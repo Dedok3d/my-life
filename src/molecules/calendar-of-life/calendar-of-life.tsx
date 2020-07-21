@@ -27,7 +27,7 @@ function CalendarOfLife({ numberOfWeeks, completedWeeks }: Props) {
 
     return (
         <div className={css(styles.calendar)}>
-            {squares.map(square => <div className={css(styles.item)}>{square}</div>)}
+            {squares.map((square, i) => <div key={`square-${i}`} className={css(styles.item)}>{square}</div>)}
         </div>
     );
 }
