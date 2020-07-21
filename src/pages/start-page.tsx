@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 function StartPage() {
     return (
         <div className={css(styles.main)}>
-            <CalendarOfLife numberOfWeeks={11} />
+            <CalendarOfLife numberOfWeeks={11} completedWeeks={3} />
         </div>
     );
 }

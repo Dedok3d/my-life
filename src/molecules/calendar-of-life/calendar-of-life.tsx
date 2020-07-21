@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
 
 interface Props {
     numberOfWeeks: number;
+    completedWeeks: number;
 }
 
-function CalendarOfLife({ numberOfWeeks }: Props) {
+function CalendarOfLife({ numberOfWeeks, completedWeeks }: Props) {
     const squares = useMemo(() => {
         const array = [];
         for (let i = 0; i < numberOfWeeks; i++) {
-            array.push(<Square />);
+            array.push(<Square fill={i < completedWeeks} />);
         }
         return array;
     }, [])

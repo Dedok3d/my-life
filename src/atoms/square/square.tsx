@@ -9,12 +9,14 @@ const styles = StyleSheet.create({
     },
 });
 
-interface Props { }
+interface Props {
+    fill: boolean;
+}
 
-function Square(props: Props) {
+function Square({ fill }: Props) {
 
     return (
-        <div className={css(styles.square)}>
+        <div style={fill ? { background: 'rgb(255,204,204)' } : undefined} className={css(styles.square)}>
         </div>
     );
 }
