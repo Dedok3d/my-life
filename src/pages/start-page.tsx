@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import CalendarOfLife from '../molecules/calendar-of-life';
 
-import Square from '../atoms/square';
 
 const styles = StyleSheet.create({
     main: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 function StartPage() {
     return (
         <div className={css(styles.main)}>
-            <Square />
+            <CalendarOfLife numberOfWeeks={11} />
         </div>
     );
 }
