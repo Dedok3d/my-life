@@ -13,6 +13,6 @@ function render(Component: ComponentType<{}>) {
 
 render(StartPage);
 
-if (module.hot) {
-  module.hot.accept(['./components/main'], () => render(require('./components/main').default));
-}
+// if (module.hot) {
+//   module.hot.accept(['./components/main'], () => render(require('./components/main').default));
+// }
