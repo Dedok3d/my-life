@@ -4,10 +4,13 @@ import Square from '../../atoms/square';
 
 const styles = StyleSheet.create({
     calendar: {
+        margin: 'auto',
+        width: '50%',
+        border: '1px solid rgb(0,0,0)'
     },
     item: {
         display: 'inline-block',
-        padding: '10px',
+        padding: '3px',
     },
 });
 
