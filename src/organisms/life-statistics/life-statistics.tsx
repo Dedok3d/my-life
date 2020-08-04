@@ -17,7 +17,7 @@ function LifeStatistics({ }: Props) {
 
     return (
         <div className={css(styles.life)}>
-            <RadioButton />
+            <RadioButton options={['Недели','Месяцы','Годы']} name={'time'} />
             <CalendarOfLife numberOfWeeks={864} completedWeeks={23} />
         </div>
     );

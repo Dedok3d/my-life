@@ -10,16 +10,23 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
+    options: string[];
+    name: string;
 }
 
-function RadioButton({ }: Props) {
+function RadioButton({ options, name }: Props) {
 
     return (
         <div>
-            <div>
-                <input type="radio" />
-                <label >Huey</label>
-            </div>
+            {
+                options.map((option, i) =>
+                    <div key={i}>
+                        <input type="radio" name={name} value={option} />
+                        <label >{option}</label>
+                    </div >
+                )
+            }
+
         </div>
     );
 }
