@@ -20,7 +20,7 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
     const squares = (() => {
         const array = [];
         for (let i = 0; i < numberOfSquares; i++) {
-            array.push(<Square fill={i < completedSquares} />);
+            array.push(<Square fill={i < completedSquares} num={i + 1} />);
         }
         return array;
     })();
