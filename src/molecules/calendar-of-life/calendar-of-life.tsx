@@ -12,18 +12,18 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-    numberOfWeeks: number;
-    completedWeeks: number;
+    numberOfSquares: number;
+    completedSquares: number;
 }
 
-function CalendarOfLife({ numberOfWeeks, completedWeeks }: Props) {
-    const squares = useMemo(() => {
+function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
+    const squares = (() => {
         const array = [];
-        for (let i = 0; i < numberOfWeeks; i++) {
-            array.push(<Square fill={i < completedWeeks} />);
+        for (let i = 0; i < numberOfSquares; i++) {
+            array.push(<Square fill={i < completedSquares} />);
         }
         return array;
-    }, [])
+    })();
 
     return (
         <div className={css(styles.calendar)}>
