@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import RadioButton from '../../atoms/radio-button';
 import CalendarOfLife from '../../molecules/calendar-of-life';
+import moment from 'moment';
 
 const styles = StyleSheet.create({
     life: {
@@ -26,16 +27,8 @@ const WEEKS_OF_MOUNTH = 4;
 const intervals = [Intervals.week, Intervals.month, Intervals.year];
 
 function LifeStatistics({ }: Props) {
-    const date = new Date('1989-01-19');
-    const nowDate = new Date();
-
-    const [interval, setInterval] = useState(`${Intervals.year}`);
-    const [numberOfSquares, setNumberOfSquares] = useState(LIFE_AVERAGE_DURATION);
-
-    const onSelect = (option: string) => {
-        setNumberOfSquares(calculateSquares(option));
-        setInterval(option);
-    };
+    const bornDate = moment('1989-01-19');
+    const nowDate = moment();
 
     const calculateSquares = (option: string) => {
         let count = LIFE_AVERAGE_DURATION;
@@ -51,11 +44,32 @@ function LifeStatistics({ }: Props) {
         return count;
     };
 
+    const calculateCompletedSquares = (option: string) => {
+        if (option === Intervals.week) {
+            return nowDate.diff(bornDate, 'weeks');
+        }
+
+        if (option === Intervals.month) {
+            return nowDate.diff(bornDate, 'months');
+        }
+
+        return nowDate.diff(bornDate, 'years');
+    };
+
+    const [interval, setInterval] = useState(`${Intervals.year}`);
+    const [numberOfSquares, setNumberOfSquares] = useState(LIFE_AVERAGE_DURATION);
+    const [completedSquares, setCompletedSquares] = useState(calculateCompletedSquares(Intervals.year));
+
+    const onSelect = (option: string) => {
+        setNumberOfSquares(calculateSquares(option));
+        setInterval(option);
+        setCompletedSquares(calculateCompletedSquares(option));
+    };
 
     return (
         <div className={css(styles.life)}>
             <RadioButton options={intervals} defaultValue={interval} onSelect={onSelect} />
-            <CalendarOfLife numberOfSquares={numberOfSquares} completedSquares={23} />
+            <CalendarOfLife numberOfSquares={numberOfSquares} completedSquares={completedSquares} />
         </div>
     );
 }
