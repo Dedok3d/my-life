@@ -1,11 +1,9 @@
 import React, { useMemo } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import Square from '../../atoms/square';
-import RadioButton from '../../atoms/radio-button';
 
 const styles = StyleSheet.create({
     calendar: {
-        border: '1px solid rgb(0,0,0)'
     },
     item: {
         display: 'inline-block',
