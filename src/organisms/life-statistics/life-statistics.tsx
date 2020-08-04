@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import RadioButton from '../../atoms/radio-button';
 import CalendarOfLife from '../../molecules/calendar-of-life';
@@ -13,11 +13,14 @@ const styles = StyleSheet.create({
 interface Props {
 }
 
+const intervals = ['Недели', 'Месяцы', 'Годы'];
+
 function LifeStatistics({ }: Props) {
+    const [interval, setInterval] = useState(intervals[0]);
 
     return (
         <div className={css(styles.life)}>
-            <RadioButton options={['Недели','Месяцы','Годы']} name={'time'} />
+            <RadioButton options={intervals} defaultValue={interval} onSelect={setInterval} />
             <CalendarOfLife numberOfWeeks={864} completedWeeks={23} />
         </div>
     );

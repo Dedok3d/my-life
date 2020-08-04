@@ -16,12 +16,11 @@ const styles = StyleSheet.create({
 
 interface Props {
     options: string[];
-    name: string;
+    defaultValue: string;
+    onSelect: (option: string) => void;
 }
 
-function RadioButton({ options, name }: Props) {
-    const [selected, select] = useState(options[0]);
-
+function RadioButton({ options, defaultValue, onSelect }: Props) {
     return (
         <div className={css(styles.panel)}>
             {
@@ -29,7 +28,7 @@ function RadioButton({ options, name }: Props) {
                     <div
                         className={css(styles.radio)}
                         style={
-                            selected === option ?
+                            defaultValue === option ?
                                 {
                                     color: 'rgb(53, 120, 229)',
                                     borderBottom: '4px solid rgb(53, 120, 229)'
@@ -37,7 +36,7 @@ function RadioButton({ options, name }: Props) {
                                 : undefined
                         }
                         key={i}
-                        onClick={() => select(option)}
+                        onClick={() => onSelect(option)}
                     >
                         {option}
                     </div >
