@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import CalendarOfLife from '../molecules/calendar-of-life';
 import LifeStatistics from '../organisms/life-statistics';
+import OptionsPanel from '../molecules/options-panel';
 
 const styles = StyleSheet.create({
     main: {
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
 function StartPage() {
     return (
         <div className={css(styles.main)}>
+            <OptionsPanel />
             <LifeStatistics />
         </div>
     );
