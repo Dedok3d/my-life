@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import moment from 'moment';
+
 import ContextMenu from '../../atoms/context-menu';
 
 const styles = StyleSheet.create({
@@ -30,12 +32,39 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
+    date: string;
 }
 
 const intervals = ['Дней', 'Месяцев', 'Лет'];
 
-function OptionsPanel({ }: Props) {
-    const [interval, setInterval] = useState(intervals[0]);
+function OptionsPanel({ date }: Props) {
+    const [interval, setInterval] = useState('');
+    const [lifeCount, setLifeCount] = useState('');
+
+    const onSelect = (option: string) => {
+        setInterval(option);
+        setLifeCount(calculateLifeCount(option));
+    };
+
+    const calculateLifeCount = (interval: string) => {
+        const dBidth = moment(date);
+        const dNow = moment();
+
+        if (interval === intervals[0]) {
+            return `${dNow.diff(dBidth, 'days')}`;
+        }
+
+        if (interval === intervals[1]) {
+            return `${dNow.diff(dBidth, 'months')}`;
+        }
+
+        if (interval === intervals[2]) {
+            return `${dNow.diff(dBidth, 'years')}`;
+        }
+    };
+
+    useEffect(() => onSelect(intervals[0]), []);
+
 
     return (
         <div className={css(styles.panel)}>
@@ -43,7 +72,12 @@ function OptionsPanel({ }: Props) {
 
             <div className={css(styles.meta)}>
                 <div className={css(styles.context)}>
-                    <ContextMenu seletedOption={interval} onSelect={setInterval} options={intervals} />
+                    <ContextMenu
+                        lifeCount={lifeCount}
+                        seletedOption={interval}
+                        onSelect={onSelect}
+                        options={intervals}
+                    />
                 </div>
             </div>
         </div>

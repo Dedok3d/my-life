@@ -79,23 +79,31 @@ const styles = StyleSheet.create({
             animationFillMode: 'forwards'
         },
     },
+    count: {
+        textAlign: 'center',
+        padding: '5px'
+    },
 });
 
 interface Props {
     options: string[];
     seletedOption: string;
     onSelect: (option: string) => void;
+    lifeCount: string;
 }
 
-function ContextMenu({ seletedOption, options, onSelect }: Props) {
+function ContextMenu({ seletedOption, options, lifeCount, onSelect }: Props) {
     const [showSropContent, setShow] = useState<boolean>(undefined);
 
     return (
         <div className={css(styles.menu)}>
+
             <div onClick={() => setShow(!showSropContent)}>
                 Прожито {` ${seletedOption.toLocaleLowerCase()}`}
                 <DownArrow color={'rgb(255,255,255)'} />
+                <div className={css(styles.count)}>{lifeCount}</div>
             </div>
+
             {
                 showSropContent !== undefined && <div className={css(styles.dropContent, showSropContent ? styles.animFadeIn : styles.animFadeOut)}>
                     <ul className={css(styles.ul)}>

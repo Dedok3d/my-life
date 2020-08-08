@@ -10,9 +10,11 @@ const styles = StyleSheet.create({
 });
 
 function StartPage() {
+    const date = '1989.12.12';
+
     return (
         <div className={css(styles.main)}>
-            <OptionsPanel />
+            <OptionsPanel date={date} />
             <LifeStatistics />
         </div>
     );
