@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import RadioButton from '../../atoms/radio-button';
 import CalendarOfLife from '../../molecules/calendar-of-life';
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
+    date: string;
 }
 
 enum Intervals {
@@ -26,8 +27,8 @@ const WEEKS_OF_MOUNTH = 4;
 
 const intervals = [Intervals.week, Intervals.month, Intervals.year];
 
-function LifeStatistics({ }: Props) {
-    const bornDate = moment('1989-01-19');
+function LifeStatistics({ date }: Props) {
+    const bornDate = moment(date);
     const nowDate = moment();
 
     const calculateSquares = (option: string) => {
@@ -45,6 +46,10 @@ function LifeStatistics({ }: Props) {
     };
 
     const calculateCompletedSquares = (option: string) => {
+        if (!bornDate.isValid) {
+            return 0;
+        }
+
         if (option === Intervals.week) {
             return nowDate.diff(bornDate, 'weeks');
         }
@@ -65,6 +70,8 @@ function LifeStatistics({ }: Props) {
         setInterval(option);
         setCompletedSquares(calculateCompletedSquares(option));
     };
+
+    useEffect(() => onSelect(interval), [date])
 
     return (
         <div className={css(styles.life)}>

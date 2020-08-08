@@ -15,7 +15,7 @@ function StartPage() {
     return (
         <div className={css(styles.main)}>
             <OptionsPanel onSelectDate={setDate} date={date} />
-            <LifeStatistics />
+            <LifeStatistics date={date} />
         </div>
     );
 }
