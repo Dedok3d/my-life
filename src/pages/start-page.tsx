@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import LifeStatistics from '../organisms/life-statistics';
@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
 });
 
 function StartPage() {
-    const date = '1989.12.12';
+    const [date, setDate] = useState('1989.12.12');
 
     return (
         <div className={css(styles.main)}>
-            <OptionsPanel date={date} />
+            <OptionsPanel onSelectDate={setDate} date={date} />
             <LifeStatistics />
         </div>
     );

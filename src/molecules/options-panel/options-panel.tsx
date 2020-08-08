@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
         backgroundImage: 'linear-gradient(262deg,rgb(51, 51, 51),rgb(0, 0, 0))',
         borderRadius: '6px',
         color: 'rgb(255,255,255)',
+        display: 'flex',
     },
     title: {
         fontSize: '24px',
@@ -29,15 +30,20 @@ const styles = StyleSheet.create({
         width: '190px',
         margin: '28px',
     },
+    datepicker: {
+        margin: '25px',
+        height: '30px',
+    }
 });
 
 interface Props {
     date: string;
+    onSelectDate: (date: string) => void;
 }
 
 const intervals = ['Дней', 'Месяцев', 'Лет'];
 
-function OptionsPanel({ date }: Props) {
+function OptionsPanel({ date, onSelectDate }: Props) {
     const [interval, setInterval] = useState('');
     const [lifeCount, setLifeCount] = useState('');
 
@@ -47,6 +53,10 @@ function OptionsPanel({ date }: Props) {
     };
 
     const calculateLifeCount = (interval: string) => {
+        if (!moment(date).isValid()) {
+            return '';
+        }
+
         const dBidth = moment(date);
         const dNow = moment();
 
@@ -63,12 +73,18 @@ function OptionsPanel({ date }: Props) {
         }
     };
 
-    useEffect(() => onSelect(intervals[0]), []);
+    useEffect(() => onSelect(intervals[0]), [date]);
 
 
     return (
         <div className={css(styles.panel)}>
             <div className={css(styles.title)}>Календарь жизни</div>
+
+            <input
+                className={css(styles.datepicker)}
+                onChange={(e) => onSelectDate(e.target.value)}
+                type="date"
+            />
 
             <div className={css(styles.meta)}>
                 <div className={css(styles.context)}>
