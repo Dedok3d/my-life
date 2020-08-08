@@ -13,6 +13,7 @@ interface Props {
 function ContextMenu({ }: Props) {
     return (
         <div className={css(styles.menu)}>
+            Прожито
         </div>
     );
 }
