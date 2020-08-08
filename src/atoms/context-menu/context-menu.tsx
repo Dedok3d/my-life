@@ -14,20 +14,24 @@ const [hoverAnim, fadeIn, fadeOut] = [
     {
         '0%': {
             opacity: 0,
+            visibility: 'hidden',
             top: '75px',
         },
         '100%': {
             opacity: 1,
+            visibility: 'visible',
             top: '55px',
         }
     },
     {
         '0%': {
             opacity: 1,
+            visibility: 'visible',
             top: '55px',
         },
         '100%': {
             opacity: 0,
+            visibility: 'hidden',
             top: '75px',
         }
     },
@@ -79,23 +83,33 @@ const styles = StyleSheet.create({
 
 interface Props {
     options: string[];
+    seletedOption: string;
+    onSelect: (option: string) => void;
 }
 
-function ContextMenu({ options }: Props) {
-    const [showSropContent, setShow] = useState(false);
-
+function ContextMenu({ seletedOption, options, onSelect }: Props) {
+    const [showSropContent, setShow] = useState<boolean>(undefined);
 
     return (
         <div className={css(styles.menu)}>
             <div onClick={() => setShow(!showSropContent)}>
-                Прожито в
-                <DownArrow />
+                Прожито {` ${seletedOption.toLocaleLowerCase()}`}
+                <DownArrow color={'rgb(255,255,255)'} />
             </div>
             {
-                <div className={css(styles.dropContent, showSropContent ? styles.animFadeIn : styles.animFadeOut)}>
+                showSropContent !== undefined && <div className={css(styles.dropContent, showSropContent ? styles.animFadeIn : styles.animFadeOut)}>
                     <ul className={css(styles.ul)}>
                         {
-                            options.map(option => <li className={css(styles.li)} key={option}>{option}</li>)
+                            options.map(option =>
+                                <li
+                                    onClick={() => { onSelect(option); setShow(false); }}
+                                    className={css(styles.li)}
+                                    key={option}
+                                >
+                                    {option}
+                                    {option === seletedOption ? <DownArrow color={'rgb(0,0,0)'} /> : undefined}
+                                </li>
+                            )
                         }
                     </ul>
                 </div>

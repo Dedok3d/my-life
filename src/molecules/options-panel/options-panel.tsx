@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import ContextMenu from '../../atoms/context-menu';
 
@@ -32,7 +32,10 @@ const styles = StyleSheet.create({
 interface Props {
 }
 
+const intervals = ['Дней', 'Месяцев', 'Лет'];
+
 function OptionsPanel({ }: Props) {
+    const [interval, setInterval] = useState(intervals[0]);
 
     return (
         <div className={css(styles.panel)}>
@@ -40,7 +43,7 @@ function OptionsPanel({ }: Props) {
 
             <div className={css(styles.meta)}>
                 <div className={css(styles.context)}>
-                    <ContextMenu options={['Дней', 'Месяцев', 'Лет']} />
+                    <ContextMenu seletedOption={interval} onSelect={setInterval} options={intervals} />
                 </div>
             </div>
         </div>
