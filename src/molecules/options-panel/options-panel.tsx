@@ -73,7 +73,7 @@ function OptionsPanel({ date, onSelectDate }: Props) {
         }
     };
 
-    useEffect(() => onSelect(intervals[0]), [date]);
+    useEffect(() => onSelect(interval || intervals[0]), [date]);
 
 
     return (
