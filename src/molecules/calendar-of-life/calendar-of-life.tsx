@@ -56,6 +56,9 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
 
     useEffect(() => {
         calculateSquares();
+    }, [numberOfSquares]);
+
+    useEffect(() => {
         window.addEventListener('resize', calculateSquares);
         return () => window.removeEventListener('resize', calculateSquares);
     }, []);
