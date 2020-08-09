@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        margin: '3px',
     },
     span: {
     }
