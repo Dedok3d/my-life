@@ -22,7 +22,7 @@ interface Props {
 function Square({ fill, num }: Props) {
 
     return (
-        <div className={css(styles.square)} style={fill ? { background: 'rgb(255,204,204)' } : undefined}>
+        <div className={css(styles.square)} style={fill ? { background: 'rgba(53, 120, 229, 0.5)' } : undefined}>
             <span className={css(styles.span)}>{num}</span>
         </div>
     );

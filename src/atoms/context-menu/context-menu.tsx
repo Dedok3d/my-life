@@ -8,7 +8,7 @@ const [hoverAnim, fadeIn, fadeOut] = [
             backgroundColor: 'rgb(255,255,255)',
         },
         '100%': {
-            backgroundColor: 'rgb(220,220,220)',
+            backgroundColor: 'rgba(53, 120, 229, 0.5)',
         }
     },
     {
