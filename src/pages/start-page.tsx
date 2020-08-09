@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 });
 
 function StartPage() {
-    const [date, setDate] = useState('1989.12.12');
+    const [date, setDate] = useState('');
 
     return (
         <div className={css(styles.main)}>
