@@ -7,8 +7,6 @@ const VIEWPORT_HEIGHT = 400;
 const NUM_VISIBLE_ITEMS = Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT);
 
 const styles = StyleSheet.create({
-    calendar: {
-    },
     item: {
         display: 'flex',
         heigth: '30px',
@@ -40,6 +38,7 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
 
     const calculateSquares = () => {
         const array = [];
+        // divide by 2 because LifeStatistics width is '50%'
         const numItemsOnLine = Math.trunc((window.innerWidth / 2) / ITEM_HEIGHT);
 
         for (let i = 0; i < numberOfSquares; i += numItemsOnLine) {
@@ -64,6 +63,7 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
     }, []);
 
     const renderRows = (() => {
+
         let result = [];
         for (let i = start; i < end + 1; i++) {
             result.push(
@@ -87,18 +87,15 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
         let currentIndx = Math.trunc(ref.current.scrollTop / ITEM_HEIGHT)
         currentIndx = currentIndx - NUM_VISIBLE_ITEMS >= squares.length ? currentIndx - NUM_VISIBLE_ITEMS : currentIndx;
         if (currentIndx !== start) {
-            console.log("Redraw");
             setStart(currentIndx);
-            setEnd(currentIndx + NUM_VISIBLE_ITEMS >= squares.length ? squares.length - 1 : currentIndx + NUM_VISIBLE_ITEMS);
+            setEnd(currentIndx + NUM_VISIBLE_ITEMS);
         }
     }
 
     return (
-        <div className={css(styles.calendar)}>
-            <div className={css(styles.viewport)} ref={ref} onScroll={scollPos}>
-                <div className={css(styles.itemContainer)} style={{ height: squares.length * ITEM_HEIGHT }}>
-                    {renderRows}
-                </div>
+        <div className={css(styles.viewport)} ref={ref} onScroll={scollPos}>
+            <div className={css(styles.itemContainer)} style={{ height: squares.length * ITEM_HEIGHT }}>
+                {renderRows}
             </div>
         </div>
     );
