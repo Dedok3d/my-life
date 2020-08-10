@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '300px',
         height: '300px',
-        backgroundColor: 'rgba(53, 120, 229, 0.5)'
     },
 });
 
