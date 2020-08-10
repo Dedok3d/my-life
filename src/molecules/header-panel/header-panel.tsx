@@ -43,7 +43,7 @@ interface Props {
 
 const intervals = ['Дней', 'Месяцев', 'Лет'];
 
-function OptionsPanel({ date, onSelectDate }: Props) {
+function HeaderPanel({ date, onSelectDate }: Props) {
     const [interval, setInterval] = useState('');
     const [lifeCount, setLifeCount] = useState('');
 
@@ -100,4 +100,4 @@ function OptionsPanel({ date, onSelectDate }: Props) {
     );
 }
 
-export default OptionsPanel;
+export default HeaderPanel;

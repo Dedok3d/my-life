@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import LifeStatistics from '../organisms/life-statistics';
-import OptionsPanel from '../molecules/options-panel';
+import HeaderPanel from '../molecules/header-panel';
 
 const styles = StyleSheet.create({
     main: {
@@ -14,7 +14,7 @@ function StartPage() {
 
     return (
         <div className={css(styles.main)}>
-            <OptionsPanel onSelectDate={setDate} date={date} />
+            <HeaderPanel onSelectDate={setDate} date={date} />
             <LifeStatistics date={date} />
         </div>
     );
