@@ -5,6 +5,7 @@ import Square from '../../atoms/square';
 const ITEM_HEIGHT = 40;
 const VIEWPORT_HEIGHT = 400;
 const NUM_VISIBLE_ITEMS = Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT);
+const MAIN_WIDTH = 800;
 
 const styles = StyleSheet.create({
     item: {
@@ -39,7 +40,7 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
     const calculateSquares = () => {
         const array = [];
         // divide by 2 because LifeStatistics width is '50%'
-        const numItemsOnLine = Math.trunc((window.innerWidth / 2) / ITEM_HEIGHT);
+        const numItemsOnLine = Math.trunc(MAIN_WIDTH / ITEM_HEIGHT);
 
         for (let i = 0; i < numberOfSquares; i += numItemsOnLine) {
             const tmp = [];

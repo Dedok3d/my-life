@@ -6,8 +6,8 @@ import moment from 'moment';
 
 const styles = StyleSheet.create({
     life: {
-        margin: 'auto',
-        width: '50%',
+        marginLeft: '100px',
+        width: '800px',
     },
 });
 
