@@ -3,7 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import LifeStatistics from '../organisms/life-statistics';
 import HeaderPanel from '../molecules/header-panel';
-import OptionsPanel from '../molecules/options-panel';
+import OptionsPanel from '../organisms/options-panel';
 
 const styles = StyleSheet.create({
     main: {

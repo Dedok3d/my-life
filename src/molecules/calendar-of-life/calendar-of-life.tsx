@@ -39,7 +39,6 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
 
     const calculateSquares = () => {
         const array = [];
-        // divide by 2 because LifeStatistics width is '50%'
         const numItemsOnLine = Math.trunc(MAIN_WIDTH / ITEM_HEIGHT);
 
         for (let i = 0; i < numberOfSquares; i += numItemsOnLine) {
