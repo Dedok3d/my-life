@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import moment from 'moment';
+
 import RadioButton from '../../atoms/radio-button';
 import CalendarOfLife from '../../molecules/calendar-of-life';
-import moment from 'moment';
 
 const styles = StyleSheet.create({
     life: {
