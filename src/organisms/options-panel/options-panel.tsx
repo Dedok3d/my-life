@@ -6,9 +6,8 @@ import OptionCard from '../../molecules/option-card';
 const styles = StyleSheet.create({
     panel: {
         display: 'flex',
-        justifyContent: 'center',
         width: '300px',
-        height: '300px',
+        flexDirection: 'column',
     },
 });
 
