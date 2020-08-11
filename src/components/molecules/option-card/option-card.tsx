@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { connect, ConnectedProps } from 'react-redux';
+import { changeLifeIternals } from '../../../store/actions';
+import { LifeIternal } from '../../../models';
 
 const styles = StyleSheet.create({
     panel: {
@@ -37,29 +40,55 @@ const styles = StyleSheet.create({
     }
 });
 
-interface Props {
+
+interface RootState {
+    lifeIternals: LifeIternal[];
 }
 
+const mapStateToProps = ({ lifeIternals }: RootState) => ({
+    lifeIternals
+});
 
-function OptionCard({ }: Props) {
+const connector = connect(
+    mapStateToProps,
+    { changeLifeIternals }
+);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface Props extends PropsFromRedux { }
+
+function OptionCard({ lifeIternals, changeLifeIternals }: Props) {
+
+    const updateIternals = (index: number, checked: boolean) => {
+        const its = [...lifeIternals];
+        its[index].checked = checked;
+        changeLifeIternals(its);
+    };
+
 
     return (
         <div className={css(styles.panel)}>
             <div className={css(styles.title)}>Этапы жизни</div>
 
             <div className={css(styles.content)}>
-                <label className={css(styles.label)}><input className={css(styles.input)} type="checkbox" />Текущий возраст</label>
-                <label className={css(styles.label)}><input className={css(styles.input)} type="checkbox" />Начальная школа</label>
-                <label className={css(styles.label)}><input className={css(styles.input)} type="checkbox" />Средняя школа</label>
-                <label className={css(styles.label)}><input className={css(styles.input)} type="checkbox" />Старшая школа</label>
-                <label className={css(styles.label)}><input className={css(styles.input)} type="checkbox" />Бакалавриат</label>
-                <label className={css(styles.label)}><input className={css(styles.input)} type="checkbox" />Магистратура</label>
-                <label className={css(styles.label)}><input className={css(styles.input)} type="checkbox" />Карьера</label>
-                <label className={css(styles.label)}><input className={css(styles.input)} type="checkbox" />Пенсия</label>
+                {
+                    lifeIternals.map((iternal, index) =>
+                        <label key={iternal.name} className={css(styles.label)}>
+                            <input
+                                className={css(styles.input)}
+                                type="checkbox"
+                                checked={iternal.checked}
+                                onChange={(e) => updateIternals(index, e.target.checked)}
+                            />
+                            {iternal.name}
+                        </label>
+                    )
+                }
             </div>
 
         </div>
     );
 }
 
-export default OptionCard;
+export default connector(OptionCard);

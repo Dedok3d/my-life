@@ -1,9 +1,25 @@
+import { LifeIternal } from '../models';
 
-export const ACTION_CHANGE_FIRST_NAME = 'ACTION_CHANGE_FIRST_NAME';
+export enum ActionType {
+    ACTION_CHANGE_FIRST_NAME = 'ACTION_CHANGE_FIRST_NAME',
+    ACTION_CHANGE_LIFE_ITERNALS = 'ACTION_CHANGE_LIFE_ITERNALS'
+}
 
-export const changeFirstName = (newName: string) => {
+export interface Action {
+    type: ActionType;
+    payload: any;
+};
+
+export const changeFirstName = (newName: string): Action => {
     return {
-        type: ACTION_CHANGE_FIRST_NAME,
+        type: ActionType.ACTION_CHANGE_FIRST_NAME,
         payload: newName,
+    };
+};
+
+export const changeLifeIternals = (iternals: LifeIternal[]): Action => {
+    return {
+        type: ActionType.ACTION_CHANGE_LIFE_ITERNALS,
+        payload: iternals,
     };
 };
