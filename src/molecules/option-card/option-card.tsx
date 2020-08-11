@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 const styles = StyleSheet.create({
     panel: {
         width: '250px',
+        margin: '10px',
         borderRadius: '8px',
         overflow: 'hidden',
         backgroundColor: 'rgb(245,245,245)',
