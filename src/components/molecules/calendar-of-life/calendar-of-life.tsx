@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import Square from '../../atoms/square';
+import { LifeIternal } from '../../../models';
+import { connect, ConnectedProps } from 'react-redux';
 
 const ITEM_HEIGHT = 40;
 const VIEWPORT_HEIGHT = 400;
@@ -25,7 +27,21 @@ const styles = StyleSheet.create({
     },
 });
 
-interface Props {
+
+interface RootState {
+}
+
+const mapStateToProps = ({ }: RootState) => ({
+});
+
+const connector = connect(
+    mapStateToProps,
+    {}
+);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface Props extends PropsFromRedux {
     numberOfSquares: number;
     completedSquares: number;
 }
@@ -101,4 +117,4 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
     );
 }
 
-export default CalendarOfLife;
+export default connector(CalendarOfLife);
