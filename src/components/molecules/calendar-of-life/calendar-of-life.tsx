@@ -78,7 +78,7 @@ function CalendarOfLife({ numberOfSquares, completedSquares, lifeIternals }: Pro
             }
         }
 
-        return 'rgb(255,255,255)';
+        return `rgba(33, 110, 57, ${1 - (index / numberOfSquares)})`;
     };
 
     useEffect(() => {

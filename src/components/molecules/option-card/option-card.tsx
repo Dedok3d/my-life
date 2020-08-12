@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect, ConnectedProps } from 'react-redux';
+
 import { changeLifeIternals } from '../../../store/actions';
 import { LifeIternal } from '../../../models';
 
