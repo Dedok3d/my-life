@@ -18,12 +18,13 @@ const styles = StyleSheet.create({
 interface Props {
     fill: boolean;
     num?: number;
+    color?: string;
 }
 
-function Square({ fill, num }: Props) {
+function Square({ fill, num, color }: Props) {
 
     return (
-        <div key={num} className={css(styles.square)} style={fill ? { background: 'rgba(53, 120, 229, 0.5)' } : undefined}>
+        <div key={num} className={css(styles.square)} style={fill ? { background: color || 'rgba(53, 120, 229, 0.5)' } : undefined}>
             <span className={css(styles.span)}>{num}</span>
         </div>
     );
