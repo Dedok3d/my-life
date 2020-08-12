@@ -29,9 +29,11 @@ const styles = StyleSheet.create({
 
 
 interface RootState {
+    lifeIternals: LifeIternal[];
 }
 
-const mapStateToProps = ({ }: RootState) => ({
+const mapStateToProps = ({ lifeIternals }: RootState) => ({
+    lifeIternals
 });
 
 const connector = connect(
@@ -47,7 +49,7 @@ interface Props extends PropsFromRedux {
 }
 
 
-function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
+function CalendarOfLife({ numberOfSquares, completedSquares, lifeIternals }: Props) {
     const ref = useRef<HTMLDivElement>();
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT));
@@ -69,6 +71,16 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
         setSquares(array);
     };
 
+    const getSquareColor = (index: number) => {
+        for (const iternal of lifeIternals) {
+            if (iternal.checked && iternal.min <= index && index <= iternal.max) {
+                return iternal.color;
+            }
+        }
+
+        return 'rgb(255,255,255)';
+    };
+
     useEffect(() => {
         calculateSquares();
     }, [numberOfSquares]);
@@ -86,7 +98,7 @@ function CalendarOfLife({ numberOfSquares, completedSquares }: Props) {
                 <div key={`item-${i}`} className={css(styles.item)} style={{ top: i * ITEM_HEIGHT, height: ITEM_HEIGHT }}>
                     {
                         squares[i] && squares[i].map(index =>
-                            <Square key={`square-${index}`} fill={index < completedSquares} num={index + 1} />
+                            <Square key={`square-${index}`} fill={true} color={getSquareColor(index)} num={index + 1} />
                         )
                     }
                 </div>
