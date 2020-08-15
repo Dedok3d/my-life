@@ -45,11 +45,10 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface Props extends PropsFromRedux {
     numberOfSquares: number;
-    completedSquares: number;
 }
 
 
-function CalendarOfLife({ numberOfSquares, completedSquares, lifeIternals }: Props) {
+function CalendarOfLife({ numberOfSquares, lifeIternals }: Props) {
     const ref = useRef<HTMLDivElement>();
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT));
