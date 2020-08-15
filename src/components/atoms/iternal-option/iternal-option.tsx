@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     label: {
         width: '150px',
         padding: '3px',
+        cursor: 'pointer'
     },
     input: {
         verticalAling: 'middle',
