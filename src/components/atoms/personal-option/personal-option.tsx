@@ -1,19 +1,23 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect, ConnectedProps } from 'react-redux';
-import { changeFirstName } from '../../../store/actions';
+import { changeFirstName, changeBirthDate } from '../../../store/actions';
 
 const styles = StyleSheet.create({
     label: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'inherit',
         flexDirection: 'row',
         alignItems: 'center',
-        width: '150px',
         padding: '3px',
     },
     input: {
-        margin: '10px',
+        margin: '3px 3px 3px 10px',
+        width: '150px',
+    },
+    datepicker: {
+        padding: '1px 2px',
+        height: '30px',
     },
     title: {
         display: 'flex',
@@ -37,28 +41,40 @@ const styles = StyleSheet.create({
 
 interface RootState {
     firstName: string;
+    birthDate: string;
 }
 
-const mapStateToProps = ({ firstName }: RootState) => ({
-    firstName,
-});
+const mapStateToProps = (state: RootState) => (state);
 
 const connector = connect(
     mapStateToProps,
-    { changeFirstName }
+    { changeFirstName, changeBirthDate }
 );
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface Props extends PropsFromRedux { }
 
-function PersonalOption({ firstName, changeFirstName }: Props) {
+function PersonalOption({ firstName, birthDate, changeFirstName, changeBirthDate }: Props) {
 
     return (
         <Fragment>
             <div className={css(styles.title)}>Личность</div>
 
             <div className={css(styles.content)}>
+
+                <label className={css(styles.label)}>
+                    Д.Р.
+                    <input
+                        className={css(styles.input, styles.datepicker)}
+                        value={birthDate}
+                        onChange={(e) => {
+                            changeBirthDate(e.target.value);
+                        }}
+                        type="date"
+                    />
+                </label>
+
                 <label className={css(styles.label)}>
                     Имя
                     <input
