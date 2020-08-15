@@ -4,9 +4,11 @@ import { LifeIternal } from '../models';
 interface State {
     firstName: string;
     lifeIternals: LifeIternal[];
+    birthDate: string;
 }
 
 const initialState: State = {
+    birthDate: undefined,
     firstName: 'Ivan',
     lifeIternals: [
         {
@@ -61,6 +63,8 @@ export const rootReducer = (state: State = initialState, action: Action): State 
             return { ...state, firstName: action.payload };
         case ActionType.ACTION_CHANGE_LIFE_ITERNALS:
             return { ...state, lifeIternals: action.payload };
+        case ActionType.ACTION_CHANGE_BIRTH_DATE:
+            return { ...state, birthDate: action.payload };
     }
 
     return state;
