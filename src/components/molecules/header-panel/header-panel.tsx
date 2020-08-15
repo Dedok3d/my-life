@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import moment from 'moment';
 
@@ -36,14 +37,24 @@ const styles = StyleSheet.create({
     }
 });
 
-interface Props {
-    date: string;
-    onSelectDate: (date: string) => void;
+interface RootState {
+    birthDate: string;
 }
+
+const mapStateToProps = (state: RootState) => (state);
+
+const connector = connect(
+    mapStateToProps,
+    {}
+);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface Props extends PropsFromRedux { }
 
 const intervals = ['Дней', 'Месяцев', 'Лет'];
 
-function HeaderPanel({ date, onSelectDate }: Props) {
+function HeaderPanel({ birthDate }: Props) {
     const [interval, setInterval] = useState('');
     const [lifeCount, setLifeCount] = useState('');
 
@@ -53,11 +64,11 @@ function HeaderPanel({ date, onSelectDate }: Props) {
     };
 
     const calculateLifeCount = (interval: string) => {
-        if (!moment(date).isValid()) {
+        if (!moment(birthDate).isValid()) {
             return '';
         }
 
-        const dBidth = moment(date);
+        const dBidth = moment(birthDate);
         const dNow = moment();
 
         if (interval === intervals[0]) {
@@ -73,18 +84,12 @@ function HeaderPanel({ date, onSelectDate }: Props) {
         }
     };
 
-    useEffect(() => onSelect(interval || intervals[0]), [date]);
+    useEffect(() => onSelect(interval || intervals[0]), [birthDate]);
 
 
     return (
         <div className={css(styles.panel)}>
             <div className={css(styles.title)}>Календарь жизни</div>
-
-            <input
-                className={css(styles.datepicker)}
-                onChange={(e) => onSelectDate(e.target.value)}
-                type="date"
-            />
 
             <div className={css(styles.meta)}>
                 <div className={css(styles.context)}>
@@ -100,4 +105,4 @@ function HeaderPanel({ date, onSelectDate }: Props) {
     );
 }
 
-export default HeaderPanel;
+export default connector(HeaderPanel);
