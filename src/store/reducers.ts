@@ -12,7 +12,7 @@ const initialState: State = {
     firstName: 'Ivan',
     lifeIternals: [
         {
-            color: 'rgb(33, 110, 57)',
+            color: 'rgb(255, 240, 250)',
             checked: false,
             name: 'Детство',
             min: 0,
