@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     },
     datepicker: {
         padding: '1px 2px',
-        height: '30px',
     },
     title: {
         display: 'flex',
