@@ -77,6 +77,10 @@ function CalendarOfLife({ numberOfSquares, lifeIternals }: Props) {
             }
         }
 
+        if (!!lifeIternals.find(iternal => iternal.checked)) {
+            return 'rgb(192,192,192)';
+        }
+
         return `rgba(33, 110, 57, ${1 - (index / numberOfSquares)})`;
     };
 
