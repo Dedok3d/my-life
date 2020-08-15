@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
+
+import IternalOption from '../../atoms/iternal-option';
 import OptionCard from '../../molecules/option-card';
 
 
@@ -17,7 +19,9 @@ interface Props {
 function OptionsPanel({ }: Props) {
     return (
         <div className={css(styles.panel)}>
-            <OptionCard />
+            <OptionCard>
+                <IternalOption />
+            </OptionCard>
         </div>
     );
 }
