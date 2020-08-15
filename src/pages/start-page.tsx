@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { connect, ConnectedProps } from 'react-redux';
 
 import LifeStatistics from '../components/organisms/life-statistics';
 import HeaderPanel from '../components/molecules/header-panel';
@@ -15,31 +14,19 @@ const styles = StyleSheet.create({
     },
 });
 
-interface RootState {
-}
-
-const mapStateToProps = (state: RootState) => ({});
-
-const connector = connect(mapStateToProps, {});
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-interface Props extends PropsFromRedux { }
+interface Props { }
 
 function StartPage({ }: Props) {
-    const [date, setDate] = useState('');
-
-
     return (
         <div className={css(styles.main)}>
-            <HeaderPanel onSelectDate={setDate} date={date} />
+            <HeaderPanel />
 
             <div className={css(styles.content)}>
                 <OptionsPanel />
-                <LifeStatistics date={date} />
+                <LifeStatistics />
             </div>
         </div>
     );
 }
 
-export default connector(StartPage);
+export default StartPage;
