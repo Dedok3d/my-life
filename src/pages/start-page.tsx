@@ -5,7 +5,6 @@ import { connect, ConnectedProps } from 'react-redux';
 import LifeStatistics from '../components/organisms/life-statistics';
 import HeaderPanel from '../components/molecules/header-panel';
 import OptionsPanel from '../components/organisms/options-panel';
-import { changeFirstName } from '../store/actions';
 
 const styles = StyleSheet.create({
     main: {
@@ -17,39 +16,22 @@ const styles = StyleSheet.create({
 });
 
 interface RootState {
-    firstName: string;
 }
 
-const mapStateToProps = (state: RootState) => ({
-    firstName: state.firstName
-});
+const mapStateToProps = (state: RootState) => ({});
 
-const mapDispatchToProps = ({
-    changeFirstName: changeFirstName
-});
-
-const connector = connect(
-    mapStateToProps,
-    mapDispatchToProps
-);
+const connector = connect(mapStateToProps, {});
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface Props extends PropsFromRedux { }
 
-function StartPage({ firstName, changeFirstName }: Props) {
+function StartPage({ }: Props) {
     const [date, setDate] = useState('');
 
 
     return (
         <div className={css(styles.main)}>
-            <input
-                type="text"
-                value={firstName}
-                onChange={(e) => {
-                    changeFirstName(e.target.value);
-                }}
-            />
             <HeaderPanel onSelectDate={setDate} date={date} />
 
             <div className={css(styles.content)}>
