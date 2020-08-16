@@ -3,7 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import RadioButton from '../../atoms/radio-button';
 import CalendarOfLife from '../../molecules/calendar-of-life';
-import { Intervals } from '../../../models';
+import { Intervals, LIFE_AVERAGE_DURATION, MONTHS_OF_YAER, WEEKS_OF_MOUNTH } from '../../../models';
 
 const styles = StyleSheet.create({
     life: {
@@ -15,9 +15,6 @@ const styles = StyleSheet.create({
 interface Props {
 }
 
-const LIFE_AVERAGE_DURATION = 72;
-const MONTHS_OF_YAER = 12;
-const WEEKS_OF_MOUNTH = 4;
 
 const intervals = [Intervals.week, Intervals.month, Intervals.year];
 
