@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import Square from '../../atoms/square';
-import { LifeIternal } from '../../../models';
+import { LifeIternal, Intervals, MONTHS_OF_YAER, WEEKS_OF_MOUNTH } from '../../../models';
 import { connect, ConnectedProps } from 'react-redux';
 
 const ITEM_HEIGHT = 40;
@@ -53,12 +53,24 @@ interface Props extends PropsFromRedux {
     iternal: string;
 }
 
-
 function CalendarOfLife({ numberOfSquares, lifeIternals, iternal }: Props) {
     const ref = useRef<HTMLDivElement>();
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT));
     const [squares, setSquares] = useState<number[][]>([]);
+
+    const multiplier = useMemo(() => {
+        switch (iternal) {
+            case Intervals.year:
+                return 1;
+            case Intervals.month:
+                return MONTHS_OF_YAER;
+            case Intervals.week:
+                return MONTHS_OF_YAER * WEEKS_OF_MOUNTH;
+            default:
+                return 0;
+        }
+    }, [iternal]);
 
     const calculateSquares = () => {
         const array = [];
@@ -77,10 +89,17 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal }: Props) {
     };
 
     const getSquareColor = (index: number) => {
-        for (const iternal of lifeIternals) {
-            if (iternal.checked && iternal.min <= index && index <= iternal.max) {
+        for (let i = 0; i < lifeIternals.length; i++) {
+            const iternal = lifeIternals[i];
+            const [min, max] = [
+                i > 0 ? lifeIternals[i - 1].max * multiplier + 1 : lifeIternals[i].min * multiplier,
+                iternal.max * multiplier
+            ];
+
+            if (iternal.checked && min <= index && index <= max) {
                 return iternal.color;
             }
+
         }
 
         if (!!lifeIternals.find(iternal => iternal.checked)) {
