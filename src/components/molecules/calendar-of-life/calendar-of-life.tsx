@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
         width: '100%',
         height: `${VIEWPORT_HEIGHT}px`,
         overflow: 'auto',
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'blue orange',
+        ':-webkit-scrollbar': {
+            width: '12px',
+        }
     },
     itemContainer: {
         position: 'absolute',
@@ -45,10 +50,11 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface Props extends PropsFromRedux {
     numberOfSquares: number;
+    iternal: string;
 }
 
 
-function CalendarOfLife({ numberOfSquares, lifeIternals }: Props) {
+function CalendarOfLife({ numberOfSquares, lifeIternals, iternal }: Props) {
     const ref = useRef<HTMLDivElement>();
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT));

@@ -3,6 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import RadioButton from '../../atoms/radio-button';
 import CalendarOfLife from '../../molecules/calendar-of-life';
+import { Intervals } from '../../../models';
 
 const styles = StyleSheet.create({
     life: {
@@ -13,12 +14,6 @@ const styles = StyleSheet.create({
 
 interface Props {
 }
-
-enum Intervals {
-    week = 'Недели',
-    month = 'Месяцы',
-    year = 'Годы',
-};
 
 const LIFE_AVERAGE_DURATION = 72;
 const MONTHS_OF_YAER = 12;
@@ -54,7 +49,7 @@ function LifeStatistics({ }: Props) {
     return (
         <div className={css(styles.life)}>
             <RadioButton options={intervals} defaultValue={interval} onSelect={onSelect} />
-            <CalendarOfLife numberOfSquares={numberOfSquares} />
+            <CalendarOfLife numberOfSquares={numberOfSquares} iternal={interval} />
         </div>
     );
 }

@@ -5,3 +5,9 @@ export interface LifeIternal {
     max: number;
     min: number;
 }
+
+export enum Intervals {
+    week = 'Недели',
+    month = 'Месяцы',
+    year = 'Годы',
+};

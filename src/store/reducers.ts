@@ -9,7 +9,7 @@ interface State {
 
 const initialState: State = {
     birthDate: undefined,
-    firstName: 'Ivan',
+    firstName: '',
     lifeIternals: [
         {
             color: 'rgb(255, 240, 250)',
