@@ -6,11 +6,21 @@ export interface LifeIternal {
     min: number;
 }
 
+export interface Option {
+    name: string;
+    checked: boolean;
+}
+
 export enum Intervals {
     week = 'Недели',
     month = 'Месяцы',
     year = 'Годы',
 };
+
+export enum OptionName {
+    Person = 'Личность',
+    StageOfLife = 'Этапы жизни',
+}
 
 
 export const LIFE_AVERAGE_DURATION = 72;

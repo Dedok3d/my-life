@@ -1,11 +1,13 @@
 import { ActionType, Action } from './actions';
-import { LifeIternal } from '../models';
+import { LifeIternal, Option, OptionName } from '../models';
 import MStorage from '../actions/storage/storage';
+
 
 export interface RootState {
     firstName: string;
     lifeIternals: LifeIternal[];
     birthDate: string;
+    options: Option[];
 }
 
 const initialState: RootState = {
@@ -55,6 +57,16 @@ const initialState: RootState = {
             max: 99,
         },
     ],
+    options: [
+        {
+            name: OptionName.Person,
+            checked: false,
+        },
+        {
+            name: OptionName.StageOfLife,
+            checked: false,
+        }
+    ]
 };
 
 const storeState = MStorage.loadFromLocalStorage();
@@ -68,6 +80,8 @@ export const rootReducer = (state: RootState = storeState || initialState, actio
             return { ...state, lifeIternals: action.payload };
         case ActionType.ACTION_CHANGE_BIRTH_DATE:
             return { ...state, birthDate: action.payload };
+        case ActionType.ACTION_CHANGE_OPTIONS:
+            return { ...state, options: action.payload };
     }
 
     return state;
