@@ -4,21 +4,23 @@ import { StyleSheet, css } from 'aphrodite';
 import moment from 'moment';
 
 import ContextMenu from '../../atoms/context-menu';
+import ActionButton from '../../atoms/buttons/action-button';
 
 const styles = StyleSheet.create({
     panel: {
         position: 'relative',
         border: '1px solid rgb(0,0,0)',
-        height: '100px',
+        height: '130px',
         margin: '50px 100px 50px 100px',
         backgroundImage: 'linear-gradient(262deg,rgb(51, 51, 51),rgb(0, 0, 0))',
         borderRadius: '6px',
         color: 'rgb(255,255,255)',
         display: 'flex',
+        flexDirection: 'column',
     },
     title: {
         fontSize: '24px',
-        margin: '25px',
+        margin: '20px',
     },
     meta: {
         position: 'absolute',
@@ -34,6 +36,9 @@ const styles = StyleSheet.create({
     datepicker: {
         margin: '25px',
         height: '30px',
+    },
+    actions: {
+        marginLeft: '25px',
     }
 });
 
@@ -90,6 +95,9 @@ function HeaderPanel({ birthDate }: Props) {
     return (
         <div className={css(styles.panel)}>
             <div className={css(styles.title)}>Календарь жизни</div>
+            <div className={css(styles.actions)}>
+                <ActionButton>Сохранить</ActionButton>
+            </div>
 
             <div className={css(styles.meta)}>
                 <div className={css(styles.context)}>
