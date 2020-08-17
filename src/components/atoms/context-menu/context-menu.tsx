@@ -8,7 +8,7 @@ const [hoverAnim, fadeIn, fadeOut] = [
             backgroundColor: 'rgb(255,255,255)',
         },
         '100%': {
-            backgroundColor: 'rgba(53, 120, 229, 0.5)',
+            backgroundColor: 'rgb(215,215,215)',
         }
     },
     {
@@ -60,18 +60,18 @@ const styles = StyleSheet.create({
         border: '1px solid rgb(0, 0, 0)',
         borderRadius: '10px',
         color: 'rgb(0,0,0)',
-        width: '150px',
         position: 'absolute',
         overflow: 'hidden',
     },
     ul: {
         listStyleType: 'none',
-        padding: '0',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '7px 0',
         margin: '0',
-        lineHeight: '24px',
     },
     li: {
-        padding: '10px 5px 10px 5px',
+        padding: '10px 15px 10px 15px',
         ':hover': {
             animationName: [hoverAnim],
             animationDuration: '0.2s',
