@@ -57,7 +57,7 @@ const initialState: RootState = {
 };
 
 
-export const rootReducer = (state: State = initialState, action: Action): State => {
+export const rootReducer = (state: RootState = initialState, action: Action): RootState => {
     switch (action.type) {
         case ActionType.ACTION_CHANGE_FIRST_NAME:
             return { ...state, firstName: action.payload };
