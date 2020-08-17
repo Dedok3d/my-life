@@ -1,5 +1,6 @@
 import { ActionType, Action } from './actions';
 import { LifeIternal } from '../models';
+import MStorage from '../actions/storage/storage';
 
 export interface RootState {
     firstName: string;
@@ -56,8 +57,10 @@ const initialState: RootState = {
     ],
 };
 
+const storeState = MStorage.loadFromLocalStorage();
 
-export const rootReducer = (state: RootState = initialState, action: Action): RootState => {
+
+export const rootReducer = (state: RootState = storeState || initialState, action: Action): RootState => {
     switch (action.type) {
         case ActionType.ACTION_CHANGE_FIRST_NAME:
             return { ...state, firstName: action.payload };
