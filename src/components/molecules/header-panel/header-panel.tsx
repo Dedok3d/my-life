@@ -6,6 +6,7 @@ import moment from 'moment';
 import ContextMenu from '../../atoms/context-menu';
 import ActionButton from '../../atoms/buttons/action-button';
 import { RootState } from '../../../store/reducers';
+import MStorage from '../../../actions/storage/storage';
 
 const styles = StyleSheet.create({
     panel: {
@@ -56,7 +57,9 @@ interface Props extends PropsFromRedux { }
 
 const intervals = ['Дней', 'Месяцев', 'Лет'];
 
-function HeaderPanel({ birthDate, }: Props) {
+function HeaderPanel(state: Props) {
+    const { birthDate } = state;
+
     const [interval, setInterval] = useState('');
     const [lifeCount, setLifeCount] = useState('');
 
@@ -93,7 +96,7 @@ function HeaderPanel({ birthDate, }: Props) {
         <div className={css(styles.panel)}>
             <div className={css(styles.title)}>Календарь жизни</div>
             <div className={css(styles.actions)}>
-                <ActionButton>Сохранить</ActionButton>
+                <ActionButton onClick={() => MStorage.saveToLocalStorage(state)}>Сохранить</ActionButton>
             </div>
 
             <div className={css(styles.meta)}>
