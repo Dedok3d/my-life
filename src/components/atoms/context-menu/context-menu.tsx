@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import DownArrow from '../svg/down-arrow';
 
@@ -94,6 +94,19 @@ interface Props {
 
 function ContextMenu({ seletedOption, options, lifeCount, onSelect }: Props) {
     const [showSropContent, setShow] = useState<boolean>(undefined);
+
+    const onClickHandler = () => {
+        var show = showSropContent;
+
+        if (show) {
+            setShow(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', onClickHandler);
+        return () => document.removeEventListener('click', onClickHandler);
+    }, [showSropContent])
 
     return (
         <div className={css(styles.menu)}>
