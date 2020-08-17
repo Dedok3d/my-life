@@ -96,9 +96,7 @@ function ContextMenu({ seletedOption, options, lifeCount, onSelect }: Props) {
     const [showSropContent, setShow] = useState<boolean>(undefined);
 
     const onClickHandler = () => {
-        var show = showSropContent;
-
-        if (show) {
+        if (showSropContent) {
             setShow(false);
         }
     };
