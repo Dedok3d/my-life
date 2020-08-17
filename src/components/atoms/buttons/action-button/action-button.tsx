@@ -3,11 +3,8 @@ import { StyleSheet, css } from 'aphrodite';
 
 const [hoverAnim] = [
     {
-        '0%': {
-            backgroundColor: 'rgb(255,255,255)',
-        },
         '100%': {
-            backgroundColor: 'rgb(215,215,215)',
+            boxShadow: '0 0 5px rgb(255,255,255)',
         }
     },
 ];
@@ -23,6 +20,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '120px',
         height: '40px',
+        cursor: 'pointer',
+        ':hover': {
+            animationName: [hoverAnim],
+            animationDuration: '0.2s',
+            animationIterationCount: 1,
+            animationFillMode: 'forwards'
+        },
     }
 });
 
