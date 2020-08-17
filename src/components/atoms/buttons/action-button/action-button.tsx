@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     button: {
         border: '1px solid rgb(255,255,255)',
         color: 'rgb(255,255,255)',
-        borderRadius: '5px',
+        borderTopLeftRadius: '5px',
+        borderBottomLeftRadius: '5px',
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
