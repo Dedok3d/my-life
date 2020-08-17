@@ -1,13 +1,13 @@
 import { ActionType, Action } from './actions';
 import { LifeIternal } from '../models';
 
-interface State {
+export interface RootState {
     firstName: string;
     lifeIternals: LifeIternal[];
     birthDate: string;
 }
 
-const initialState: State = {
+const initialState: RootState = {
     birthDate: undefined,
     firstName: '',
     lifeIternals: [

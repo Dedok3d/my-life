@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import ContextMenu from '../../atoms/context-menu';
 import ActionButton from '../../atoms/buttons/action-button';
+import { RootState } from '../../../store/reducers';
 
 const styles = StyleSheet.create({
     panel: {
@@ -42,10 +43,6 @@ const styles = StyleSheet.create({
     }
 });
 
-interface RootState {
-    birthDate: string;
-}
-
 const mapStateToProps = (state: RootState) => (state);
 
 const connector = connect(
@@ -59,7 +56,7 @@ interface Props extends PropsFromRedux { }
 
 const intervals = ['Дней', 'Месяцев', 'Лет'];
 
-function HeaderPanel({ birthDate }: Props) {
+function HeaderPanel({ birthDate, }: Props) {
     const [interval, setInterval] = useState('');
     const [lifeCount, setLifeCount] = useState('');
 
