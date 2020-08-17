@@ -7,6 +7,8 @@ import ContextMenu from '../../atoms/context-menu';
 import ActionButton from '../../atoms/buttons/action-button';
 import { RootState } from '../../../store/reducers';
 import MStorage from '../../../actions/storage/storage';
+import SelectBox from '../../atoms/buttons/select-box';
+import { changeOptions } from '../../../store/actions';
 
 const styles = StyleSheet.create({
     panel: {
@@ -40,6 +42,7 @@ const styles = StyleSheet.create({
         height: '30px',
     },
     actions: {
+        display: 'flex',
         marginLeft: '25px',
     }
 });
@@ -48,7 +51,7 @@ const mapStateToProps = (state: RootState) => (state);
 
 const connector = connect(
     mapStateToProps,
-    {}
+    { changeOptions }
 );
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
@@ -58,8 +61,8 @@ interface Props extends PropsFromRedux { }
 const intervals = ['Дней', 'Месяцев', 'Лет'];
 
 function HeaderPanel(state: Props) {
-    const { birthDate } = state;
-
+    const { birthDate, options, changeOptions } = state;
+    
     const [interval, setInterval] = useState('');
     const [lifeCount, setLifeCount] = useState('');
 
@@ -97,6 +100,7 @@ function HeaderPanel(state: Props) {
             <div className={css(styles.title)}>Календарь жизни</div>
             <div className={css(styles.actions)}>
                 <ActionButton onClick={() => MStorage.saveToLocalStorage(state)}>Сохранить</ActionButton>
+                <SelectBox changeOptions={changeOptions} options={options} />
             </div>
 
             <div className={css(styles.meta)}>
