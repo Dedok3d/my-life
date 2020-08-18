@@ -29359,11 +29359,11 @@ const initialState = {
     options: [
         {
             name: _models__WEBPACK_IMPORTED_MODULE_1__["OptionName"].Person,
-            checked: true,
+            checked: false,
         },
         {
             name: _models__WEBPACK_IMPORTED_MODULE_1__["OptionName"].FamousDeaths,
-            checked: false,
+            checked: true,
         },
         {
             name: _models__WEBPACK_IMPORTED_MODULE_1__["OptionName"].StageOfLife,
