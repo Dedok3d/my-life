@@ -77,9 +77,9 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
     const deathAge = useMemo(() => {
         const celebrity = famousDeath.find(celebrity => celebrity.checked);
         if (celebrity) {
-            return celebrity.death;
+            return celebrity.death * multiplier;
         }
-    }, [famousDeath]);
+    }, [famousDeath, multiplier]);
 
     const age = useMemo(() => {
         if (!birthDate) {
@@ -89,8 +89,17 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
         const dBidth = moment(birthDate);
         const dNow = moment();
 
-        return dNow.diff(dBidth, 'years');
-    }, [birthDate]);
+        switch (iternal) {
+            case Intervals.year:
+                return dNow.diff(dBidth, 'years');
+            case Intervals.month:
+                return dNow.diff(dBidth, 'months');
+            case Intervals.week:
+                return dNow.diff(dBidth, 'days');
+            default:
+                return;
+        }
+    }, [birthDate, iternal]);
 
     const iternalChecked = useMemo(() => !!lifeIternals.find(iternal => iternal.checked), [lifeIternals]);
 
