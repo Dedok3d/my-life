@@ -17,7 +17,7 @@ const [hoverAnim] = [
 const styles = StyleSheet.create({
     label: {
         padding: '5px',
-        paddingLeft: '70px',
+        paddingLeft: '40px',
         display: 'flex',
         flexDirection: 'row',
         cursor: 'pointer',
@@ -84,7 +84,7 @@ function FamousOption({ famousDeath, changeFamousDeath }: Props) {
 
     return (
         <Fragment>
-            <div className={css(styles.title)}>Этапы жизни</div>
+            <div className={css(styles.title)}>Смерти знаменитостей</div>
 
             <div className={css(styles.content)}>
                 {
