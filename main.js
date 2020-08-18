@@ -27862,6 +27862,7 @@ const styles = aphrodite__WEBPACK_IMPORTED_MODULE_1__["StyleSheet"].create({
         },
     },
     dropContent: {
+        zIndex: 999,
         width: '250px',
         backgroundColor: 'rgb(255,255,255)',
         border: '1px solid rgb(0, 0, 0)',
@@ -28758,11 +28759,11 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
         let result = [];
         for (let i = start; i < end; i++) {
             result.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { key: `item-${i}`, className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_2__["css"])(styles.item), style: { top: i * ITEM_HEIGHT, height: ITEM_HEIGHT } }, squares[i] && squares[i].map(index => {
-                if (deathAge === index + 1) {
-                    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_death__WEBPACK_IMPORTED_MODULE_6__["default"], { key: `svg-deathAge-${deathAge}` });
-                }
                 if (showMe && age === index + 1) {
                     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_person__WEBPACK_IMPORTED_MODULE_7__["default"], { key: `svg-age-${age}` });
+                }
+                if (deathAge === index + 1) {
+                    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_death__WEBPACK_IMPORTED_MODULE_6__["default"], { key: `svg-deathAge-${deathAge}` });
                 }
                 return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_square__WEBPACK_IMPORTED_MODULE_4__["default"], { key: `square-${index}`, fill: true, color: getSquareColor(index), num: index + 1 });
             })));
