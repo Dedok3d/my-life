@@ -4,7 +4,16 @@ import { StyleSheet, css } from 'aphrodite';
 import DownArrow from '../../svg/down-arrow';
 import { Option } from '../../../../models';
 
-const [hoverAnim, fadeIn, fadeOut] = [
+const [hoverAnim, hoverAnimBtn, fadeIn, fadeOut] = [
+
+    {
+        '0%': {
+            backgroundColor: 'rgb(255,255,255)',
+        },
+        '100%': {
+            backgroundColor: 'rgb(215,215,215)',
+        }
+    },
     {
         '100%': {
             boxShadow: '0 0 5px rgb(255,255,255)',
@@ -64,14 +73,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         cursor: 'pointer',
         ':hover': {
-            animationName: [hoverAnim],
+            animationName: [hoverAnimBtn],
             animationDuration: '0.2s',
             animationIterationCount: 1,
             animationFillMode: 'forwards'
         },
     },
     dropContent: {
-        width: '150px',
+        width: '250px',
         backgroundColor: 'rgb(255,255,255)',
         border: '1px solid rgb(0, 0, 0)',
         borderRadius: '10px',
