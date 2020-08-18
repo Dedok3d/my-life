@@ -1,10 +1,14 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
+import moment from 'moment';
+
+
 import Square from '../../atoms/square';
 import { Intervals, MONTHS_OF_YAER, WEEKS_OF_MOUNTH } from '../../../models';
-import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../../../store/reducers';
 import Death from '../../atoms/svg/death';
+import Person from '../../atoms/svg/person';
 
 const ITEM_HEIGHT = 40;
 const VIEWPORT_HEIGHT = 400;
@@ -35,8 +39,8 @@ const styles = StyleSheet.create({
 });
 
 
-const mapStateToProps = ({ lifeIternals, famousDeath }: RootState) => ({
-    lifeIternals, famousDeath
+const mapStateToProps = ({ lifeIternals, famousDeath, showMe, birthDate }: RootState) => ({
+    lifeIternals, famousDeath, showMe, birthDate
 });
 
 const connector = connect(
@@ -51,7 +55,7 @@ interface Props extends PropsFromRedux {
     iternal: string;
 }
 
-function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath }: Props) {
+function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, birthDate, showMe }: Props) {
     const ref = useRef<HTMLDivElement>();
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT));
@@ -76,6 +80,19 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath }:
             return celebrity.death;
         }
     }, [famousDeath]);
+
+    const age = useMemo(() => {
+        if (!birthDate) {
+            return;
+        }
+
+        const dBidth = moment(birthDate);
+        const dNow = moment();
+
+        return dNow.diff(dBidth, 'years');
+    }, [birthDate]);
+
+    const iternalChecked = useMemo(() => !!lifeIternals.find(iternal => iternal.checked), [lifeIternals]);
 
     const calculateSquares = () => {
         const array = [];
@@ -107,7 +124,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath }:
 
         }
 
-        if (!!lifeIternals.find(iternal => iternal.checked)) {
+        if (iternalChecked) {
             return 'rgb(192,192,192)';
         }
 
@@ -118,9 +135,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath }:
         return `rgba(33, 110, 57, ${1 - (index / numberOfSquares)})`;
     };
 
-    useEffect(() => {
-        calculateSquares();
-    }, [numberOfSquares]);
+    useEffect(() => calculateSquares(), [numberOfSquares]);
 
     const renderRows = (() => {
         let result = [];
@@ -130,7 +145,11 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath }:
                     {
                         squares[i] && squares[i].map(index => {
                             if (deathAge === index + 1) {
-                                return <Death key={`svg-deathAge-${deathAge}`}/>;
+                                return <Death key={`svg-deathAge-${deathAge}`} />;
+                            }
+
+                            if (age === index + 1) {
+                                return <Person key={`svg-age-${age}`} />;
                             }
 
                             return <Square key={`square-${index}`} fill={true} color={getSquareColor(index)} num={index + 1} />;
