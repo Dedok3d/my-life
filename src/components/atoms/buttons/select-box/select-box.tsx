@@ -109,10 +109,6 @@ const styles = StyleSheet.create({
             animationFillMode: 'forwards'
         },
     },
-    count: {
-        textAlign: 'center',
-        padding: '5px'
-    },
 });
 
 interface Props {
