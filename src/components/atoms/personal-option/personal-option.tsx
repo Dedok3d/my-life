@@ -66,10 +66,8 @@ function PersonalOption({ firstName, birthDate, changeFirstName, changeBirthDate
                     Д.Р.
                     <input
                         className={css(styles.input, styles.datepicker)}
-                        value={birthDate}
-                        onChange={(e) => {
-                            changeBirthDate(e.target.value);
-                        }}
+                        value={birthDate || ''}
+                        onChange={(e) => changeBirthDate(e.target.value)}
                         type="date"
                     />
                 </label>
@@ -80,9 +78,7 @@ function PersonalOption({ firstName, birthDate, changeFirstName, changeBirthDate
                         className={css(styles.input)}
                         type="text"
                         value={firstName}
-                        onChange={(e) => {
-                            changeFirstName(e.target.value);
-                        }}
+                        onChange={(e) => changeFirstName(e.target.value)}
                     />
                 </label>
             </div>
