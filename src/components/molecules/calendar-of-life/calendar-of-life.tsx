@@ -122,11 +122,6 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath }:
         calculateSquares();
     }, [numberOfSquares]);
 
-    useEffect(() => {
-        window.addEventListener('resize', calculateSquares);
-        return () => window.removeEventListener('resize', calculateSquares);
-    }, []);
-
     const renderRows = (() => {
         let result = [];
         for (let i = start; i < end; i++) {
