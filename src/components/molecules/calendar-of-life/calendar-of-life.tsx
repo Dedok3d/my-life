@@ -157,7 +157,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
                                 return <Death key={`svg-deathAge-${deathAge}`} />;
                             }
 
-                            if (age === index + 1) {
+                            if (showMe && age === index + 1) {
                                 return <Person key={`svg-age-${age}`} />;
                             }
 
