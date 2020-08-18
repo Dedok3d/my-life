@@ -6,14 +6,27 @@ import { changeFamousDeath } from '../../../store/actions';
 import { RootState } from '../../../store/reducers';
 import DownArrow from '../svg/down-arrow';
 
+const [hoverAnim] = [
+    {
+        '100%': {
+            textShadow: 'rgb(255,215,0) 1px 0 10px',
+        }
+    },
+];
+
 const styles = StyleSheet.create({
     label: {
-        width: '150px',
-        padding: '3px',
-        cursor: 'pointer'
-    },
-    input: {
-        verticalAling: 'middle',
+        padding: '5px',
+        paddingLeft: '70px',
+        display: 'flex',
+        flexDirection: 'row',
+        cursor: 'pointer',
+        ':hover': {
+            animationName: [hoverAnim],
+            animationDuration: '0.2s',
+            animationIterationCount: 1,
+            animationFillMode: 'forwards'
+        },
     },
     title: {
         display: 'flex',
@@ -27,11 +40,13 @@ const styles = StyleSheet.create({
         color: 'rgb(255,255,255)',
     },
     content: {
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
         height: 'calc(100% - 30px)',
+        width: '250px',
+        listStyleType: 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '7px 0',
+        margin: '0',
     }
 });
 
