@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import Square from '../../atoms/square';
-import { LifeIternal, Intervals, MONTHS_OF_YAER, WEEKS_OF_MOUNTH } from '../../../models';
+import { Intervals, MONTHS_OF_YAER, WEEKS_OF_MOUNTH } from '../../../models';
 import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '../../../store/reducers';
+import Death from '../../atoms/svg/death';
 
 const ITEM_HEIGHT = 40;
 const VIEWPORT_HEIGHT = 400;
@@ -33,12 +35,8 @@ const styles = StyleSheet.create({
 });
 
 
-interface RootState {
-    lifeIternals: LifeIternal[];
-}
-
-const mapStateToProps = ({ lifeIternals }: RootState) => ({
-    lifeIternals
+const mapStateToProps = ({ lifeIternals, famousDeath }: RootState) => ({
+    lifeIternals, famousDeath
 });
 
 const connector = connect(
@@ -53,7 +51,7 @@ interface Props extends PropsFromRedux {
     iternal: string;
 }
 
-function CalendarOfLife({ numberOfSquares, lifeIternals, iternal }: Props) {
+function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath }: Props) {
     const ref = useRef<HTMLDivElement>();
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT));
@@ -71,6 +69,13 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal }: Props) {
                 return 0;
         }
     }, [iternal]);
+
+    const deathAge = useMemo(() => {
+        const celebrity = famousDeath.find(celebrity => celebrity.checked);
+        if (celebrity) {
+            return celebrity.death;
+        }
+    }, [famousDeath]);
 
     const calculateSquares = () => {
         const array = [];
@@ -106,6 +111,10 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal }: Props) {
             return 'rgb(192,192,192)';
         }
 
+        if (index + 1 > deathAge) {
+            return 'rgb(255,255,255)';
+        }
+
         return `rgba(33, 110, 57, ${1 - (index / numberOfSquares)})`;
     };
 
@@ -119,19 +128,22 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal }: Props) {
     }, []);
 
     const renderRows = (() => {
-
         let result = [];
-        for (let i = start; i < end + 1; i++) {
+        for (let i = start; i < end; i++) {
             result.push(
                 <div key={`item-${i}`} className={css(styles.item)} style={{ top: i * ITEM_HEIGHT, height: ITEM_HEIGHT }}>
                     {
-                        squares[i] && squares[i].map(index =>
-                            <Square key={`square-${index}`} fill={true} color={getSquareColor(index)} num={index + 1} />
-                        )
+                        squares[i] && squares[i].map(index => {
+                            if (deathAge === index + 1) {
+                                return <Death key={`svg-deathAge-${deathAge}`}/>;
+                            }
+
+                            return <Square key={`square-${index}`} fill={true} color={getSquareColor(index)} num={index + 1} />;
+                        })
                     }
-                </div>
-            );
+                </div>);
         }
+
         return result;
     })();
 
