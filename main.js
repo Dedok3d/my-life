@@ -29363,7 +29363,7 @@ const initialState = {
         },
         {
             name: _models__WEBPACK_IMPORTED_MODULE_1__["OptionName"].FamousDeaths,
-            checked: true,
+            checked: false,
         },
         {
             name: _models__WEBPACK_IMPORTED_MODULE_1__["OptionName"].StageOfLife,
