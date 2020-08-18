@@ -17,7 +17,7 @@ const [hoverAnim] = [
 const styles = StyleSheet.create({
     label: {
         padding: '5px',
-        paddingLeft: '40px',
+        paddingLeft: '25px',
         display: 'flex',
         flexDirection: 'row',
         cursor: 'pointer',

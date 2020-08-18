@@ -5,8 +5,9 @@ import MStorage from '../actions/storage/storage';
 
 export interface RootState {
     firstName: string;
-    lifeIternals: LifeIternal[];
     birthDate: string;
+    showMe: boolean;
+    lifeIternals: LifeIternal[];
     options: Option[];
     famousDeath: FamousDeath[];
 }
@@ -14,6 +15,7 @@ export interface RootState {
 const initialState: RootState = {
     birthDate: undefined,
     firstName: '',
+    showMe: false,
     lifeIternals: [
         {
             color: 'rgb(255, 240, 250)',
@@ -65,7 +67,7 @@ const initialState: RootState = {
         },
         {
             name: OptionName.FamousDeaths,
-            checked: false,
+            checked: true,
         },
         {
             name: OptionName.StageOfLife,
@@ -74,20 +76,55 @@ const initialState: RootState = {
     ],
     famousDeath: [
         {
-            name: `Жанна д'Арк`,
-            death: 19,
+            name: `Зоя Космодемьянская`,
+            death: 18,
             checked: false,
         },
         {
-            name: `Тупак Шакур`,
-            death: 25,
+            name: `Виктор Цой`,
+            death: 28,
             checked: false,
         },
         {
-            name: `Курт Кобейн `,
-            death: 27,
+            name: `Сергей Бодров-младший`,
+            death: 30,
             checked: false,
         },
+        {
+            name: `Иисус Христос`,
+            death: 33,
+            checked: false,
+        },
+        {
+            name: `Александр Грибоедов`,
+            death: 34,
+            checked: false,
+        },
+        {
+            name: `Юрий Гагарин`,
+            death: 34,
+            checked: false,
+        },
+        {
+            name: `Александр Пушкин`,
+            death: 37,
+            checked: false,
+        },
+        {
+            name: `Александр Попов`,
+            death: 46,
+            checked: false,
+        },
+        {
+            name: `Иосиф Сталин`,
+            death: 74,
+            checked: false,
+        },
+        {
+            name: `Лев Толстой `,
+            death: 82,
+            checked: false,
+        }
     ]
 };
 
@@ -106,6 +143,8 @@ export const rootReducer = (state: RootState = storeState || initialState, actio
             return { ...state, options: action.payload };
         case ActionType.ACTION_CHANGE_FAMOUS_DEATH:
             return { ...state, famousDeath: action.payload };
+        case ActionType.ACTION_CHANGE_SHOW_ME:
+            return { ...state, showMe: action.payload };
     }
 
     return state;
