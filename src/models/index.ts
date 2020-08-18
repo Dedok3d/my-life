@@ -11,6 +11,12 @@ export interface Option {
     checked: boolean;
 }
 
+export interface FamousDeath {
+    name: string;
+    death: number;
+    checked: boolean;
+}
+
 export enum Intervals {
     week = 'Недели',
     month = 'Месяцы',
@@ -20,6 +26,7 @@ export enum Intervals {
 export enum OptionName {
     Person = 'Личность',
     StageOfLife = 'Этапы жизни',
+    FamousDeaths = 'Смерти знаменитостей'
 }
 
 
