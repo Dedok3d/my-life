@@ -64,7 +64,7 @@ const initialState: RootState = {
             checked: false,
         },
         {
-            name: OptionName.Person,
+            name: OptionName.FamousDeaths,
             checked: false,
         },
         {
