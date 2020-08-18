@@ -1,7 +1,17 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect, ConnectedProps } from 'react-redux';
-import { changeFirstName, changeBirthDate } from '../../../store/actions';
+import { changeFirstName, changeBirthDate, changeShowMe } from '../../../store/actions';
+import { RootState } from '../../../store/reducers';
+import DownArrow from '../svg/down-arrow';
+
+const [hoverAnim] = [
+    {
+        '100%': {
+            textShadow: 'rgb(255,215,0) 1px 0 10px',
+        }
+    },
+];
 
 const styles = StyleSheet.create({
     label: {
@@ -33,28 +43,40 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
-        alignItems: 'center',
         height: 'calc(100% - 30px)',
-    }
+    },
+    checkbox: {
+        padding: '5px 5px 15px 70px',
+        display: 'flex',
+        flexDirection: 'row',
+        cursor: 'pointer',
+        ':hover': {
+            animationName: [hoverAnim],
+            animationDuration: '0.2s',
+            animationIterationCount: 1,
+            animationFillMode: 'forwards'
+        },
+    },
 });
 
-interface RootState {
-    firstName: string;
-    birthDate: string;
-}
 
-const mapStateToProps = (state: RootState) => (state);
+const mapStateToProps = ({ firstName, birthDate, showMe }: RootState) => (
+    {
+        firstName,
+        birthDate,
+        showMe,
+    });
 
 const connector = connect(
     mapStateToProps,
-    { changeFirstName, changeBirthDate }
+    { changeFirstName, changeBirthDate, changeShowMe }
 );
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface Props extends PropsFromRedux { }
 
-function PersonalOption({ firstName, birthDate, changeFirstName, changeBirthDate }: Props) {
+function PersonalOption({ firstName, birthDate, showMe, changeFirstName, changeBirthDate, changeShowMe }: Props) {
 
     return (
         <Fragment>
@@ -80,6 +102,11 @@ function PersonalOption({ firstName, birthDate, changeFirstName, changeBirthDate
                         value={firstName}
                         onChange={(e) => changeFirstName(e.target.value)}
                     />
+                </label>
+
+                <label className={css(styles.checkbox)} onClick={() => changeShowMe(!showMe)}>
+                    Показать меня
+                    {showMe && <DownArrow color={'rgb(0,0,0)'} />}
                 </label>
             </div>
         </Fragment>
