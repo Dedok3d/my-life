@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
         },
     },
     dropContent: {
+        zIndex: 999,
         width: '250px',
         backgroundColor: 'rgb(255,255,255)',
         border: '1px solid rgb(0, 0, 0)',

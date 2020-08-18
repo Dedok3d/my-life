@@ -153,12 +153,12 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
                 <div key={`item-${i}`} className={css(styles.item)} style={{ top: i * ITEM_HEIGHT, height: ITEM_HEIGHT }}>
                     {
                         squares[i] && squares[i].map(index => {
-                            if (deathAge === index + 1) {
-                                return <Death key={`svg-deathAge-${deathAge}`} />;
-                            }
-
                             if (showMe && age === index + 1) {
                                 return <Person key={`svg-age-${age}`} />;
+                            }
+
+                            if (deathAge === index + 1) {
+                                return <Death key={`svg-deathAge-${deathAge}`} />;
                             }
 
                             return <Square key={`square-${index}`} fill={true} color={getSquareColor(index)} num={index + 1} />;

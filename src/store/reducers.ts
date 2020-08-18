@@ -67,7 +67,7 @@ const initialState: RootState = {
         },
         {
             name: OptionName.FamousDeaths,
-            checked: true,
+            checked: false,
         },
         {
             name: OptionName.StageOfLife,
