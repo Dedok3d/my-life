@@ -82,7 +82,7 @@ const initialState: RootState = {
             name: `Тупак Шакур`,
             death: 25,
             checked: false,
-        }, ,
+        },
         {
             name: `Курт Кобейн `,
             death: 27,
