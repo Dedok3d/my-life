@@ -30,6 +30,6 @@ export enum OptionName {
 }
 
 
-export const LIFE_AVERAGE_DURATION = 72;
+export const LIFE_AVERAGE_DURATION = 100;
 export const MONTHS_OF_YAER = 12;
 export const WEEKS_OF_MOUNTH = 4;
