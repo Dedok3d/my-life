@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { connect, ConnectedProps } from 'react-redux';
 
-import { changeFamousDeath } from '../../../store/actions';
-import { RootState } from '../../../store/reducers';
 import DownArrow from '../svg/down-arrow';
+import { RadioOption } from '../../../models';
 
 const [hoverAnim] = [
     {
@@ -50,52 +48,28 @@ const styles = StyleSheet.create({
     }
 });
 
+interface Props {
+    title: string;
+    radioOption: RadioOption[];
+    changeRadioOption: (index: number) => void;
+}
 
-const mapStateToProps = ({ famousDeath }: RootState) => ({ famousDeath });
-
-const connector = connect(
-    mapStateToProps,
-    { changeFamousDeath }
-);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-interface Props extends PropsFromRedux { }
-
-function FamousOption({ famousDeath, changeFamousDeath }: Props) {
-
-    const updateFamousDeath = (index: number) => {
-        const its = [...famousDeath];
-
-        if (its[index].checked) {
-            its[index].checked = false;
-            changeFamousDeath(its);
-            return;
-        }
-
-        const checkedIndex = its.findIndex(celebrity => celebrity.checked);
-        if (checkedIndex !== -1) {
-            its[checkedIndex].checked = false;
-        }
-
-        its[index].checked = true;
-        changeFamousDeath(its);
-    };
+function RadioGroup({ title, radioOption, changeRadioOption }: Props) {
 
     return (
         <Fragment>
-            <div className={css(styles.title)}>Смерти знаменитостей</div>
+            <div className={css(styles.title)}>{title}</div>
 
             <div className={css(styles.content)}>
                 {
-                    famousDeath.map((celebrity, index) =>
+                    radioOption.map((option, index) =>
                         <label
-                            key={celebrity.name}
+                            key={option.name}
                             className={css(styles.label)}
-                            onClick={() => updateFamousDeath(index)}
+                            onClick={() => changeRadioOption(index)}
                         >
-                            {`${celebrity.name} (${celebrity.death})`}
-                            {celebrity.checked && <DownArrow color={'rgb(0,0,0)'} />}
+                            {option.name}
+                            {option.checked && <DownArrow color={'rgb(0,0,0)'} />}
                         </label>
                     )
                 }
@@ -104,4 +78,4 @@ function FamousOption({ famousDeath, changeFamousDeath }: Props) {
     );
 }
 
-export default connector(FamousOption);
+export default RadioGroup;
