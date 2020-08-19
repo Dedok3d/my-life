@@ -188,7 +188,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
             return <Death key={`svg-deathAge-${deathAge}`} />;
         }
 
-        return <Square key={`square-${index}`} fill={true} color={getSquareColor(index - 1)} num={index} />;
+        return <Square key={`square-${index}`} fill={true} color={getSquareColor(index)} num={index + 1} />;
     }
 
     const renderRows = (() => {
