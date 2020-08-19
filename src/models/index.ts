@@ -32,8 +32,15 @@ export enum Intervals {
 export enum OptionName {
     Person = 'Личность',
     StageOfLife = 'Этапы жизни',
-    LifeEvents = 'События',
+    LifeEvents = 'События в среднем',
     FamousDeaths = 'Смерти знаменитостей'
+}
+
+export enum LEvents {
+    FirstMarriage = 'Свадьба',
+    FirstChild = 'Первый ребёнок',
+    OwnBusiness = 'Свой бизнес',
+    PurchaseOfFlat = 'Покупка квартиры',
 }
 
 

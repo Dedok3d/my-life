@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -39,6 +39,18 @@ function OptionsPanel({ options, famousDeaths, lifeEvents, changeFamousDeath, ch
         options.find(option => option.name === OptionName.FamousDeaths),
         options.find(option => option.name === OptionName.LifeEvents)
     ];
+
+    const deaths = useMemo(() => (famousDeaths.map(celebrity => {
+        const newFamousDeath = { ...celebrity };
+        newFamousDeath.name = `${celebrity.name} (${celebrity.death})`;
+        return newFamousDeath;
+    })), [famousDeaths]);
+
+    const events = useMemo(() => (lifeEvents.map(event => {
+        const newEvent = { ...event };
+        newEvent.name = `${event.name} (${event.age})`;
+        return newEvent;
+    })), [lifeEvents]);
 
     const updateRadio = (
         index: number,
@@ -88,7 +100,7 @@ function OptionsPanel({ options, famousDeaths, lifeEvents, changeFamousDeath, ch
                 famousDeath && famousDeath.checked && <OptionCard>
                     <RadioGroup
                         title={famousDeath.name}
-                        radioOption={famousDeaths}
+                        radioOption={deaths}
                         changeRadioOption={updateFamous}
                     />
                 </OptionCard>

@@ -5,10 +5,14 @@ import moment from 'moment';
 
 
 import Square from '../../atoms/square';
-import { Intervals, MONTHS_OF_YAER, WEEKS_OF_MOUNTH } from '../../../models';
+import { Intervals, MONTHS_OF_YAER, WEEKS_OF_MOUNTH, LEvents } from '../../../models';
 import { RootState } from '../../../store/reducers';
 import Death from '../../atoms/svg/death';
 import Person from '../../atoms/svg/person';
+import Child from '../../atoms/svg/child';
+import Marriage from '../../atoms/svg/marriage';
+import Business from '../../atoms/svg/business';
+import Appartment from '../../atoms/svg/appartment';
 
 const ITEM_HEIGHT = 40;
 const VIEWPORT_HEIGHT = 400;
@@ -81,10 +85,13 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
         }
     }, [famousDeaths, multiplier]);
 
-    const eventAge = useMemo(() => {
+    const eventChecked = useMemo(() => {
         const event = lifeEvents.find(event => event.checked);
         if (event) {
-            return event.age * multiplier;
+            return {
+                name: event.name,
+                age: event.age * multiplier,
+            };
         }
     }, [lifeEvents, multiplier]);
 
@@ -153,27 +160,44 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
 
     useEffect(() => calculateSquares(), [numberOfSquares]);
 
+    const getEventIcon = () => {
+        const { name, age } = eventChecked;
+
+        switch (name) {
+            case LEvents.FirstMarriage:
+                return <Marriage key={`svg-marriage-${age}`} />
+            case LEvents.FirstChild:
+                return <Child key={`svg-child-${age}`} />
+            case LEvents.OwnBusiness:
+                return <Business key={`svg-business-${age}`} />
+            case LEvents.PurchaseOfFlat:
+                return <Appartment key={`svg-appartment-${age}`} />
+        }
+    }
+
+    const getIcon = (index: number) => {
+        if (showMe && age === index) {
+            return <Person key={`svg-age-${age}`} />;
+        }
+
+        if (eventChecked && eventChecked.age === index) {
+            return getEventIcon();
+        }
+
+        if (deathAge === index) {
+            return <Death key={`svg-deathAge-${deathAge}`} />;
+        }
+
+        return <Square key={`square-${index}`} fill={true} color={getSquareColor(index - 1)} num={index} />;
+    }
+
     const renderRows = (() => {
         let result = [];
         for (let i = start; i < end; i++) {
             result.push(
                 <div key={`item-${i}`} className={css(styles.item)} style={{ top: i * ITEM_HEIGHT, height: ITEM_HEIGHT }}>
                     {
-                        squares[i] && squares[i].map(index => {
-                            if (showMe && age === index + 1) {
-                                return <Person key={`svg-age-${age}`} />;
-                            }
-
-                            if (deathAge === index + 1) {
-                                return <Death key={`svg-deathAge-${deathAge}`} />;
-                            }
-
-                            if (deathAge === index + 1) {
-                                return <Death key={`svg-deathAge-${deathAge}`} />;
-                            }
-
-                            return <Square key={`square-${index}`} fill={true} color={getSquareColor(index)} num={index + 1} />;
-                        })
+                        squares[i] && squares[i].map(getIcon)
                     }
                 </div>);
         }

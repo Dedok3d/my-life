@@ -1,5 +1,5 @@
 import { ActionType, Action } from './actions';
-import { LifeIternal, OptionName, RadioOption, FamousDeath, LifeEvent } from '../models';
+import { LifeIternal, OptionName, RadioOption, FamousDeath, LifeEvent, LEvents } from '../models';
 import MStorage from '../actions/storage/storage';
 
 
@@ -67,11 +67,11 @@ const initialState: RootState = {
             checked: false,
         },
         {
-            name: OptionName.FamousDeaths,
+            name: OptionName.LifeEvents,
             checked: false,
         },
         {
-            name: OptionName.LifeEvents,
+            name: OptionName.FamousDeaths,
             checked: false,
         },
         {
@@ -133,22 +133,22 @@ const initialState: RootState = {
     ],
     lifeEvents: [
         {
-            name: 'Первый брак',
+            name: LEvents.FirstMarriage,
             age: 23,
             checked: false,
         },
         {
-            name: 'Первый ребёнок',
+            name: LEvents.FirstChild,
             age: 26,
             checked: false,
         },
         {
-            name: 'Свой бизнес',
+            name: LEvents.OwnBusiness,
             age: 28,
             checked: false,
         },
         {
-            name: 'Покупка квартиры',
+            name: LEvents.PurchaseOfFlat,
             age: 33,
             checked: false,
         },
