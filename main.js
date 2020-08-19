@@ -29033,7 +29033,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
         if (deathAge === index) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_death__WEBPACK_IMPORTED_MODULE_6__["default"], { key: `svg-deathAge-${deathAge}` });
         }
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_square__WEBPACK_IMPORTED_MODULE_4__["default"], { key: `square-${index}`, fill: true, color: getSquareColor(index - 1), num: index });
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_square__WEBPACK_IMPORTED_MODULE_4__["default"], { key: `square-${index}`, fill: true, color: getSquareColor(index), num: index + 1 });
     };
     const renderRows = (() => {
         let result = [];
