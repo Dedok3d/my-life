@@ -27672,8 +27672,8 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const saveToLocalStorage = ({ lifeIternals, options, firstName, birthDate, showMe, famousDeath }) => {
-    localStorage.setItem('store', JSON.stringify({ lifeIternals, options, firstName, birthDate, showMe, famousDeath }));
+const saveToLocalStorage = ({ lifeIternals, options, firstName, birthDate, showMe, famousDeaths, lifeEvents }) => {
+    localStorage.setItem('store', JSON.stringify({ lifeIternals, options, firstName, birthDate, showMe, famousDeaths, lifeEvents }));
 };
 const loadFromLocalStorage = () => {
     const item = localStorage.getItem('store');
@@ -28056,113 +28056,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/components/atoms/famous-option/famous-option.tsx":
-/*!**************************************************************!*\
-  !*** ./src/components/atoms/famous-option/famous-option.tsx ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var aphrodite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aphrodite */ "./node_modules/aphrodite/es/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../store/actions */ "./src/store/actions.ts");
-/* harmony import */ var _svg_down_arrow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svg/down-arrow */ "./src/components/atoms/svg/down-arrow/index.ts");
-
-
-
-
-
-const [hoverAnim] = [
-    {
-        '100%': {
-            textShadow: 'rgb(255,215,0) 1px 0 10px',
-        }
-    },
-];
-const styles = aphrodite__WEBPACK_IMPORTED_MODULE_1__["StyleSheet"].create({
-    label: {
-        padding: '5px',
-        paddingLeft: '25px',
-        display: 'flex',
-        flexDirection: 'row',
-        cursor: 'pointer',
-        ':hover': {
-            animationName: [hoverAnim],
-            animationDuration: '0.2s',
-            animationIterationCount: 1,
-            animationFillMode: 'forwards'
-        },
-    },
-    title: {
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        fontSize: '20px',
-        width: '100%',
-        height: '30px',
-        backgroundImage: 'linear-gradient(262deg,rgb(51, 51, 51),rgb(0, 0, 0))',
-        color: 'rgb(255,255,255)',
-    },
-    content: {
-        height: 'calc(100% - 30px)',
-        width: '250px',
-        listStyleType: 'none',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '7px 0',
-        margin: '0',
-    }
-});
-const mapStateToProps = ({ famousDeath }) => ({ famousDeath });
-const connector = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, { changeFamousDeath: _store_actions__WEBPACK_IMPORTED_MODULE_3__["changeFamousDeath"] });
-function FamousOption({ famousDeath, changeFamousDeath }) {
-    const updateFamousDeath = (index) => {
-        const its = [...famousDeath];
-        if (its[index].checked) {
-            its[index].checked = false;
-            changeFamousDeath(its);
-            return;
-        }
-        const checkedIndex = its.findIndex(celebrity => celebrity.checked);
-        if (checkedIndex !== -1) {
-            its[checkedIndex].checked = false;
-        }
-        its[index].checked = true;
-        changeFamousDeath(its);
-    };
-    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.title) }, "\u0421\u043C\u0435\u0440\u0442\u0438 \u0437\u043D\u0430\u043C\u0435\u043D\u0438\u0442\u043E\u0441\u0442\u0435\u0439"),
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.content) }, famousDeath.map((celebrity, index) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", { key: celebrity.name, className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.label), onClick: () => updateFamousDeath(index) },
-            `${celebrity.name} (${celebrity.death})`,
-            celebrity.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svg_down_arrow__WEBPACK_IMPORTED_MODULE_4__["default"], { color: 'rgb(0,0,0)' }))))));
-}
-/* harmony default export */ __webpack_exports__["default"] = (connector(FamousOption));
-
-
-/***/ }),
-
-/***/ "./src/components/atoms/famous-option/index.ts":
-/*!*****************************************************!*\
-  !*** ./src/components/atoms/famous-option/index.ts ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _famous_option__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./famous-option */ "./src/components/atoms/famous-option/famous-option.tsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _famous_option__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
-
-
-/***/ }),
-
 /***/ "./src/components/atoms/iternal-option/index.ts":
 /*!******************************************************!*\
   !*** ./src/components/atoms/iternal-option/index.ts ***!
@@ -28416,6 +28309,93 @@ function RadioButton({ options, defaultValue, onSelect }) {
 
 /***/ }),
 
+/***/ "./src/components/atoms/radio-group/index.ts":
+/*!***************************************************!*\
+  !*** ./src/components/atoms/radio-group/index.ts ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _radio_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./radio-group */ "./src/components/atoms/radio-group/radio-group.tsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _radio_group__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/atoms/radio-group/radio-group.tsx":
+/*!**********************************************************!*\
+  !*** ./src/components/atoms/radio-group/radio-group.tsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var aphrodite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aphrodite */ "./node_modules/aphrodite/es/index.js");
+/* harmony import */ var _svg_down_arrow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../svg/down-arrow */ "./src/components/atoms/svg/down-arrow/index.ts");
+
+
+
+const [hoverAnim] = [
+    {
+        '100%': {
+            textShadow: 'rgb(255,215,0) 1px 0 10px',
+        }
+    },
+];
+const styles = aphrodite__WEBPACK_IMPORTED_MODULE_1__["StyleSheet"].create({
+    label: {
+        padding: '5px',
+        paddingLeft: '25px',
+        display: 'flex',
+        flexDirection: 'row',
+        cursor: 'pointer',
+        ':hover': {
+            animationName: [hoverAnim],
+            animationDuration: '0.2s',
+            animationIterationCount: 1,
+            animationFillMode: 'forwards'
+        },
+    },
+    title: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        fontSize: '20px',
+        width: '100%',
+        height: '30px',
+        backgroundImage: 'linear-gradient(262deg,rgb(51, 51, 51),rgb(0, 0, 0))',
+        color: 'rgb(255,255,255)',
+    },
+    content: {
+        height: 'calc(100% - 30px)',
+        width: '250px',
+        listStyleType: 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '7px 0',
+        margin: '0',
+    }
+});
+function RadioGroup({ title, radioOption, changeRadioOption }) {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.title) }, title),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.content) }, radioOption.map((option, index) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", { key: option.name, className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.label), onClick: () => changeRadioOption(index) },
+            option.name,
+            option.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svg_down_arrow__WEBPACK_IMPORTED_MODULE_2__["default"], { color: 'rgb(0,0,0)' }))))));
+}
+/* harmony default export */ __webpack_exports__["default"] = (RadioGroup);
+
+
+/***/ }),
+
 /***/ "./src/components/atoms/square/index.ts":
 /*!**********************************************!*\
   !*** ./src/components/atoms/square/index.ts ***!
@@ -28464,6 +28444,206 @@ function Square({ fill, num, color }) {
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.span) }, num)));
 }
 /* harmony default export */ __webpack_exports__["default"] = (Square);
+
+
+/***/ }),
+
+/***/ "./src/components/atoms/svg/appartment/appartment.tsx":
+/*!************************************************************!*\
+  !*** ./src/components/atoms/svg/appartment/appartment.tsx ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var aphrodite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aphrodite */ "./node_modules/aphrodite/es/index.js");
+
+
+const styles = aphrodite__WEBPACK_IMPORTED_MODULE_1__["StyleSheet"].create({
+    icon: {
+        width: '30px',
+        height: '30px',
+        padding: '1px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '3px',
+    }
+});
+function Appartment() {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.icon), viewBox: "0 0 512.002 512.002", enableBackground: "new 0 0 512.002 512.002" },
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M96,207.001h15c5.523,0,10-4.478,10-10v-14.999c0-5.523-4.477-10-10-10H96c-5.524,0-10,4.477-10,10v14.999\r\n\t\t\t\tC86,202.523,90.476,207.001,96,207.001z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M96,267.002h15c5.523,0,10-4.478,10-10V242c0-5.523-4.477-10-10-10H96c-5.524,0-10,4.477-10,10v15.002\r\n\t\t\t\tC86,262.524,90.476,267.002,96,267.002z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M96,327h15c5.523,0,10-4.477,10-10v-14.999c0-5.522-4.477-10-10-10H96c-5.524,0-10,4.478-10,10V317\r\n\t\t\t\tC86,322.522,90.476,327,96,327z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M96,386.997h15c5.523,0,10-4.478,10-10v-14.998c0-5.522-4.477-10-10-10H96c-5.524,0-10,4.478-10,10v14.998\r\n\t\t\t\tC86,382.519,90.476,386.997,96,386.997z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M148.5,207.001h15.001c5.522,0,10-4.478,10-10v-14.999c0-5.523-4.478-10-10-10H148.5c-5.523,0-10,4.477-10,10v14.999\r\n\t\t\t\tC138.5,202.523,142.977,207.001,148.5,207.001z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M148.5,267.002h15.001c5.522,0,10-4.478,10-10V242c0-5.523-4.478-10-10-10H148.5c-5.523,0-10,4.477-10,10v15.002\r\n\t\t\t\tC138.5,262.524,142.977,267.002,148.5,267.002z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M148.5,327h15.001c5.522,0,10-4.477,10-10v-14.999c0-5.522-4.478-10-10-10H148.5c-5.523,0-10,4.478-10,10V317\r\n\t\t\t\tC138.5,322.522,142.977,327,148.5,327z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M148.5,386.997h15.001c5.522,0,10-4.478,10-10v-14.998c0-5.522-4.478-10-10-10H148.5c-5.523,0-10,4.478-10,10v14.998\r\n\t\t\t\tC138.5,382.519,142.977,386.997,148.5,386.997z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M201.001,207.001h15.001c5.523,0,10-4.478,10-10v-14.999c0-5.523-4.477-10-10-10h-15.001c-5.522,0-10,4.477-10,10v14.999\r\n\t\t\t\tC191.001,202.523,195.478,207.001,201.001,207.001z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M201.001,267.002h15.001c5.523,0,10-4.478,10-10V242c0-5.523-4.477-10-10-10h-15.001c-5.522,0-10,4.477-10,10v15.002\r\n\t\t\t\tC191.001,262.524,195.478,267.002,201.001,267.002z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M201.001,327h15.001c5.523,0,10-4.477,10-10v-14.999c0-5.522-4.477-10-10-10h-15.001c-5.522,0-10,4.478-10,10V317\r\n\t\t\t\tC191.001,322.522,195.478,327,201.001,327z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M201.001,386.997h15.001c5.523,0,10-4.478,10-10v-14.998c0-5.522-4.477-10-10-10h-15.001c-5.522,0-10,4.478-10,10v14.998\r\n\t\t\t\tC191.001,382.519,195.478,386.997,201.001,386.997z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M296,207.001h15c5.523,0,10-4.478,10-10v-14.999c0-5.523-4.477-10-10-10h-15c-5.524,0-10,4.477-10,10v14.999\r\n\t\t\t\tC286,202.523,290.476,207.001,296,207.001z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M296,147.003h15c5.523,0,10-4.478,10-10v-14.998c0-5.522-4.477-10-10-10h-15c-5.524,0-10,4.478-10,10v14.998\r\n\t\t\t\tC286,142.525,290.476,147.003,296,147.003z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M296,87.006h15c5.523,0,10-4.478,10-10V62.003c0-5.522-4.477-10-10-10h-15c-5.524,0-10,4.478-10,10v15.003\r\n\t\t\t\tC286,82.528,290.476,87.006,296,87.006z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M296,267.002h15c5.523,0,10-4.478,10-10V242c0-5.523-4.477-10-10-10h-15c-5.524,0-10,4.477-10,10v15.002\r\n\t\t\t\tC286,262.524,290.476,267.002,296,267.002z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M296,327h15c5.523,0,10-4.477,10-10v-14.999c0-5.522-4.477-10-10-10h-15c-5.524,0-10,4.478-10,10V317\r\n\t\t\t\tC286,322.522,290.476,327,296,327z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M296,386.997h15c5.523,0,10-4.478,10-10v-14.998c0-5.522-4.477-10-10-10h-15c-5.524,0-10,4.478-10,10v14.998\r\n\t\t\t\tC286,382.519,290.476,386.997,296,386.997z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M348.5,207.001h15c5.523,0,10-4.478,10-10v-14.999c0-5.523-4.477-10-10-10h-15c-5.522,0-10,4.477-10,10v14.999\r\n\t\t\t\tC338.5,202.523,342.978,207.001,348.5,207.001z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M348.5,147.003h15c5.523,0,10-4.478,10-10v-14.998c0-5.522-4.477-10-10-10h-15c-5.522,0-10,4.478-10,10v14.998\r\n\t\t\t\tC338.5,142.525,342.978,147.003,348.5,147.003z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M348.5,87.006h15c5.523,0,10-4.478,10-10V62.003c0-5.522-4.477-10-10-10h-15c-5.522,0-10,4.478-10,10v15.003\r\n\t\t\t\tC338.5,82.528,342.978,87.006,348.5,87.006z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M348.5,267.002h15c5.523,0,10-4.478,10-10V242c0-5.523-4.477-10-10-10h-15c-5.522,0-10,4.477-10,10v15.002\r\n\t\t\t\tC338.5,262.524,342.978,267.002,348.5,267.002z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M348.5,327h15c5.523,0,10-4.477,10-10v-14.999c0-5.522-4.477-10-10-10h-15c-5.522,0-10,4.478-10,10V317\r\n\t\t\t\tC338.5,322.522,342.978,327,348.5,327z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M348.5,386.997h15c5.523,0,10-4.478,10-10v-14.998c0-5.522-4.477-10-10-10h-15c-5.522,0-10,4.478-10,10v14.998\r\n\t\t\t\tC338.5,382.519,342.978,386.997,348.5,386.997z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M401,207.001h14.999c5.522,0,10-4.478,10-10v-14.999c0-5.523-4.478-10-10-10H401c-5.522,0-10,4.477-10,10v14.999\r\n\t\t\t\tC391,202.523,395.478,207.001,401,207.001z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M401,147.003h14.999c5.522,0,10-4.478,10-10v-14.998c0-5.522-4.478-10-10-10H401c-5.522,0-10,4.478-10,10v14.998\r\n\t\t\t\tC391,142.525,395.478,147.003,401,147.003z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M401,87.006h14.999c5.522,0,10-4.478,10-10V62.003c0-5.522-4.478-10-10-10H401c-5.522,0-10,4.478-10,10v15.003\r\n\t\t\t\tC391,82.528,395.478,87.006,401,87.006z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M401,267.002h14.999c5.522,0,10-4.478,10-10V242c0-5.523-4.478-10-10-10H401c-5.522,0-10,4.477-10,10v15.002\r\n\t\t\t\tC391,262.524,395.478,267.002,401,267.002z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M401,327h14.999c5.522,0,10-4.477,10-10v-14.999c0-5.522-4.478-10-10-10H401c-5.522,0-10,4.478-10,10V317\r\n\t\t\t\tC391,322.522,395.478,327,401,327z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M401,386.997h14.999c5.522,0,10-4.478,10-10v-14.998c0-5.522-4.478-10-10-10H401c-5.522,0-10,4.478-10,10v14.998\r\n\t\t\t\tC391,382.519,395.478,386.997,401,386.997z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M115.764,452.003c-5.523,0-10,4.478-10,10c0,5.523,4.477,10,10,10H116c5.522,0,10-4.477,10-10s-4.478-10-10-10H115.764z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M315.764,452.003c-5.523,0-10,4.478-10,10c0,5.523,4.477,10,10,10h0.235c5.522,0,10-4.477,10-10c0-5.522-4.478-10-10-10\r\n\t\t\t\tH315.764z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M10.236,492.001H10c-5.524,0-10,4.478-10,10c0,5.522,4.476,10,10,10h0.236c5.522,0,10-4.478,10-10\r\n\t\t\t\tC20.236,496.478,15.759,492.001,10.236,492.001z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M502.002,492.001h-0.238c-5.523,0-10,4.478-10,10c0,5.522,4.477,10,10,10h0.238c5.523,0,10-4.478,10-10\r\n\t\t\t\tC512.002,496.478,507.524,492.001,502.002,492.001z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M473.034,492.001h-7.037v-482c0-5.523-4.478-10-10-10H256c-5.524,0-10,4.477-10,10v122.003H56c-5.524,0-10,4.478-10,10\r\n\t\t\t\tv349.997h-7.033c-5.523,0-10,4.478-10,10c0,5.522,4.477,10,10,10H56h100h60.002H256h100h59.999h39.998h0.001H456h17.034\r\n\t\t\t\tc5.523,0,10-4.478,10-10C483.034,496.478,478.557,492.001,473.034,492.001z M206.002,492.001H166v-39.997h40.002V492.001z\r\n\t\t\t\t M246,492.001h-19.998v-49.997c0-5.522-4.477-10-10-10H156c-5.524,0-10,4.478-10,10v49.997H66v-19.998h21.034\r\n\t\t\t\tc5.522,0,10-4.477,10-10c0-5.522-4.478-10-10-10H66V152.004h180V492.001z M405.999,492.001H366v-39.997h39.999V492.001z\r\n\t\t\t\t M445.997,492.001h-19.998v-49.997c0-5.522-4.478-10-10-10H356c-5.523,0-10,4.478-10,10v49.997h-80v-19.998h21.033\r\n\t\t\t\tc5.523,0,10-4.477,10-10c0-5.522-4.477-10-10-10H266V142.004V20.001h179.997V492.001z" })));
+}
+/* harmony default export */ __webpack_exports__["default"] = (Appartment);
+
+
+/***/ }),
+
+/***/ "./src/components/atoms/svg/appartment/index.ts":
+/*!******************************************************!*\
+  !*** ./src/components/atoms/svg/appartment/index.ts ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _appartment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./appartment */ "./src/components/atoms/svg/appartment/appartment.tsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _appartment__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/atoms/svg/business/business.tsx":
+/*!********************************************************!*\
+  !*** ./src/components/atoms/svg/business/business.tsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var aphrodite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aphrodite */ "./node_modules/aphrodite/es/index.js");
+
+
+const styles = aphrodite__WEBPACK_IMPORTED_MODULE_1__["StyleSheet"].create({
+    icon: {
+        width: '30px',
+        height: '30px',
+        padding: '1px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '3px',
+    }
+});
+function Business() {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.icon), viewBox: "0 0 497.44 497.44", enableBackground: "new 0 0 497.44 497.44" },
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M83.448,295.408c1.904,6.072,5.08,11.704,9.712,16.336l33.944,33.944c4.528,4.536,10.56,7.032,16.976,7.032h34.744\r\n\t\t\t\tc6.408,0,12.44-2.496,16.976-7.032l33.944-33.944c4.448-4.448,7.552-9.816,9.488-15.608\r\n\t\t\t\tc14.872-2.736,26.208-15.752,26.208-31.416c0-11.792-6.48-22-16-27.552V200.72c0-15.96-11.744-29.224-27.04-31.616\r\n\t\t\t\tc-11.816-20.088-33.16-32.384-56.736-32.384h-4.224c-48.52,0-88,39.48-88,88v14.2c-8.768,5.464-14.664,15.12-14.664,26.2\r\n\t\t\t\tC58.776,280.032,69.376,292.512,83.448,295.408z M241.44,250.944c4.76,2.776,8,7.88,8,13.776s-3.24,11-8,13.776V250.944z\r\n\t\t\t\t M225.44,283.472c0,6.312-2.56,12.496-7.024,16.96l-33.944,33.944c-1.512,1.512-3.52,2.344-5.664,2.344h-34.744\r\n\t\t\t\tc-2.136,0-4.152-0.832-5.664-2.344l-33.944-33.944c-4.464-4.472-7.024-10.656-7.024-16.968V248.72h29.496\r\n\t\t\t\tc19.232,0,37.312-7.488,50.912-21.088l6.744-6.736c10.232,13.168,24.808,22.296,40.856,25.992V283.472z M89.44,224.72\r\n\t\t\t\tc0-39.696,32.304-72,72-72h4.224c19.016,0,36.12,10.568,44.624,27.576l2.208,4.424h4.944c8.824,0,16,7.176,16,16v31.352\r\n\t\t\t\tc-14.52-2.128-27.896-9.88-36.8-21.752l-10.336-13.776l-19.776,19.776c-10.576,10.576-24.64,16.4-39.6,16.4H89.44V224.72z\r\n\t\t\t\t M81.44,252.696v24.848c-4.016-2.68-6.664-7.248-6.664-12.424C74.776,259.944,77.432,255.376,81.44,252.696z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M259.992,374.216l-42.552-11.608v-9.888h-16v15.208l-5.352,26.776l-23.984-17.984h-21.336l-23.976,17.984l-5.352-26.776\r\n\t\t\t\tV352.72h-16v9.888l-42.552,11.608c-27.032,7.368-47.472,29.992-52.072,57.624L0,496.72h322.888l-10.816-64.872\r\n\t\t\t\tC307.464,404.208,287.024,381.584,259.992,374.216z M123.192,480.72H74.664l6.696-46.864l-15.832-2.264l-7.024,49.128H18.888\r\n\t\t\t\tl7.704-46.248c3.584-21.496,19.48-39.08,40.504-44.816l40.184-10.96l8.808,44.04l12.28-9.208l8.456,12.688L123.192,480.72z\r\n\t\t\t\t M139.688,480.72l14.376-57.496l-12.88-19.312l14.92-11.192h10.664l14.928,11.192l-12.88,19.312l14.376,57.496H139.688z\r\n\t\t\t\t M264.376,480.72l-7.016-49.136l-15.832,2.264l6.696,46.864h-48.528l-13.624-54.504l8.456-12.688l12.28,9.208l8.808-44.04\r\n\t\t\t\tl40.184,10.96c21.024,5.736,36.92,23.328,40.504,44.824l7.688,46.248H264.376z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M473.44,0.72h-320c-13.232,0-24,10.768-24,24s10.768,24,24,24h320c13.232,0,24-10.768,24-24S486.672,0.72,473.44,0.72z\r\n\t\t\t\t M473.44,32.72h-320c-4.408,0-8-3.592-8-8s3.592-8,8-8h320c4.408,0,8,3.592,8,8S477.848,32.72,473.44,32.72z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("polygon", { points: "465.44,296.72 257.44,296.72 257.44,312.72 481.44,312.72 481.44,64.72 465.44,64.72 \t\t\t" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("rect", { x: "145.44", y: "64.72", width: "16", height: "56" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M237.88,167.376l29.256-19.504c4,3.008,8.92,4.848,14.304,4.848c5.192,0,9.968-1.696,13.896-4.504L338.4,178.36\r\n\t\t\t\tc-0.56,2.04-0.96,4.144-0.96,6.36c0,13.232,10.768,24,24,24s24-10.768,24-24c0-4.64-1.384-8.936-3.672-12.608l35.848-44.808\r\n\t\t\t\tc2.464,0.856,5.072,1.416,7.824,1.416c13.232,0,24-10.768,24-24s-10.768-24-24-24s-24,10.768-24,24\r\n\t\t\t\tc0,4.64,1.384,8.936,3.672,12.608l-35.848,44.808c-2.464-0.856-5.072-1.416-7.824-1.416c-5.192,0-9.968,1.696-13.896,4.504\r\n\t\t\t\tL304.48,135.08c0.56-2.04,0.96-4.144,0.96-6.36c0-13.232-10.768-24-24-24s-24,10.768-24,24c0,2.032,0.328,3.968,0.808,5.848\r\n\t\t\t\tl-29.24,19.496L237.88,167.376z M425.44,96.72c4.408,0,8,3.592,8,8s-3.592,8-8,8c-4.408,0-8-3.592-8-8\r\n\t\t\t\tS421.032,96.72,425.44,96.72z M361.44,176.72c4.408,0,8,3.592,8,8s-3.592,8-8,8c-4.408,0-8-3.592-8-8\r\n\t\t\t\tS357.032,176.72,361.44,176.72z M281.44,120.72c4.408,0,8,3.592,8,8s-3.592,8-8,8c-4.408,0-8-3.592-8-8\r\n\t\t\t\tS277.032,120.72,281.44,120.72z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("rect", { x: "337.44", y: "264.72", width: "112", height: "16" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("rect", { x: "337.44", y: "232.72", width: "80", height: "16" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("rect", { x: "433.44", y: "232.72", width: "16", height: "16" })));
+}
+/* harmony default export */ __webpack_exports__["default"] = (Business);
+
+
+/***/ }),
+
+/***/ "./src/components/atoms/svg/business/index.ts":
+/*!****************************************************!*\
+  !*** ./src/components/atoms/svg/business/index.ts ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _business__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./business */ "./src/components/atoms/svg/business/business.tsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _business__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/atoms/svg/child/child.tsx":
+/*!**************************************************!*\
+  !*** ./src/components/atoms/svg/child/child.tsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var aphrodite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aphrodite */ "./node_modules/aphrodite/es/index.js");
+
+
+const styles = aphrodite__WEBPACK_IMPORTED_MODULE_1__["StyleSheet"].create({
+    icon: {
+        width: '30px',
+        height: '30px',
+        padding: '1px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '3px',
+    }
+});
+function Child() {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.icon), x: "0px", y: "0px", viewBox: "0 0 512 512", enableBackground: "new 0 0 512 512" },
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M298.102,479.277c-5.124-2.055-10.948,0.435-13.003,5.562c-1.717,4.283-6.071,7.161-10.833,7.161h-36.532\r\n\t\t\tc-4.762,0-9.116-2.878-10.833-7.161c-2.055-5.127-7.876-7.612-13.003-5.562c-5.126,2.056-7.616,7.877-5.561,13.003\r\n\t\t\tc4.803,11.98,16.341,19.72,29.397,19.72h36.532c13.056,0,24.594-7.74,29.396-19.72\r\n\t\t\tC305.718,487.154,303.228,481.333,298.102,479.277z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M415.541,427.762c-2.716-14.004-11.344-26.128-23.677-33.288c2.243-1.832,4.347-3.858,6.267-6.089\r\n\t\t\tc9.471-11.003,13.665-25.548,11.504-39.903c-3.509-23.324-13.436-45.117-28.707-63.024\r\n\t\t\tc-11.434-13.407-25.488-24.211-41.217-31.803c19.249-20.534,31.057-48.124,31.057-78.423\r\n\t\t\tc-0.001-52.434-35.348-96.769-83.465-110.428c6.554-7.825,10.13-17.601,10.13-27.931C297.434,16.541,280.892,0,260.561,0\r\n\t\t\tc-0.001,0-0.002,0-0.003,0c-8.207,0-15.894,2.669-21.643,7.514c-6.354,5.354-9.853,12.879-9.854,21.188c0,5.522,4.477,10,10,10\r\n\t\t\tc5.522,0,10-4.477,10-10c0-2.379,0.922-4.362,2.742-5.896c2.148-1.81,5.257-2.807,8.756-2.807h0.001\r\n\t\t\tc9.304,0,16.874,7.568,16.874,16.872c0,6.302-2.454,12.226-6.91,16.682c-4.456,4.455-10.379,6.909-16.679,6.909\r\n\t\t\tc-0.001,0-0.001,0-0.002,0c-0.245,0-0.485,0.019-0.725,0.037c-61.956,1.536-111.885,52.413-111.886,114.732\r\n\t\t\tc0,30.299,11.808,57.889,31.057,78.423c-15.728,7.592-29.782,18.395-41.216,31.803c-15.271,17.907-25.198,39.7-28.708,63.023\r\n\t\t\tc-2.16,14.356,2.033,28.901,11.504,39.904c1.92,2.231,4.024,4.258,6.267,6.089c-12.333,7.16-20.962,19.284-23.677,33.288\r\n\t\t\tc-2.723,14.04,0.771,28.553,9.584,39.816l21.415,27.365c8.652,11.056,21.795,17.001,35.126,17.001\r\n\t\t\tc7.568,0,15.198-1.916,22.1-5.901c19.061-11.005,27.229-34.697,19-55.109l-12.991-32.228c-0.868-2.153-1.894-4.218-3.039-6.202\r\n\t\t\tH261c5.523,0,10-4.478,10-10c0-5.522-4.477-10-10-10h-92.356v-21.081c0-2.715,2.208-4.923,4.923-4.923h164.867\r\n\t\t\tc2.714,0,4.923,2.208,4.923,4.923v22.464c-9.922,5.439-17.755,14.163-22.051,24.819l-12.991,32.227\r\n\t\t\tc-8.229,20.413-0.061,44.105,19,55.11c6.903,3.985,14.53,5.901,22.1,5.901c13.33,0,26.475-5.946,35.127-17.001l21.414-27.365\r\n\t\t\tC414.771,456.314,418.264,441.802,415.541,427.762z M161.231,175.232c0.001-52.255,42.515-94.768,94.769-94.769\r\n\t\t\tc52.254,0.001,94.768,42.514,94.769,94.769c0,52.255-42.513,94.768-94.769,94.769C203.745,270,161.231,227.487,161.231,175.232z\r\n\t\t\t M172.146,426.183l12.991,32.229c4.525,11.227,0.031,24.258-10.452,30.311c-10.482,6.053-24.015,3.43-31.476-6.105l-21.415-27.365\r\n\t\t\tc-5.243-6.699-7.321-15.331-5.701-23.683c1.62-8.352,6.775-15.582,14.143-19.836c7.367-4.254,16.206-5.101,24.249-2.33\r\n\t\t\tC162.528,412.177,168.965,418.294,172.146,426.183z M338.5,326.5c-5.523,0-10,4.478-10,10v10H183.566v-10c0-5.522-4.477-10-10-10\r\n\t\t\tc-5.523,0-10,4.478-10,10v12.101c-8.777,3.861-14.923,12.635-14.923,22.822v14.121c-7.573-0.757-14.6-4.379-19.617-10.207\r\n\t\t\tc-5.667-6.585-8.176-15.289-6.884-23.88c5.725-38.053,31.097-69.494,66.716-83.206C207.75,281.925,230.948,290,256,290\r\n\t\t\ts48.25-8.075,67.142-21.749c35.619,13.712,60.991,45.153,66.716,83.206c1.292,8.591-1.217,17.295-6.885,23.88\r\n\t\t\tc-5.016,5.828-12.044,9.45-19.617,10.207v-14.121c0-10.161-6.115-18.916-14.856-22.792V336.5\r\n\t\t\tC348.5,330.978,344.023,326.5,338.5,326.5z M390.206,455.252l-21.414,27.365c-7.461,9.533-20.992,12.157-31.476,6.105\r\n\t\t\tc-10.484-6.053-14.977-19.084-10.451-30.313l12.991-32.228c3.181-7.89,9.618-14.006,17.661-16.779\r\n\t\t\tc3.115-1.073,6.349-1.604,9.571-1.604c5.097,0,10.164,1.329,14.678,3.935c7.368,4.254,12.522,11.484,14.143,19.836\r\n\t\t\tC397.527,439.921,395.449,448.553,390.206,455.252z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M307.79,395.43c-1.86-1.86-4.44-2.93-7.07-2.93s-5.21,1.069-7.07,2.93c-1.86,1.861-2.93,4.44-2.93,7.07\r\n\t\t\tc0,2.64,1.07,5.21,2.93,7.069c1.86,1.87,4.44,2.931,7.07,2.931s5.21-1.061,7.07-2.931c1.86-1.859,2.93-4.439,2.93-7.069\r\n\t\t\tS309.65,397.29,307.79,395.43z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M283.57,209.382c-4.29-3.478-10.587-2.817-14.065,1.472c-3.323,4.1-8.246,6.451-13.505,6.451\r\n\t\t\tc-5.259,0-10.183-2.352-13.505-6.451c-3.477-4.291-9.774-4.948-14.065-1.472c-4.291,3.477-4.95,9.774-1.472,14.065\r\n\t\t\tc7.138,8.807,17.724,13.857,29.042,13.857s21.905-5.051,29.042-13.857C288.52,219.156,287.861,212.859,283.57,209.382z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M230.731,168.16c-9.071-9.071-23.831-9.071-32.904,0c-3.905,3.905-3.906,10.236,0,14.142\r\n\t\t\tc3.905,3.906,10.237,3.906,14.142,0.001c1.273-1.273,3.346-1.273,4.62,0c1.953,1.952,4.512,2.929,7.071,2.929\r\n\t\t\tc2.559,0,5.119-0.977,7.071-2.929C234.636,178.398,234.636,172.066,230.731,168.16z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M314.173,168.159c-9.072-9.07-23.833-9.07-32.904,0c-3.905,3.905-3.905,10.237,0,14.143\r\n\t\t\tc1.952,1.953,4.512,2.929,7.071,2.929c2.559,0,5.119-0.977,7.071-2.929c1.273-1.272,3.346-1.274,4.62,0\r\n\t\t\tc3.905,3.906,10.237,3.905,14.142-0.001C318.078,178.396,318.078,172.065,314.173,168.159z" })));
+}
+/* harmony default export */ __webpack_exports__["default"] = (Child);
+
+
+/***/ }),
+
+/***/ "./src/components/atoms/svg/child/index.ts":
+/*!*************************************************!*\
+  !*** ./src/components/atoms/svg/child/index.ts ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _child__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./child */ "./src/components/atoms/svg/child/child.tsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _child__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
 
 
 /***/ }),
@@ -28572,6 +28752,64 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/atoms/svg/marriage/index.ts":
+/*!****************************************************!*\
+  !*** ./src/components/atoms/svg/marriage/index.ts ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _marriage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./marriage */ "./src/components/atoms/svg/marriage/marriage.tsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _marriage__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/atoms/svg/marriage/marriage.tsx":
+/*!********************************************************!*\
+  !*** ./src/components/atoms/svg/marriage/marriage.tsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var aphrodite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aphrodite */ "./node_modules/aphrodite/es/index.js");
+
+
+const styles = aphrodite__WEBPACK_IMPORTED_MODULE_1__["StyleSheet"].create({
+    icon: {
+        width: '30px',
+        height: '30px',
+        padding: '1px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '3px',
+    }
+});
+function Marriage() {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.icon), viewBox: "0 0 512 512", enableBackground: "new 0 0 512 512" },
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M349.266,240.398c-4.148,0-7.51,3.363-7.51,7.51v8.676c0,4.148,3.363,7.51,7.51,7.51c4.147,0,7.51-3.363,7.51-7.51v-8.676\r\n\t\t\tC356.776,243.76,353.414,240.398,349.266,240.398z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M407.841,240.398c-4.147,0-7.51,3.363-7.51,7.51v8.676c0,4.147,3.362,7.51,7.51,7.51s7.51-3.363,7.51-7.51v-8.676\r\n\t\t\tC415.351,243.76,411.988,240.398,407.841,240.398z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M399.082,283.635c-3.367-2.422-8.06-1.657-10.483,1.71c-1.475,2.05-5.154,4.118-10.046,4.118\r\n\t\t\tc-4.892,0-8.571-2.068-10.046-4.118c-2.423-3.367-7.116-4.132-10.483-1.71c-3.367,2.423-4.133,7.116-1.71,10.483\r\n\t\t\tc4.671,6.491,12.985,10.366,22.239,10.366c9.255,0,17.568-3.875,22.239-10.366C403.215,290.751,402.449,286.058,399.082,283.635z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M108.99,251.769c-4.148,0-7.51,3.363-7.51,7.51v8.4c0,4.148,3.363,7.51,7.51,7.51c4.147,0,7.51-3.362,7.51-7.51v-8.4\r\n\t\t\tC116.5,255.131,113.137,251.769,108.99,251.769z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M157.361,293.677c-3.367-2.422-8.06-1.657-10.482,1.71c-1.393,1.935-4.88,3.888-9.533,3.888s-8.14-1.953-9.533-3.888\r\n\t\t\tc-2.423-3.367-7.117-4.132-10.483-1.71c-3.367,2.423-4.132,7.116-1.71,10.483c4.567,6.347,12.688,10.135,21.725,10.135\r\n\t\t\tc9.037,0,17.159-3.789,21.726-10.135C161.493,300.794,160.728,296.1,157.361,293.677z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M295.476,404.379c-4.148,0-7.51,3.363-7.51,7.51v14.649c0,4.148,3.362,7.51,7.51,7.51s7.51-3.363,7.51-7.51v-14.649\r\n\t\t\tC302.987,407.741,299.624,404.379,295.476,404.379z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M288.684,13.061c-12.258,0-23.798,4.475-32.719,12.498c-8.921-8.023-20.461-12.498-32.719-12.498\r\n\t\t\tc-27.037,0-49.033,21.996-49.033,49.033c-0.001,23.803,13.884,46.696,40.152,66.204c19.146,14.219,38.066,21.7,38.862,22.011\r\n\t\t\tc0.88,0.344,1.808,0.516,2.737,0.516c0.929,0,1.857-0.172,2.737-0.516c0.796-0.311,19.715-7.792,38.862-22.011\r\n\t\t\tc26.269-19.509,40.154-42.401,40.154-66.204C337.717,35.057,315.721,13.061,288.684,13.061z M255.963,135.156\r\n\t\t\tc-12.889-5.708-66.731-32.018-66.731-73.061c0-18.755,15.258-34.013,34.013-34.013c10.533,0,20.303,4.765,26.804,13.073\r\n\t\t\tc1.423,1.819,3.605,2.882,5.914,2.882c2.309,0,4.491-1.063,5.914-2.882c6.502-8.308,16.272-13.073,26.804-13.073\r\n\t\t\tc18.755,0,34.013,15.258,34.013,34.013C322.694,103.144,268.84,129.455,255.963,135.156z" }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", { d: "M468.421,346.269l-47.475-13.979c-0.225-0.068-0.455-0.127-0.689-0.175l-7.449-1.497\r\n\t\t\tc-1.771-0.356-3.057-1.926-3.057-3.733v-3.583c19.497-8.891,34.579-25.829,40.949-46.558h5.741c10.129,0,18.37-8.241,18.37-18.37\r\n\t\t\tV246.34c0-5.418-2.406-10.478-6.397-13.916v-13.246c0-43.173-35.124-78.297-78.297-78.297H366.99\r\n\t\t\tc-43.173,0-78.297,35.124-78.297,78.297v13.246c-3.991,3.438-6.397,8.498-6.397,13.916v12.034c0,10.129,8.241,18.37,18.37,18.37\r\n\t\t\th5.741c6.224,20.252,20.753,36.9,39.6,45.947v4.465c0,1.807-1.286,3.378-3.057,3.734l-5.984,1.203\r\n\t\t\tc-0.005,0.001-0.01,0.002-0.016,0.003l-0.1,0.02c-0.235,0.047-0.465,0.107-0.691,0.175l-47.473,13.978\r\n\t\t\tc-16.535,4.868-29.847,16.554-37.23,31.402c-3.198-5.079-7.189-9.644-11.826-13.491l18.299-5.795\r\n\t\t\tc10.481-3.319,17.357-13.314,16.723-24.304c-1.128-19.541-5.882-59.123-25.047-104.665c-23.81-56.579-57.938-78.25-83.323-86.366\r\n\t\t\tc-6.483-8.985-17.033-14.849-28.934-14.849s-22.452,5.864-28.935,14.849c-25.385,8.117-59.513,29.788-83.323,86.366\r\n\t\t\tC5.923,274.958,1.169,314.54,0.041,334.08c-0.635,10.99,6.242,20.985,16.723,24.304l18.298,5.795\r\n\t\t\tc-12.641,10.487-20.497,26.304-20.497,43.344v83.905c0,4.148,3.363,7.51,7.51,7.51l482.415-0.049c4.148,0,7.51-3.362,7.51-7.51\r\n\t\t\tv-86.85C512,377.781,494.079,353.823,468.421,346.269z M235.759,235.242c18.293,43.47,22.824,81.127,23.896,99.704\r\n\t\t\tc0.238,4.126-2.337,7.876-6.262,9.119l-31.828,10.08c-0.593-0.197-1.188-0.383-1.783-0.558l-43.497-12.809\r\n\t\t\tc-0.211-0.063-0.425-0.115-0.642-0.159l-6.818-1.371c-1.326-0.266-2.288-1.441-2.288-2.793v-3.446\r\n\t\t\tc0.289-0.126,0.567-0.271,0.854-0.401c0.786-0.355,1.567-0.715,2.338-1.097c0.381-0.189,0.757-0.386,1.134-0.582\r\n\t\t\tc0.776-0.401,1.544-0.811,2.304-1.238c0.328-0.185,0.653-0.373,0.978-0.563c0.827-0.482,1.644-0.981,2.45-1.494\r\n\t\t\tc0.235-0.15,0.47-0.298,0.702-0.451c0.94-0.613,1.864-1.248,2.773-1.903c0.089-0.064,0.18-0.126,0.269-0.191\r\n\t\t\tc12.672-9.21,22.301-22.363,27.04-37.655h5.537c9.938,0,18.024-8.086,18.024-18.024v-11.651c0-0.553-0.034-1.098-0.083-1.638\r\n\t\t\tc-0.012-0.131-0.025-0.261-0.039-0.391c-0.06-0.532-0.136-1.06-0.241-1.578c-0.007-0.034-0.017-0.067-0.024-0.1\r\n\t\t\tc-0.103-0.491-0.231-0.973-0.373-1.449c-0.036-0.12-0.072-0.24-0.11-0.359c-0.159-0.495-0.334-0.982-0.534-1.457\r\n\t\t\tc-0.022-0.052-0.047-0.101-0.069-0.153c-0.188-0.434-0.394-0.857-0.614-1.273c-0.056-0.106-0.111-0.212-0.17-0.317\r\n\t\t\tc-0.248-0.447-0.511-0.884-0.794-1.306c-0.041-0.061-0.085-0.118-0.127-0.178c-0.259-0.375-0.532-0.739-0.818-1.093\r\n\t\t\tc-0.072-0.089-0.142-0.179-0.216-0.267c-0.326-0.389-0.665-0.765-1.022-1.124c-0.06-0.061-0.124-0.118-0.185-0.178\r\n\t\t\tc-0.32-0.313-0.651-0.614-0.993-0.903c-0.083-0.07-0.164-0.141-0.248-0.21c-0.393-0.32-0.799-0.625-1.219-0.912\r\n\t\t\tc-0.079-0.054-0.161-0.104-0.24-0.156c-0.192-0.127-0.382-0.257-0.579-0.377c-0.002-1.247-0.041-2.488-0.098-3.727\r\n\t\t\tc-0.02-0.45-0.049-0.896-0.076-1.344c-0.048-0.771-0.107-1.539-0.176-2.306c-0.052-0.59-0.101-1.181-0.165-1.767\r\n\t\t\tc-0.023-0.203-0.053-0.405-0.077-0.608c-2.496-21.446-13.01-40.467-28.464-53.996c-0.001-0.001-0.002-0.001-0.002-0.002\r\n\t\t\tc-1.44-1.261-2.918-2.479-4.441-3.641c-0.073-0.056-0.144-0.115-0.218-0.171c-0.467-0.354-0.944-0.696-1.419-1.04\r\n\t\t\tc-0.558-0.406-1.119-0.808-1.687-1.201c-0.387-0.267-0.774-0.532-1.165-0.792c-0.84-0.56-1.69-1.106-2.552-1.638\r\n\t\t\tc-0.153-0.094-0.302-0.193-0.455-0.286c-1.085-0.659-2.189-1.292-3.307-1.904c-0.172-0.094-0.346-0.183-0.518-0.276\r\n\t\t\tc-0.961-0.517-1.933-1.015-2.917-1.496c-0.229-0.112-0.458-0.224-0.688-0.334c-0.279-0.133-0.553-0.275-0.834-0.406\r\n\t\t\tc0.022-0.513,0.034-1.026,0.034-1.538c0-0.661-0.021-1.317-0.057-1.97c-0.002-0.031-0.001-0.062-0.003-0.093\r\n\t\t\tC193.436,171.52,217.609,192.112,235.759,235.242z M165.702,275.189c4.148,0,7.51-3.363,7.51-7.51v-8.4\r\n\t\t\tc0-1.7-0.572-3.263-1.524-4.522h23.938v11.018c0,1.039-0.029,2.079-0.086,3.121c-0.004,0.068-0.012,0.135-0.015,0.203\r\n\t\t\tc-0.057,0.984-0.135,1.968-0.242,2.952c-0.003,0.024-0.006,0.047-0.009,0.071c-0.112,1.016-0.25,2.031-0.415,3.043\r\n\t\t\tc-0.008,0.051-0.019,0.101-0.027,0.152c-0.159,0.958-0.342,1.913-0.548,2.865c-0.091,0.416-0.188,0.83-0.288,1.244\r\n\t\t\tc-0.142,0.589-0.293,1.175-0.453,1.758c-0.11,0.402-0.223,0.803-0.342,1.202c-0.12,0.401-0.24,0.802-0.368,1.199\r\n\t\t\tc-0.139,0.433-0.288,0.861-0.437,1.289c-0.222,0.636-0.453,1.268-0.697,1.894c-0.101,0.261-0.203,0.521-0.308,0.78\r\n\t\t\tc-0.645,1.591-1.357,3.152-2.137,4.674c-0.021,0.04-0.041,0.081-0.062,0.121c-3.912,7.586-9.463,14.252-16.192,19.485\r\n\t\t\tc-0.071,0.055-0.141,0.112-0.212,0.166c-0.411,0.317-0.828,0.627-1.248,0.933c-0.234,0.17-0.471,0.337-0.707,0.503\r\n\t\t\tc-0.55,0.389-1.108,0.768-1.672,1.138c-0.387,0.253-0.774,0.505-1.167,0.749c-0.3,0.187-0.603,0.37-0.907,0.552\r\n\t\t\tc-0.533,0.317-1.07,0.628-1.613,0.929c-0.22,0.122-0.44,0.243-0.661,0.363c-0.62,0.333-1.247,0.654-1.88,0.964\r\n\t\t\tc-0.223,0.11-0.448,0.218-0.673,0.325c-0.726,0.345-1.458,0.681-2.2,0.996c-0.085,0.036-0.171,0.069-0.257,0.104\r\n\t\t\tc-0.676,0.283-1.36,0.551-2.048,0.809c-0.254,0.095-0.509,0.189-0.765,0.281c-0.457,0.164-0.919,0.315-1.381,0.468\r\n\t\t\tc-0.419,0.138-0.837,0.281-1.258,0.41c-0.429,0.131-0.864,0.248-1.297,0.369c-0.733,0.205-1.47,0.397-2.21,0.573\r\n\t\t\tc-0.495,0.118-0.988,0.239-1.487,0.344c-0.403,0.085-0.808,0.155-1.213,0.232c-0.487,0.092-0.973,0.183-1.464,0.262\r\n\t\t\tc-0.396,0.064-0.793,0.12-1.19,0.176c-0.519,0.073-1.041,0.14-1.564,0.199c-0.372,0.042-0.744,0.082-1.117,0.117\r\n\t\t\tc-0.59,0.055-1.184,0.098-1.78,0.136c-0.312,0.02-0.623,0.044-0.936,0.059c-0.911,0.043-1.826,0.07-2.748,0.07\r\n\t\t\tc-0.947,0-1.889-0.027-2.825-0.072c-0.286-0.014-0.571-0.039-0.856-0.057c-0.656-0.041-1.312-0.087-1.962-0.15\r\n\t\t\tc-0.318-0.031-0.635-0.07-0.952-0.106c-0.622-0.07-1.241-0.147-1.857-0.237c-0.311-0.045-0.621-0.095-0.931-0.145\r\n\t\t\tc-0.628-0.102-1.254-0.214-1.875-0.336c-0.284-0.056-0.568-0.112-0.851-0.172c-0.66-0.14-1.315-0.293-1.966-0.455\r\n\t\t\tc-0.238-0.059-0.476-0.116-0.713-0.178c-0.735-0.193-1.463-0.402-2.186-0.622c-0.146-0.045-0.294-0.085-0.44-0.131\r\n\t\t\tc-3.559-1.117-6.971-2.567-10.201-4.313c-0.103-0.056-0.205-0.112-0.307-0.168c-0.722-0.396-1.435-0.806-2.137-1.23\r\n\t\t\tc-0.177-0.108-0.351-0.22-0.527-0.329c-0.478-0.296-0.95-0.601-1.419-0.911c-0.366-0.243-0.731-0.487-1.091-0.738\r\n\t\t\tc-0.131-0.09-0.259-0.185-0.389-0.276c-9.247-6.55-16.521-15.732-20.718-26.288c-0.027-0.069-0.055-0.138-0.082-0.207\r\n\t\t\tc-0.371-0.944-0.714-1.901-1.035-2.865c-0.054-0.163-0.113-0.324-0.165-0.488c-0.135-0.42-0.261-0.843-0.387-1.266\r\n\t\t\tc-0.113-0.382-0.222-0.767-0.328-1.153c-0.145-0.527-0.283-1.056-0.412-1.588c-0.114-0.467-0.223-0.935-0.325-1.407\r\n\t\t\tc-0.202-0.933-0.381-1.87-0.538-2.81c-0.011-0.069-0.026-0.137-0.037-0.206c-0.162-0.994-0.297-1.991-0.407-2.988\r\n\t\t\tc-0.004-0.041-0.011-0.081-0.016-0.122c-0.105-0.969-0.182-1.939-0.238-2.909c-0.005-0.081-0.014-0.16-0.018-0.241\r\n\t\t\tc-0.056-1.04-0.085-2.08-0.085-3.118V253.7c0.07-0.029,0.136-0.066,0.205-0.095c0.276-0.118,0.547-0.244,0.814-0.379\r\n\t\t\tc0.107-0.054,0.214-0.106,0.319-0.162c0.357-0.191,0.707-0.393,1.046-0.614c0.006-0.004,0.011-0.008,0.017-0.012\r\n\t\t\tc0.333-0.218,0.653-0.453,0.967-0.698c0.094-0.073,0.185-0.15,0.277-0.226c0.233-0.192,0.46-0.391,0.68-0.597\r\n\t\t\tc0.086-0.081,0.173-0.16,0.258-0.243c0.58-0.57,1.113-1.192,1.591-1.862c0.07-0.098,0.135-0.198,0.203-0.297\r\n\t\t\tc0.172-0.254,0.336-0.514,0.492-0.781c0.061-0.105,0.124-0.208,0.183-0.315c0.201-0.365,0.393-0.737,0.563-1.123\r\n\t\t\tc0.157-0.356,0.287-0.724,0.387-1.101l5.537-20.785c0.329-1.235,1.254-1.695,1.776-1.859c0.525-0.164,1.55-0.317,2.532,0.511\r\n\t\t\tc26.874,22.697,48.353,29.851,63.066,31.358c-1.112,1.31-1.787,3.003-1.787,4.856v8.4\r\n\t\t\tC158.192,271.827,161.555,275.189,165.702,275.189z M210.343,272.416c0.042-0.454,0.061-0.908,0.094-1.363\r\n\t\t\tc0.042-0.591,0.094-1.179,0.122-1.774c0.057-1.169,0.089-2.338,0.089-3.504v-11.018h0.294h1.973c1.656,0,3.004,1.348,3.004,3.004\r\n\t\t\tv11.651c0,1.656-1.348,3.004-3.004,3.004H210.343z M117.091,159.879c0.104-0.529,0.225-1.051,0.369-1.564\r\n\t\t\tc0.028-0.102,0.065-0.202,0.095-0.304c0.128-0.43,0.267-0.855,0.421-1.273c0.053-0.143,0.109-0.284,0.165-0.426\r\n\t\t\tc0.159-0.402,0.329-0.798,0.512-1.188c0.048-0.104,0.095-0.208,0.145-0.311c3.361-6.857,10.411-11.593,18.549-11.593\r\n\t\t\tc8.137,0,15.185,4.734,18.547,11.59c0.052,0.105,0.099,0.212,0.149,0.318c0.182,0.387,0.35,0.781,0.508,1.18\r\n\t\t\tc0.056,0.143,0.114,0.286,0.167,0.431c0.154,0.416,0.292,0.839,0.419,1.267c0.031,0.103,0.067,0.204,0.096,0.308\r\n\t\t\tc0.143,0.513,0.265,1.035,0.368,1.563c0.009,0.045,0.014,0.09,0.023,0.135c-0.966-0.238-1.936-0.453-2.909-0.656\r\n\t\t\tc-0.251-0.052-0.503-0.1-0.755-0.15c-1.16-0.231-2.323-0.443-3.492-0.625c-0.091-0.014-0.181-0.032-0.273-0.046\r\n\t\t\tc-1.248-0.19-2.502-0.344-3.759-0.479c-0.246-0.026-0.491-0.054-0.737-0.078c-1.24-0.122-2.483-0.217-3.73-0.285\r\n\t\t\tc-0.225-0.012-0.45-0.02-0.675-0.03c-1.312-0.06-2.627-0.1-3.947-0.1s-2.634,0.04-3.947,0.1c-0.225,0.01-0.451,0.018-0.676,0.03\r\n\t\t\tc-1.247,0.067-2.491,0.163-3.73,0.285c-0.247,0.024-0.492,0.052-0.738,0.078c-1.257,0.134-2.51,0.288-3.758,0.479\r\n\t\t\tc-0.092,0.014-0.183,0.032-0.275,0.046c-1.167,0.182-2.329,0.393-3.487,0.624c-0.254,0.05-0.508,0.098-0.761,0.151\r\n\t\t\tc-0.972,0.203-1.941,0.418-2.906,0.656C117.077,159.969,117.082,159.923,117.091,159.879z M104.467,180.824\r\n\t\t\tc0.146-0.078,0.291-0.16,0.438-0.237c1.841-0.969,3.732-1.858,5.665-2.663c0.22-0.091,0.442-0.177,0.663-0.266\r\n\t\t\tc0.677-0.274,1.361-0.536,2.049-0.789c0.46-0.169,0.921-0.331,1.383-0.49c0.551-0.189,1.104-0.373,1.66-0.549\r\n\t\t\tc0.492-0.155,0.985-0.305,1.48-0.45c0.551-0.161,1.104-0.314,1.661-0.461c0.496-0.132,0.993-0.26,1.492-0.38\r\n\t\t\tc0.573-0.138,1.151-0.266,1.729-0.391c0.486-0.104,0.972-0.208,1.459-0.302c0.609-0.117,1.223-0.22,1.838-0.321\r\n\t\t\tc0.465-0.077,0.93-0.156,1.397-0.223c0.656-0.094,1.317-0.171,1.979-0.246c0.435-0.05,0.868-0.106,1.304-0.148\r\n\t\t\tc0.739-0.07,1.484-0.119,2.23-0.166c0.365-0.023,0.728-0.057,1.094-0.074c1.113-0.053,2.231-0.083,3.357-0.083\r\n\t\t\tc1.125,0,2.243,0.03,3.356,0.083c0.367,0.017,0.732,0.051,1.099,0.074c0.744,0.047,1.487,0.095,2.224,0.166\r\n\t\t\tc0.438,0.042,0.873,0.099,1.309,0.149c0.66,0.075,1.319,0.152,1.973,0.246c0.469,0.067,0.935,0.147,1.403,0.224\r\n\t\t\tc0.613,0.101,1.225,0.204,1.832,0.32c0.49,0.094,0.977,0.198,1.465,0.303c0.577,0.124,1.152,0.251,1.723,0.389\r\n\t\t\tc0.501,0.121,1,0.25,1.498,0.382c0.554,0.147,1.105,0.299,1.654,0.459c0.497,0.145,0.992,0.296,1.487,0.452\r\n\t\t\tc0.554,0.175,1.105,0.358,1.653,0.547c0.465,0.16,0.928,0.322,1.39,0.492c0.688,0.254,1.373,0.515,2.051,0.79\r\n\t\t\tc0.219,0.088,0.439,0.173,0.656,0.264c1.935,0.806,3.826,1.695,5.669,2.665c0.145,0.076,0.287,0.156,0.431,0.233\r\n\t\t\tc0.753,0.403,1.497,0.82,2.233,1.25c0.227,0.133,0.455,0.267,0.68,0.402c0.655,0.392,1.301,0.797,1.941,1.21\r\n\t\t\tc0.242,0.156,0.487,0.308,0.727,0.468c0.696,0.461,1.381,0.938,2.06,1.423c0.543,0.389,1.076,0.789,1.606,1.193\r\n\t\t\tc0.295,0.224,0.592,0.445,0.883,0.673c0.562,0.442,1.116,0.894,1.664,1.353c0.116,0.097,0.232,0.194,0.348,0.292\r\n\t\t\tc13.464,11.425,22.369,27.743,24.402,45.576c0.039,0.346,0.084,0.69,0.117,1.038c0.048,0.489,0.084,0.98,0.121,1.471\r\n\t\t\tc0.047,0.621,0.088,1.245,0.118,1.87c0.011,0.232,0.022,0.464,0.031,0.697h-4.018h-36.838c-22.94,0-47.247-17.635-59.693-28.147\r\n\t\t\tc-0.363-0.307-0.739-0.592-1.121-0.866c-0.108-0.077-0.216-0.151-0.325-0.226c-0.306-0.21-0.617-0.409-0.933-0.597\r\n\t\t\tc-0.093-0.056-0.184-0.114-0.278-0.168c-0.399-0.228-0.804-0.441-1.216-0.636c-0.093-0.044-0.188-0.083-0.281-0.125\r\n\t\t\tc-0.334-0.151-0.672-0.292-1.013-0.421c-0.124-0.047-0.247-0.094-0.372-0.138c-0.406-0.144-0.815-0.276-1.23-0.389\r\n\t\t\tc-0.027-0.007-0.053-0.017-0.08-0.024c-0.438-0.117-0.882-0.212-1.328-0.295c-0.128-0.024-0.257-0.044-0.385-0.065\r\n\t\t\tc-0.351-0.057-0.703-0.104-1.057-0.14c-0.113-0.011-0.226-0.026-0.339-0.035c-0.451-0.037-0.903-0.057-1.356-0.06\r\n\t\t\tc-0.025,0-0.051-0.003-0.076-0.003c-0.097,0-0.193,0.01-0.29,0.011c-0.289,0.005-0.579,0.014-0.869,0.033\r\n\t\t\tc-0.15,0.01-0.3,0.024-0.451,0.038c-0.27,0.025-0.539,0.055-0.809,0.093c-0.151,0.021-0.302,0.042-0.453,0.067\r\n\t\t\tc-0.285,0.047-0.569,0.103-0.852,0.164c-0.129,0.028-0.258,0.052-0.387,0.082c-0.41,0.098-0.819,0.207-1.226,0.335\r\n\t\t\tc-5.812,1.827-10.218,6.433-11.787,12.322l-5.113,19.191h-1.422h-4.018c0.009-0.232,0.019-0.464,0.031-0.696\r\n\t\t\tc0.03-0.627,0.072-1.251,0.119-1.873c0.038-0.49,0.073-0.98,0.121-1.468c0.034-0.35,0.079-0.697,0.118-1.045\r\n\t\t\tc2.034-17.832,10.939-34.147,24.402-45.571c0.115-0.097,0.231-0.194,0.347-0.291c0.549-0.459,1.104-0.912,1.667-1.355\r\n\t\t\tc0.287-0.225,0.58-0.443,0.87-0.663c0.539-0.41,1.08-0.816,1.632-1.211c0.673-0.481,1.353-0.954,2.043-1.411\r\n\t\t\tc0.243-0.161,0.491-0.315,0.736-0.473c0.638-0.411,1.28-0.814,1.932-1.204c0.228-0.137,0.457-0.272,0.687-0.406\r\n\t\t\tC102.976,181.641,103.717,181.226,104.467,180.824z M21.299,344.065c-3.926-1.243-6.501-4.993-6.263-9.119\r\n\t\t\tc1.073-18.578,5.603-56.234,23.896-99.704c18.15-43.129,42.323-63.722,62.806-73.436c-0.002,0.031-0.001,0.062-0.003,0.093\r\n\t\t\tc-0.036,0.652-0.057,1.309-0.057,1.97c0,0.512,0.011,1.024,0.034,1.538c-0.28,0.13-0.553,0.272-0.832,0.404\r\n\t\t\tc-0.232,0.111-0.463,0.225-0.694,0.337c-0.98,0.479-1.95,0.976-2.907,1.491c-0.176,0.095-0.354,0.186-0.529,0.282\r\n\t\t\tc-1.116,0.611-2.218,1.242-3.3,1.9c-0.158,0.096-0.312,0.199-0.47,0.296c-0.856,0.528-1.701,1.07-2.536,1.627\r\n\t\t\tc-0.394,0.262-0.785,0.53-1.175,0.799c-0.564,0.39-1.121,0.788-1.674,1.192c-0.478,0.347-0.959,0.692-1.43,1.049\r\n\t\t\tc-0.053,0.04-0.104,0.083-0.156,0.123c-17.903,13.638-30.234,34.214-32.965,57.685c-0.024,0.203-0.055,0.404-0.077,0.608\r\n\t\t\tc-0.064,0.587-0.113,1.177-0.165,1.767c-0.069,0.767-0.128,1.535-0.176,2.306c-0.027,0.448-0.056,0.895-0.076,1.344\r\n\t\t\tc-0.057,1.238-0.096,2.48-0.098,3.727c-0.197,0.12-0.387,0.25-0.579,0.377c-0.08,0.053-0.161,0.102-0.24,0.156\r\n\t\t\tc-0.42,0.287-0.826,0.592-1.219,0.912c-0.084,0.068-0.165,0.14-0.248,0.21c-0.342,0.289-0.674,0.59-0.993,0.903\r\n\t\t\tc-0.061,0.06-0.125,0.117-0.185,0.178c-0.357,0.36-0.697,0.736-1.022,1.124c-0.073,0.088-0.144,0.177-0.216,0.267\r\n\t\t\tc-0.285,0.354-0.559,0.717-0.818,1.093c-0.041,0.06-0.086,0.118-0.127,0.178c-0.284,0.422-0.546,0.859-0.794,1.306\r\n\t\t\tc-0.058,0.105-0.113,0.211-0.17,0.317c-0.22,0.416-0.427,0.839-0.614,1.273c-0.022,0.051-0.048,0.101-0.069,0.153\r\n\t\t\tc-0.2,0.475-0.375,0.962-0.534,1.457c-0.038,0.119-0.074,0.239-0.11,0.359c-0.142,0.476-0.27,0.957-0.373,1.449\r\n\t\t\tc-0.007,0.034-0.017,0.067-0.024,0.1c-0.106,0.518-0.181,1.045-0.241,1.578c-0.015,0.13-0.027,0.26-0.039,0.391\r\n\t\t\tc-0.049,0.541-0.083,1.085-0.083,1.638v11.651c0,9.938,8.086,18.024,18.024,18.024h5.535c0.005,0.016,0.011,0.031,0.016,0.047\r\n\t\t\tc0.146,0.469,0.314,0.929,0.469,1.394c6.217,18.841,19.727,34.241,37.636,42.876c0.095,0.046,0.189,0.093,0.285,0.139\r\n\t\t\tc0.403,0.192,0.796,0.401,1.203,0.586v4.226c0,1.352-0.962,2.527-2.291,2.794l-5.583,1.124c-0.215,0.044-0.428,0.096-0.639,0.158\r\n\t\t\tL54.91,353.587c-0.014,0.004-0.029,0.009-0.043,0.014c-0.58,0.171-1.161,0.353-1.74,0.545L21.299,344.065z M64.134,269.281\r\n\t\t\tc0.027,0.58,0.078,1.154,0.119,1.73c0.034,0.468,0.054,0.936,0.096,1.404h-2.572c-1.656,0-3.004-1.348-3.004-3.004V257.76\r\n\t\t\tc0-1.656,1.348-3.004,3.004-3.004h1.974h0.294v11.018C64.045,266.942,64.077,268.111,64.134,269.281z M245.109,483.918h-0.003\r\n\t\t\th-20.682V413.08c0-3.766-1.226-7.493-3.451-10.493c-9.538-12.863-24.777-20.542-40.764-20.542\r\n\t\t\tc-15.112,0-29.327,6.67-39.001,18.298c-1.327,1.596-2.989,1.835-3.862,1.835s-2.535-0.238-3.863-1.835\r\n\t\t\tc-9.673-11.629-23.889-18.298-39-18.298c-15.987,0-31.226,7.679-40.764,20.542c-2.226,3.001-3.451,6.728-3.451,10.494v13.458\r\n\t\t\tc0,4.148,3.363,7.51,7.51,7.51c4.147,0,7.51-3.363,7.51-7.51v-13.458c0-0.566,0.176-1.115,0.496-1.547\r\n\t\t\tc6.818-9.195,17.279-14.469,28.699-14.469c10.636,0,20.642,4.696,27.453,12.884c3.833,4.607,9.449,7.25,15.411,7.249\r\n\t\t\tc5.961,0,11.577-2.642,15.409-7.249c6.811-8.188,16.817-12.884,27.454-12.884c11.42,0,21.881,5.273,28.699,14.469\r\n\t\t\tc0.319,0.431,0.495,0.98,0.495,1.546v70.838H65.288v-22.435c0-4.148-3.363-7.51-7.51-7.51c-4.147,0-7.51,3.363-7.51,7.51v22.435\r\n\t\t\tH29.585v-76.395c0-17.461,11.258-33.164,27.617-38.894c0.116-0.041,0.231-0.086,0.347-0.126c0.206-0.07,0.416-0.131,0.624-0.198\r\n\t\t\tc0.327-0.105,0.654-0.215,0.981-0.311h-0.001l43.18-12.715l5.26-1.057c0.512-0.103,1.015-0.228,1.509-0.374\r\n\t\t\tc0.168-0.049,0.329-0.114,0.494-0.168c0.321-0.105,0.644-0.207,0.957-0.329c0.194-0.076,0.38-0.167,0.57-0.249\r\n\t\t\tc0.275-0.119,0.552-0.233,0.819-0.364c0.198-0.098,0.387-0.21,0.581-0.314c0.248-0.134,0.499-0.264,0.74-0.409\r\n\t\t\tc0.196-0.118,0.382-0.249,0.572-0.374c0.227-0.149,0.456-0.294,0.676-0.453c0.189-0.137,0.367-0.285,0.55-0.428\r\n\t\t\tc0.208-0.164,0.419-0.324,0.62-0.496c0.179-0.153,0.347-0.317,0.519-0.477c0.191-0.178,0.384-0.353,0.567-0.538\r\n\t\t\tc0.167-0.169,0.323-0.347,0.483-0.522c0.174-0.191,0.349-0.379,0.515-0.577c0.153-0.184,0.297-0.375,0.443-0.564\r\n\t\t\tc0.156-0.203,0.314-0.404,0.461-0.614c0.138-0.196,0.267-0.399,0.398-0.602c0.139-0.214,0.278-0.428,0.407-0.648\r\n\t\t\tc0.122-0.208,0.235-0.421,0.349-0.635c0.121-0.225,0.241-0.45,0.352-0.681c0.105-0.218,0.201-0.441,0.297-0.664\r\n\t\t\tc0.102-0.235,0.202-0.47,0.294-0.71c0.087-0.228,0.165-0.459,0.242-0.69c0.082-0.244,0.162-0.489,0.233-0.738\r\n\t\t\tc0.068-0.235,0.127-0.472,0.185-0.711c0.062-0.253,0.12-0.506,0.171-0.763c0.048-0.242,0.087-0.485,0.125-0.729\r\n\t\t\tc0.04-0.26,0.076-0.521,0.105-0.785c0.027-0.247,0.047-0.494,0.063-0.744c0.009-0.143,0.03-0.283,0.036-0.427\r\n\t\t\tc0.129,0.028,0.261,0.046,0.391,0.073c0.544,0.114,1.094,0.207,1.642,0.309c0.647,0.12,1.292,0.246,1.943,0.348\r\n\t\t\tc0.641,0.101,1.289,0.178,1.936,0.262c0.563,0.073,1.124,0.155,1.69,0.215c0.732,0.078,1.471,0.13,2.209,0.186\r\n\t\t\tc0.491,0.037,0.981,0.085,1.473,0.112c0.77,0.043,1.546,0.059,2.321,0.078c0.471,0.011,0.941,0.033,1.412,0.036\r\n\t\t\tc0.135,0.001,0.268,0.01,0.404,0.01c0.666,0,1.325-0.033,1.987-0.05c0.448-0.012,0.896-0.014,1.344-0.034\r\n\t\t\tc0.828-0.037,1.649-0.102,2.47-0.166c0.416-0.033,0.832-0.055,1.247-0.095c0.842-0.081,1.675-0.188,2.508-0.297\r\n\t\t\tc0.394-0.052,0.789-0.093,1.181-0.151c0.881-0.13,1.752-0.287,2.622-0.448c0.284-0.053,0.571-0.09,0.854-0.146\r\n\t\t\tc0.004,0.06,0.015,0.119,0.02,0.179c0.018,0.225,0.048,0.447,0.075,0.671c0.033,0.282,0.066,0.563,0.112,0.841\r\n\t\t\tc0.037,0.224,0.085,0.444,0.131,0.665c0.056,0.271,0.112,0.542,0.181,0.808c0.056,0.22,0.121,0.437,0.186,0.654\r\n\t\t\tc0.077,0.261,0.157,0.52,0.246,0.777c0.075,0.215,0.156,0.426,0.239,0.637c0.098,0.251,0.199,0.5,0.308,0.746\r\n\t\t\tc0.092,0.207,0.189,0.411,0.289,0.614c0.118,0.24,0.239,0.477,0.367,0.711c0.109,0.199,0.221,0.395,0.337,0.589\r\n\t\t\tc0.137,0.229,0.278,0.454,0.424,0.676c0.124,0.189,0.251,0.375,0.382,0.559c0.155,0.216,0.315,0.428,0.479,0.637\r\n\t\t\tc0.139,0.178,0.279,0.354,0.425,0.526c0.172,0.204,0.351,0.401,0.532,0.597c0.153,0.165,0.305,0.33,0.464,0.489\r\n\t\t\tc0.189,0.19,0.385,0.372,0.583,0.553c0.165,0.152,0.329,0.304,0.499,0.449c0.206,0.176,0.42,0.342,0.634,0.508\r\n\t\t\tc0.175,0.136,0.349,0.275,0.529,0.404c0.224,0.161,0.456,0.31,0.688,0.461c0.184,0.119,0.364,0.243,0.552,0.355\r\n\t\t\tc0.243,0.145,0.494,0.277,0.744,0.411c0.189,0.101,0.374,0.208,0.567,0.303c0.267,0.131,0.543,0.246,0.818,0.363\r\n\t\t\tc0.187,0.08,0.37,0.168,0.56,0.242c0.311,0.121,0.631,0.223,0.95,0.326c0.164,0.053,0.322,0.116,0.488,0.164\r\n\t\t\tc0.489,0.143,0.987,0.268,1.495,0.37l6.495,1.307l43.182,12.714c0.542,0.159,1.078,0.33,1.61,0.511\r\n\t\t\tc0.061,0.021,0.121,0.045,0.182,0.066c16.445,5.682,27.776,21.433,27.776,38.951V483.918z M420.862,358.413l10.241,18.083\r\n\t\t\tl-29.753,46.083L420.862,358.413z M382.698,381.209h-8.29l-2.932-5.08l7.078-6.462l7.077,6.461L382.698,381.209z M384.615,425.985\r\n\t\t\tl-3.318,10.911l-2.744,9.023l-6.059-19.925l4.119-29.764h3.843L384.615,425.985z M358.524,352.547\r\n\t\t\tc4.577,1.203,9.247,1.975,13.943,2.338l-15.578,14.223c-0.492,0.449-0.888,0.964-1.235,1.505l-6.22-20.454L358.524,352.547z\r\n\t\t\t M358.264,336.949c1.616-2.643,2.595-5.7,2.744-8.932c0.719,0.172,1.441,0.332,2.166,0.483c0.218,0.045,0.438,0.084,0.656,0.128\r\n\t\t\tc0.916,0.182,1.835,0.347,2.758,0.494c0.225,0.036,0.449,0.077,0.675,0.111c0.993,0.149,1.991,0.271,2.99,0.381\r\n\t\t\tc0.329,0.036,0.656,0.074,0.986,0.106c0.968,0.093,1.939,0.166,2.91,0.222c0.35,0.02,0.701,0.038,1.053,0.054\r\n\t\t\tc0.988,0.044,1.977,0.07,2.966,0.075c0.129,0.001,0.256,0.01,0.386,0.01c0.192,0,0.381-0.013,0.573-0.015\r\n\t\t\tc1.028-0.007,2.056-0.029,3.083-0.078c0.244-0.012,0.487-0.03,0.731-0.044c0.989-0.057,1.977-0.131,2.963-0.226\r\n\t\t\tc0.157-0.015,0.315-0.026,0.472-0.042c1.112-0.114,2.22-0.26,3.325-0.424c0.172-0.026,0.345-0.049,0.517-0.076\r\n\t\t\tc1.11-0.172,2.215-0.372,3.314-0.593c0.139-0.028,0.278-0.056,0.416-0.085c0.279-0.058,0.559-0.111,0.837-0.172\r\n\t\t\tc0.249,3.238,1.331,6.281,3.048,8.889l-3.068,0.806c-10.607,2.787-21.818,2.787-32.424,0L358.264,336.949z M384.64,354.885\r\n\t\t\tc4.696-0.362,9.365-1.135,13.942-2.338l9.09-2.388l-6.219,20.453c-0.346-0.54-0.743-1.055-1.235-1.504L384.64,354.885z\r\n\t\t\t M453.768,260.451c0.055-0.721,0.12-1.44,0.155-2.167c0.06-1.223,0.093-2.446,0.093-3.667v-11.626h2.356\r\n\t\t\tc0.032,0,0.068,0.003,0.099,0.003c0.216,0.002,0.431,0.025,0.642,0.07c0.015,0.003,0.031,0.007,0.045,0.011\r\n\t\t\tc0.145,0.033,0.273,0.087,0.406,0.134c0.081,0.03,0.165,0.045,0.245,0.081c0.001,0,0.001,0.001,0.002,0.001\r\n\t\t\tc1.203,0.543,1.98,1.74,1.98,3.048v12.034c0,1.847-1.503,3.349-3.349,3.349h-2.763\r\n\t\t\tC453.717,261.299,453.735,260.875,453.768,260.451z M300.666,261.722L300.666,261.722c-1.847,0.001-3.349-1.502-3.349-3.348\r\n\t\t\tV246.34c0-1.307,0.776-2.503,1.982-3.049c0.196-0.088,0.397-0.15,0.599-0.199c0.035-0.009,0.063-0.019,0.101-0.028\r\n\t\t\tc0.212-0.045,0.426-0.068,0.642-0.07c0.031,0,0.063-0.002,0.094-0.003h2.356v11.626c0,1.221,0.033,2.444,0.093,3.667\r\n\t\t\tc0.035,0.725,0.099,1.441,0.154,2.16c0.033,0.426,0.051,0.852,0.091,1.278H300.666z M312.752,204.739\r\n\t\t\tc-0.286,0.081-0.565,0.179-0.836,0.292c-0.119,0.05-0.231,0.112-0.347,0.168c-0.146,0.07-0.295,0.134-0.436,0.213\r\n\t\t\tc-0.14,0.078-0.27,0.17-0.404,0.256c-0.108,0.07-0.221,0.134-0.326,0.209c-0.139,0.1-0.267,0.213-0.398,0.322\r\n\t\t\tc-0.09,0.075-0.185,0.144-0.271,0.223c-0.13,0.118-0.248,0.248-0.369,0.375c-0.078,0.082-0.16,0.158-0.234,0.243\r\n\t\t\tc-0.117,0.134-0.221,0.278-0.328,0.421c-0.067,0.089-0.138,0.173-0.201,0.265c-0.101,0.148-0.19,0.304-0.28,0.46\r\n\t\t\tc-0.056,0.096-0.117,0.188-0.169,0.287c-0.084,0.159-0.154,0.326-0.227,0.492c-0.038,0.088-0.085,0.171-0.12,0.261\r\n\t\t\tc-0.014,0.035-0.026,0.069-0.04,0.104c-0.004,0.011-0.01,0.022-0.015,0.033c-0.007,0.02-0.014,0.041-0.021,0.061\r\n\t\t\tc-0.001,0.002-0.002,0.006-0.003,0.008c-0.005,0.014-0.01,0.028-0.015,0.042c-0.389,1.058-0.749,2.123-1.089,3.194\r\n\t\t\tc-0.007,0.023-0.016,0.045-0.023,0.067c-0.005,0.015-0.009,0.03-0.013,0.044c-1.341,4.243-2.305,8.584-2.874,12.996v-6.599\r\n\t\t\tc0-34.89,28.385-63.276,63.276-63.276h23.126c34.89,0,63.276,28.385,63.276,63.276v6.618c-0.052-0.402-0.116-0.803-0.174-1.204\r\n\t\t\tc-0.005-0.033-0.008-0.066-0.013-0.099l-0.1-0.69c-0.002-0.013-0.005-0.028-0.007-0.041c-0.162-1.034-0.347-2.063-0.551-3.087\r\n\t\t\tc-0.002-0.008-0.003-0.016-0.004-0.023l-0.167-0.801c-0.004-0.017-0.008-0.033-0.012-0.05c-0.199-0.939-0.413-1.873-0.647-2.803\r\n\t\t\tc-0.006-0.024-0.01-0.047-0.016-0.071l-0.069-0.283c-0.008-0.031-0.015-0.062-0.023-0.093c-0.001-0.004-0.003-0.007-0.004-0.011\r\n\t\t\tc-0.009-0.035-0.019-0.071-0.029-0.107c-0.044-0.161-0.116-0.307-0.17-0.463c-0.079-0.227-0.149-0.457-0.248-0.673\r\n\t\t\tc-0.075-0.162-0.171-0.31-0.257-0.465c-0.113-0.206-0.218-0.417-0.349-0.61c-0.101-0.148-0.221-0.279-0.331-0.419\r\n\t\t\tc-0.141-0.179-0.275-0.365-0.431-0.53c-0.13-0.137-0.278-0.254-0.417-0.38c-0.159-0.145-0.311-0.297-0.482-0.428\r\n\t\t\tc-0.165-0.126-0.347-0.228-0.522-0.34c-0.165-0.105-0.322-0.221-0.494-0.313c-0.2-0.107-0.414-0.186-0.624-0.275\r\n\t\t\tc-0.164-0.069-0.322-0.152-0.491-0.209c-0.226-0.077-0.462-0.123-0.696-0.178c-0.168-0.04-0.33-0.094-0.501-0.122\r\n\t\t\tc-0.227-0.037-0.461-0.042-0.693-0.058c-0.177-0.013-0.349-0.044-0.528-0.044c-0.028,0-0.056,0-0.084,0h-0.002l-0.176,0.002\r\n\t\t\tc-1.319,0.015-2.611,0.376-3.746,1.049c-8.06,4.779-18.739,7.202-31.738,7.202c-13.212,0-26.584-4.191-39.515-8.244\r\n\t\t\tc-16.377-5.133-33.254-10.417-50.427-7.515c-0.169,0.029-0.338,0.052-0.508,0.082c-0.058,0.011-0.117,0.024-0.175,0.034\r\n\t\t\tC316.232,203.849,314.494,204.246,312.752,204.739z M319.501,267.473c-0.211-0.973-0.398-1.949-0.561-2.928\r\n\t\t\tc-0.011-0.066-0.025-0.132-0.036-0.198c-0.169-1.037-0.31-2.077-0.425-3.118c-0.004-0.037-0.01-0.073-0.014-0.11\r\n\t\t\tc-0.11-1.012-0.19-2.025-0.249-3.037c-0.004-0.077-0.013-0.153-0.018-0.23c-0.059-1.079-0.089-2.158-0.089-3.235v-19.02\r\n\t\t\tc0-0.04,0.001-0.08,0.001-0.117c0-0.002,0-0.004,0-0.006c0-0.595,0.015-1.189,0.033-1.782c0.009-0.278,0.019-0.56,0.032-0.85\r\n\t\t\tc0.009-0.206,0.022-0.412,0.033-0.618c0.004-0.05,0.006-0.1,0.01-0.15l0.036-0.506c0.041-0.634,0.083-1.267,0.144-1.902\r\n\t\t\tc0-0.001,0-0.003,0-0.004c0.027-0.283,0.061-0.564,0.094-0.844l0.039-0.331c0.065-0.562,0.133-1.124,0.214-1.686\r\n\t\t\tc0.059-0.413,0.127-0.823,0.195-1.234c0.088-0.53,0.181-1.057,0.284-1.589c0.08-0.417,0.164-0.832,0.253-1.244\r\n\t\t\tc0.111-0.514,0.231-1.026,0.354-1.534l0.029-0.12c0.09-0.37,0.179-0.74,0.279-1.115c0.136-0.513,0.287-1.022,0.434-1.525\r\n\t\t\tl0.036-0.121c0.315-0.057,0.633-0.092,0.949-0.142c0.547-0.086,1.093-0.181,1.642-0.246c0.69-0.082,1.384-0.135,2.078-0.185\r\n\t\t\tc0.179-0.013,0.357-0.037,0.537-0.048c10.276-0.616,21.02,2.127,32.192,5.526c2.177,0.662,4.368,1.347,6.577,2.039\r\n\t\t\tc9.632,3.019,19.489,6.108,29.75,7.744c4.664,0.744,9.411,1.187,14.258,1.187c2.385,0,4.699-0.089,6.969-0.232\r\n\t\t\tc1.663-0.105,3.304-0.239,4.904-0.421c0.119-0.013,0.243-0.021,0.362-0.035c0.815-0.096,1.606-0.219,2.404-0.335\r\n\t\t\tc0.473-0.069,0.958-0.123,1.425-0.199c0.482-0.078,0.946-0.178,1.422-0.263c0.763-0.137,1.533-0.266,2.28-0.422\r\n\t\t\tc0.484-0.101,0.949-0.225,1.426-0.334c0.717-0.164,1.442-0.32,2.144-0.502c0.687-0.179,1.351-0.385,2.024-0.581\r\n\t\t\tc0.471-0.137,0.954-0.261,1.417-0.407c0.559-0.176,1.096-0.377,1.645-0.566c0.554-0.19,1.119-0.368,1.662-0.572l0.013,0.111\r\n\t\t\tc0.089,0.888,0.154,1.78,0.204,2.673c0,0.001,0,0.002,0,0.002l0.031,0.643c0,0.006,0,0.012,0.001,0.019\r\n\t\t\tc0.04,0.898,0.069,1.798,0.069,2.699c0,0.002,0,0.003,0,0.005c0,0.037,0,0.076,0.001,0.117v19.02c0,1.077-0.03,2.156-0.089,3.235\r\n\t\t\tc-0.004,0.077-0.013,0.153-0.018,0.23c-0.059,1.013-0.139,2.025-0.249,3.037c-0.004,0.037-0.01,0.074-0.014,0.111\r\n\t\t\tc-0.115,1.04-0.256,2.079-0.425,3.115c-0.011,0.068-0.025,0.135-0.036,0.203c-0.163,0.978-0.349,1.953-0.56,2.925\r\n\t\t\tc-4.624,21.254-20.451,38.374-40.971,44.821c-0.177,0.055-0.355,0.105-0.533,0.159c-0.725,0.221-1.455,0.43-2.192,0.624\r\n\t\t\tc-0.262,0.069-0.525,0.131-0.787,0.196c-0.66,0.164-1.323,0.319-1.992,0.461c-0.305,0.065-0.611,0.126-0.917,0.186\r\n\t\t\tc-0.636,0.125-1.275,0.239-1.917,0.343c-0.327,0.053-0.654,0.106-0.982,0.154c-0.634,0.093-1.273,0.171-1.914,0.244\r\n\t\t\tc-0.332,0.038-0.663,0.079-0.996,0.111c-0.674,0.065-1.352,0.112-2.032,0.155c-0.297,0.018-0.592,0.045-0.889,0.059\r\n\t\t\tc-0.972,0.047-1.948,0.074-2.931,0.074c-1.003,0-1.999-0.027-2.99-0.076c-0.342-0.017-0.681-0.05-1.022-0.072\r\n\t\t\tc-0.646-0.043-1.292-0.085-1.932-0.147c-0.42-0.041-0.837-0.098-1.256-0.148c-0.552-0.066-1.105-0.13-1.653-0.211\r\n\t\t\tc-0.469-0.069-0.935-0.153-1.402-0.233c-0.485-0.083-0.971-0.165-1.453-0.26c-0.512-0.101-1.021-0.216-1.531-0.33\r\n\t\t\tc-0.426-0.096-0.852-0.19-1.274-0.295c-0.548-0.136-1.093-0.284-1.638-0.436c-0.375-0.104-0.75-0.208-1.122-0.319\r\n\t\t\tc-0.568-0.17-1.133-0.351-1.696-0.538c-0.35-0.116-0.7-0.233-1.048-0.355c-0.554-0.195-1.104-0.4-1.654-0.612\r\n\t\t\tC338.121,303.794,323.851,287.469,319.501,267.473z M336.244,358.413l19.512,64.165l-29.753-46.083L336.244,358.413z\r\n\t\t\t M468.05,483.868v-71.979c0-4.148-3.362-7.51-7.51-7.51s-7.51,3.363-7.51,7.51v71.979H302.987v-22.386\r\n\t\t\tc0-4.148-3.363-7.51-7.51-7.51c-4.147,0-7.51,3.363-7.51,7.51v22.386h-27.839v-76.345v-2.995\r\n\t\t\tc0-20.133,13.488-38.165,32.802-43.851l29.728-8.754l-11.176,19.733c-1.949,3.44-1.728,7.664,0.539,10.874l60.223,93.277\r\n\t\t\tc0.011,0.017,0.025,0.032,0.036,0.049c0.04,0.06,0.08,0.12,0.121,0.179c0.031,0.044,0.065,0.086,0.097,0.13\r\n\t\t\tc0.095,0.13,0.192,0.26,0.295,0.384c0.036,0.043,0.075,0.083,0.112,0.126c0.093,0.107,0.185,0.215,0.284,0.316\r\n\t\t\tc0.004,0.004,0.008,0.007,0.012,0.011c0.06,0.061,0.125,0.117,0.187,0.176c0.055,0.053,0.11,0.106,0.167,0.156\r\n\t\t\tc0.147,0.131,0.3,0.255,0.458,0.375c0.036,0.028,0.07,0.057,0.107,0.083c0.029,0.021,0.055,0.044,0.084,0.065\r\n\t\t\tc0.019,0.014,0.04,0.025,0.059,0.038c0.206,0.143,0.422,0.275,0.645,0.399c0.047,0.026,0.092,0.054,0.14,0.079\r\n\t\t\tc0.043,0.023,0.089,0.041,0.133,0.063c0.071,0.036,0.139,0.077,0.212,0.111c0.082,0.038,0.166,0.064,0.248,0.099\r\n\t\t\tc0.116,0.049,0.233,0.097,0.351,0.14c0.057,0.021,0.112,0.048,0.169,0.067c0.01,0.003,0.021,0.006,0.031,0.009\r\n\t\t\tc0.105,0.035,0.211,0.057,0.316,0.088c0.104,0.029,0.207,0.061,0.312,0.086c0.13,0.031,0.26,0.055,0.391,0.079\r\n\t\t\tc0.081,0.015,0.162,0.028,0.243,0.04c0.075,0.011,0.148,0.027,0.223,0.036c0.29,0.034,0.581,0.054,0.87,0.054\r\n\t\t\tc0.001,0,0.003,0,0.004,0c0.001,0,0.003,0,0.004,0c0.29,0,0.58-0.02,0.87-0.054c0.075-0.009,0.149-0.025,0.224-0.036\r\n\t\t\tc0.08-0.012,0.16-0.025,0.239-0.039c0.132-0.024,0.263-0.048,0.394-0.079c0.105-0.025,0.208-0.057,0.312-0.086\r\n\t\t\tc0.109-0.031,0.219-0.054,0.327-0.09c0.004-0.001,0.009-0.002,0.013-0.004c0.059-0.02,0.117-0.048,0.176-0.07\r\n\t\t\tc0.119-0.043,0.235-0.091,0.351-0.14c0.082-0.035,0.167-0.061,0.248-0.099c0.075-0.035,0.144-0.076,0.218-0.113\r\n\t\t\tc0.04-0.02,0.083-0.037,0.123-0.058c0.049-0.026,0.096-0.055,0.144-0.081c0.223-0.124,0.439-0.255,0.645-0.399\r\n\t\t\tc0.019-0.014,0.04-0.025,0.059-0.038c0.031-0.022,0.058-0.046,0.089-0.069c0.031-0.023,0.06-0.048,0.091-0.071\r\n\t\t\tc0.162-0.122,0.319-0.25,0.469-0.383c0.057-0.051,0.112-0.104,0.168-0.157c0.169-0.16,0.33-0.327,0.482-0.501\r\n\t\t\tc0.038-0.043,0.077-0.084,0.114-0.128c0.106-0.127,0.205-0.26,0.302-0.393c0.028-0.038,0.057-0.074,0.084-0.113\r\n\t\t\tc0.043-0.061,0.085-0.123,0.126-0.185c0.011-0.017,0.025-0.032,0.036-0.049l60.223-93.277c2.267-3.209,2.489-7.434,0.54-10.871\r\n\t\t\tl-11.177-19.735l29.729,8.754c19.313,5.686,32.801,23.718,32.801,43.851v79.336H468.05z" })));
+}
+/* harmony default export */ __webpack_exports__["default"] = (Marriage);
+
+
+/***/ }),
+
 /***/ "./src/components/atoms/svg/person/index.ts":
 /*!**************************************************!*\
   !*** ./src/components/atoms/svg/person/index.ts ***!
@@ -28644,6 +28882,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models */ "./src/models/index.ts");
 /* harmony import */ var _atoms_svg_death__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../atoms/svg/death */ "./src/components/atoms/svg/death/index.ts");
 /* harmony import */ var _atoms_svg_person__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../atoms/svg/person */ "./src/components/atoms/svg/person/index.ts");
+/* harmony import */ var _atoms_svg_child__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../atoms/svg/child */ "./src/components/atoms/svg/child/index.ts");
+/* harmony import */ var _atoms_svg_marriage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../atoms/svg/marriage */ "./src/components/atoms/svg/marriage/index.ts");
+/* harmony import */ var _atoms_svg_business__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../atoms/svg/business */ "./src/components/atoms/svg/business/index.ts");
+/* harmony import */ var _atoms_svg_appartment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../atoms/svg/appartment */ "./src/components/atoms/svg/appartment/index.ts");
+
+
+
+
 
 
 
@@ -28678,11 +28924,11 @@ const styles = aphrodite__WEBPACK_IMPORTED_MODULE_2__["StyleSheet"].create({
         position: 'absolute',
     },
 });
-const mapStateToProps = ({ lifeIternals, famousDeath, showMe, birthDate }) => ({
-    lifeIternals, famousDeath, showMe, birthDate
+const mapStateToProps = ({ lifeIternals, famousDeaths, lifeEvents, showMe, birthDate }) => ({
+    lifeIternals, famousDeaths, showMe, birthDate, lifeEvents,
 });
 const connector = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, {});
-function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, birthDate, showMe }) {
+function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, lifeEvents, birthDate, showMe }) {
     const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
     const [start, setStart] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
     const [end, setEnd] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT));
@@ -28700,11 +28946,20 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
         }
     }, [iternal]);
     const deathAge = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => {
-        const celebrity = famousDeath.find(celebrity => celebrity.checked);
+        const celebrity = famousDeaths.find(celebrity => celebrity.checked);
         if (celebrity) {
             return celebrity.death * multiplier;
         }
-    }, [famousDeath, multiplier]);
+    }, [famousDeaths, multiplier]);
+    const eventChecked = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => {
+        const event = lifeEvents.find(event => event.checked);
+        if (event) {
+            return {
+                name: event.name,
+                age: event.age * multiplier,
+            };
+        }
+    }, [lifeEvents, multiplier]);
     const age = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => {
         if (!birthDate) {
             return;
@@ -28755,18 +29010,35 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
         return `rgba(33, 110, 57, ${1 - (index / numberOfSquares)})`;
     };
     Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => calculateSquares(), [numberOfSquares]);
+    const getEventIcon = () => {
+        const { name, age } = eventChecked;
+        switch (name) {
+            case _models__WEBPACK_IMPORTED_MODULE_5__["LEvents"].FirstMarriage:
+                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_marriage__WEBPACK_IMPORTED_MODULE_9__["default"], { key: `svg-marriage-${age}` });
+            case _models__WEBPACK_IMPORTED_MODULE_5__["LEvents"].FirstChild:
+                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_child__WEBPACK_IMPORTED_MODULE_8__["default"], { key: `svg-child-${age}` });
+            case _models__WEBPACK_IMPORTED_MODULE_5__["LEvents"].OwnBusiness:
+                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_business__WEBPACK_IMPORTED_MODULE_10__["default"], { key: `svg-business-${age}` });
+            case _models__WEBPACK_IMPORTED_MODULE_5__["LEvents"].PurchaseOfFlat:
+                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_appartment__WEBPACK_IMPORTED_MODULE_11__["default"], { key: `svg-appartment-${age}` });
+        }
+    };
+    const getIcon = (index) => {
+        if (showMe && age === index) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_person__WEBPACK_IMPORTED_MODULE_7__["default"], { key: `svg-age-${age}` });
+        }
+        if (eventChecked && eventChecked.age === index) {
+            return getEventIcon();
+        }
+        if (deathAge === index) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_death__WEBPACK_IMPORTED_MODULE_6__["default"], { key: `svg-deathAge-${deathAge}` });
+        }
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_square__WEBPACK_IMPORTED_MODULE_4__["default"], { key: `square-${index}`, fill: true, color: getSquareColor(index - 1), num: index });
+    };
     const renderRows = (() => {
         let result = [];
         for (let i = start; i < end; i++) {
-            result.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { key: `item-${i}`, className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_2__["css"])(styles.item), style: { top: i * ITEM_HEIGHT, height: ITEM_HEIGHT } }, squares[i] && squares[i].map(index => {
-                if (showMe && age === index + 1) {
-                    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_person__WEBPACK_IMPORTED_MODULE_7__["default"], { key: `svg-age-${age}` });
-                }
-                if (deathAge === index + 1) {
-                    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_death__WEBPACK_IMPORTED_MODULE_6__["default"], { key: `svg-deathAge-${deathAge}` });
-                }
-                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_square__WEBPACK_IMPORTED_MODULE_4__["default"], { key: `square-${index}`, fill: true, color: getSquareColor(index), num: index + 1 });
-            })));
+            result.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { key: `item-${i}`, className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_2__["css"])(styles.item), style: { top: i * ITEM_HEIGHT, height: ITEM_HEIGHT } }, squares[i] && squares[i].map(getIcon)));
         }
         return result;
     })();
@@ -29082,9 +29354,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _atoms_iternal_option__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../atoms/iternal-option */ "./src/components/atoms/iternal-option/index.ts");
 /* harmony import */ var _atoms_personal_option__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../atoms/personal-option */ "./src/components/atoms/personal-option/index.ts");
-/* harmony import */ var _atoms_famous_option__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../atoms/famous-option */ "./src/components/atoms/famous-option/index.ts");
+/* harmony import */ var _atoms_radio_group__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../atoms/radio-group */ "./src/components/atoms/radio-group/index.ts");
 /* harmony import */ var _molecules_option_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../molecules/option-card */ "./src/components/molecules/option-card/index.ts");
 /* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../models */ "./src/models/index.ts");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../store/actions */ "./src/store/actions.ts");
+
 
 
 
@@ -29100,19 +29374,50 @@ const styles = aphrodite__WEBPACK_IMPORTED_MODULE_1__["StyleSheet"].create({
         flexDirection: 'column',
     },
 });
-const mapStateToProps = ({ options }) => ({ options });
-const connector = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {});
-function OptionsPanel({ options }) {
-    const [person, stageOfLife, famousDeaths] = [
+const mapStateToProps = ({ options, famousDeaths, lifeEvents }) => ({ options, lifeEvents, famousDeaths });
+const connector = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, { changeFamousDeath: _store_actions__WEBPACK_IMPORTED_MODULE_8__["changeFamousDeath"], changeEvents: _store_actions__WEBPACK_IMPORTED_MODULE_8__["changeEvents"] });
+function OptionsPanel({ options, famousDeaths, lifeEvents, changeFamousDeath, changeEvents }) {
+    const [person, stageOfLife, famousDeath, lifeEvent] = [
         options.find(option => option.name === _models__WEBPACK_IMPORTED_MODULE_7__["OptionName"].Person),
         options.find(option => option.name === _models__WEBPACK_IMPORTED_MODULE_7__["OptionName"].StageOfLife),
-        options.find(option => option.name === _models__WEBPACK_IMPORTED_MODULE_7__["OptionName"].FamousDeaths)
+        options.find(option => option.name === _models__WEBPACK_IMPORTED_MODULE_7__["OptionName"].FamousDeaths),
+        options.find(option => option.name === _models__WEBPACK_IMPORTED_MODULE_7__["OptionName"].LifeEvents)
     ];
+    const deaths = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => (famousDeaths.map(celebrity => {
+        const newFamousDeath = { ...celebrity };
+        newFamousDeath.name = `${celebrity.name} (${celebrity.death})`;
+        return newFamousDeath;
+    })), [famousDeaths]);
+    const events = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => (lifeEvents.map(event => {
+        const newEvent = { ...event };
+        newEvent.name = `${event.name} (${event.age})`;
+        return newEvent;
+    })), [lifeEvents]);
+    const updateRadio = (index, its) => {
+        if (its[index].checked) {
+            its[index].checked = false;
+            return its;
+        }
+        const checkedIndex = its.findIndex(celebrity => celebrity.checked);
+        if (checkedIndex !== -1) {
+            its[checkedIndex].checked = false;
+        }
+        its[index].checked = true;
+        return its;
+    };
+    const updateEvents = (index) => {
+        changeEvents(updateRadio(index, [...lifeEvents]));
+    };
+    const updateFamous = (index) => {
+        changeFamousDeath(updateRadio(index, [...famousDeaths]));
+    };
     return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: Object(aphrodite__WEBPACK_IMPORTED_MODULE_1__["css"])(styles.panel) },
         person && person.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_personal_option__WEBPACK_IMPORTED_MODULE_4__["default"], null)),
-        famousDeaths && famousDeaths.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_famous_option__WEBPACK_IMPORTED_MODULE_5__["default"], null)),
+        lifeEvent && lifeEvent.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_radio_group__WEBPACK_IMPORTED_MODULE_5__["default"], { title: lifeEvent.name, radioOption: lifeEvents, changeRadioOption: updateEvents })),
+        famousDeath && famousDeath.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_radio_group__WEBPACK_IMPORTED_MODULE_5__["default"], { title: famousDeath.name, radioOption: deaths, changeRadioOption: updateFamous })),
         famousDeaths && stageOfLife.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_iternal_option__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
 }
@@ -29158,13 +29463,14 @@ render(_pages_start_page__WEBPACK_IMPORTED_MODULE_4__["default"]);
 /*!*****************************!*\
   !*** ./src/models/index.ts ***!
   \*****************************/
-/*! exports provided: Intervals, OptionName, LIFE_AVERAGE_DURATION, MONTHS_OF_YAER, WEEKS_OF_MOUNTH */
+/*! exports provided: Intervals, OptionName, LEvents, LIFE_AVERAGE_DURATION, MONTHS_OF_YAER, WEEKS_OF_MOUNTH */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Intervals", function() { return Intervals; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OptionName", function() { return OptionName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LEvents", function() { return LEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIFE_AVERAGE_DURATION", function() { return LIFE_AVERAGE_DURATION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MONTHS_OF_YAER", function() { return MONTHS_OF_YAER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WEEKS_OF_MOUNTH", function() { return WEEKS_OF_MOUNTH; });
@@ -29179,8 +29485,16 @@ var OptionName;
 (function (OptionName) {
     OptionName["Person"] = "\u041B\u0438\u0447\u043D\u043E\u0441\u0442\u044C";
     OptionName["StageOfLife"] = "\u042D\u0442\u0430\u043F\u044B \u0436\u0438\u0437\u043D\u0438";
+    OptionName["LifeEvents"] = "\u0421\u043E\u0431\u044B\u0442\u0438\u044F \u0432 \u0441\u0440\u0435\u0434\u043D\u0435\u043C";
     OptionName["FamousDeaths"] = "\u0421\u043C\u0435\u0440\u0442\u0438 \u0437\u043D\u0430\u043C\u0435\u043D\u0438\u0442\u043E\u0441\u0442\u0435\u0439";
 })(OptionName || (OptionName = {}));
+var LEvents;
+(function (LEvents) {
+    LEvents["FirstMarriage"] = "\u0421\u0432\u0430\u0434\u044C\u0431\u0430";
+    LEvents["FirstChild"] = "\u041F\u0435\u0440\u0432\u044B\u0439 \u0440\u0435\u0431\u0451\u043D\u043E\u043A";
+    LEvents["OwnBusiness"] = "\u0421\u0432\u043E\u0439 \u0431\u0438\u0437\u043D\u0435\u0441";
+    LEvents["PurchaseOfFlat"] = "\u041F\u043E\u043A\u0443\u043F\u043A\u0430 \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u044B";
+})(LEvents || (LEvents = {}));
 const LIFE_AVERAGE_DURATION = 100;
 const MONTHS_OF_YAER = 12;
 const WEEKS_OF_MOUNTH = 4;
@@ -29231,12 +29545,13 @@ function StartPage({}) {
 /*!******************************!*\
   !*** ./src/store/actions.ts ***!
   \******************************/
-/*! exports provided: ActionType, changeShowMe, changeFamousDeath, changeOptions, changeBirthDate, changeFirstName, changeLifeIternals */
+/*! exports provided: ActionType, changeEvents, changeShowMe, changeFamousDeath, changeOptions, changeBirthDate, changeFirstName, changeLifeIternals */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionType", function() { return ActionType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeEvents", function() { return changeEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeShowMe", function() { return changeShowMe; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeFamousDeath", function() { return changeFamousDeath; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeOptions", function() { return changeOptions; });
@@ -29251,8 +29566,15 @@ var ActionType;
     ActionType["ACTION_CHANGE_LIFE_ITERNALS"] = "ACTION_CHANGE_LIFE_ITERNALS";
     ActionType["ACTION_CHANGE_OPTIONS"] = "ACTION_CHANGE_OPTIONS";
     ActionType["ACTION_CHANGE_FAMOUS_DEATH"] = "ACTION_CHANGE_FAMOUS_DEATH";
+    ActionType["ACTION_CHANGE_LIFE_EVENTS"] = "ACTION_CHANGE_LIFE_EVENTS";
 })(ActionType || (ActionType = {}));
 ;
+const changeEvents = (events) => {
+    return {
+        type: ActionType.ACTION_CHANGE_LIFE_EVENTS,
+        payload: events,
+    };
+};
 const changeShowMe = (showMe) => {
     return {
         type: ActionType.ACTION_CHANGE_SHOW_ME,
@@ -29363,6 +29685,10 @@ const initialState = {
             checked: false,
         },
         {
+            name: _models__WEBPACK_IMPORTED_MODULE_1__["OptionName"].LifeEvents,
+            checked: false,
+        },
+        {
             name: _models__WEBPACK_IMPORTED_MODULE_1__["OptionName"].FamousDeaths,
             checked: false,
         },
@@ -29371,7 +29697,7 @@ const initialState = {
             checked: false,
         }
     ],
-    famousDeath: [
+    famousDeaths: [
         {
             name: `Зоя Космодемьянская`,
             death: 18,
@@ -29422,6 +29748,28 @@ const initialState = {
             death: 82,
             checked: false,
         }
+    ],
+    lifeEvents: [
+        {
+            name: _models__WEBPACK_IMPORTED_MODULE_1__["LEvents"].FirstMarriage,
+            age: 23,
+            checked: false,
+        },
+        {
+            name: _models__WEBPACK_IMPORTED_MODULE_1__["LEvents"].FirstChild,
+            age: 26,
+            checked: false,
+        },
+        {
+            name: _models__WEBPACK_IMPORTED_MODULE_1__["LEvents"].OwnBusiness,
+            age: 28,
+            checked: false,
+        },
+        {
+            name: _models__WEBPACK_IMPORTED_MODULE_1__["LEvents"].PurchaseOfFlat,
+            age: 33,
+            checked: false,
+        },
     ]
 };
 const storeState = _actions_storage_storage__WEBPACK_IMPORTED_MODULE_2__["default"].loadFromLocalStorage();
@@ -29436,9 +29784,11 @@ const rootReducer = (state = storeState || initialState, action) => {
         case _actions__WEBPACK_IMPORTED_MODULE_0__["ActionType"].ACTION_CHANGE_OPTIONS:
             return { ...state, options: action.payload };
         case _actions__WEBPACK_IMPORTED_MODULE_0__["ActionType"].ACTION_CHANGE_FAMOUS_DEATH:
-            return { ...state, famousDeath: action.payload };
+            return { ...state, famousDeaths: action.payload };
         case _actions__WEBPACK_IMPORTED_MODULE_0__["ActionType"].ACTION_CHANGE_SHOW_ME:
             return { ...state, showMe: action.payload };
+        case _actions__WEBPACK_IMPORTED_MODULE_0__["ActionType"].ACTION_CHANGE_LIFE_EVENTS:
+            return { ...state, lifeEvents: action.payload };
     }
     return state;
 };
