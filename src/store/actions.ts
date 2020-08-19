@@ -1,4 +1,4 @@
-import { LifeIternal, Option, FamousDeath } from '../models';
+import { LifeIternal, RadioOption, FamousDeath } from '../models';
 
 export enum ActionType {
     ACTION_CHANGE_FIRST_NAME = 'ACTION_CHANGE_FIRST_NAME',
@@ -28,7 +28,7 @@ export const changeFamousDeath = (options: FamousDeath[]): Action => {
     };
 };
 
-export const changeOptions = (options: Option[]): Action => {
+export const changeOptions = (options: RadioOption[]): Action => {
     return {
         type: ActionType.ACTION_CHANGE_OPTIONS,
         payload: options,

@@ -6,7 +6,7 @@ export interface LifeIternal {
     min: number;
 }
 
-export interface Option {
+export interface RadioOption {
     name: string;
     checked: boolean;
 }

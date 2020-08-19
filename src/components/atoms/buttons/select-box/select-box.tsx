@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import DownArrow from '../../svg/down-arrow';
-import { Option } from '../../../../models';
+import { RadioOption } from '../../../../models';
 
 const [hoverAnim, hoverAnimBtn, fadeIn, fadeOut] = [
 
@@ -113,8 +113,8 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-    options: Option[];
-    changeOptions: (options: Option[]) => void;
+    options: RadioOption[];
+    changeOptions: (options: RadioOption[]) => void;
 }
 
 function SelectBox({ options, changeOptions }: Props) {

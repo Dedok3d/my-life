@@ -1,5 +1,5 @@
 import { ActionType, Action } from './actions';
-import { LifeIternal, Option, OptionName, FamousDeath } from '../models';
+import { LifeIternal, RadioOption, OptionName, FamousDeath } from '../models';
 import MStorage from '../actions/storage/storage';
 
 
@@ -8,7 +8,7 @@ export interface RootState {
     birthDate: string;
     showMe: boolean;
     lifeIternals: LifeIternal[];
-    options: Option[];
+    options: RadioOption[];
     famousDeath: FamousDeath[];
 }
 
