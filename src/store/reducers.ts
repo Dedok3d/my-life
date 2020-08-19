@@ -1,5 +1,5 @@
 import { ActionType, Action } from './actions';
-import { LifeIternal, RadioOption, OptionName, FamousDeath, LifeEvent } from '../models';
+import { LifeIternal, OptionName, RadioOption, FamousDeath, LifeEvent } from '../models';
 import MStorage from '../actions/storage/storage';
 
 
@@ -9,7 +9,7 @@ export interface RootState {
     showMe: boolean;
     lifeIternals: LifeIternal[];
     options: RadioOption[];
-    famousDeath: FamousDeath[];
+    famousDeaths: FamousDeath[];
     lifeEvents: LifeEvent[];
 }
 
@@ -71,11 +71,15 @@ const initialState: RootState = {
             checked: false,
         },
         {
+            name: OptionName.LifeEvents,
+            checked: false,
+        },
+        {
             name: OptionName.StageOfLife,
             checked: false,
         }
     ],
-    famousDeath: [
+    famousDeaths: [
         {
             name: `Зоя Космодемьянская`,
             death: 18,
@@ -165,9 +169,11 @@ export const rootReducer = (state: RootState = storeState || initialState, actio
         case ActionType.ACTION_CHANGE_OPTIONS:
             return { ...state, options: action.payload };
         case ActionType.ACTION_CHANGE_FAMOUS_DEATH:
-            return { ...state, famousDeath: action.payload };
+            return { ...state, famousDeaths: action.payload };
         case ActionType.ACTION_CHANGE_SHOW_ME:
             return { ...state, showMe: action.payload };
+        case ActionType.ACTION_CHANGE_LIFE_EVENTS:
+            return { ...state, lifeEvents: action.payload };
     }
 
     return state;

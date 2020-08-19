@@ -1,7 +1,7 @@
 import { RootState } from '../../store/reducers';
 
-const saveToLocalStorage = ({ lifeIternals, options, firstName, birthDate, showMe, famousDeath }: RootState) => {
-    localStorage.setItem('store', JSON.stringify({ lifeIternals, options, firstName, birthDate, showMe, famousDeath }));
+const saveToLocalStorage = ({ lifeIternals, options, firstName, birthDate, showMe, famousDeaths, lifeEvents }: RootState) => {
+    localStorage.setItem('store', JSON.stringify({ lifeIternals, options, firstName, birthDate, showMe, famousDeaths, lifeEvents }));
 };
 
 const loadFromLocalStorage = (): RootState => {

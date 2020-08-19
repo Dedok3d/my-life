@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
 });
 
 
-const mapStateToProps = ({ lifeIternals, famousDeath, showMe, birthDate }: RootState) => ({
-    lifeIternals, famousDeath, showMe, birthDate
+const mapStateToProps = ({ lifeIternals, famousDeaths, lifeEvents, showMe, birthDate }: RootState) => ({
+    lifeIternals, famousDeaths, showMe, birthDate, lifeEvents,
 });
 
 const connector = connect(
@@ -55,7 +55,7 @@ interface Props extends PropsFromRedux {
     iternal: string;
 }
 
-function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, birthDate, showMe }: Props) {
+function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, lifeEvents, birthDate, showMe }: Props) {
     const ref = useRef<HTMLDivElement>();
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(Math.trunc(VIEWPORT_HEIGHT / ITEM_HEIGHT));
@@ -75,11 +75,18 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
     }, [iternal]);
 
     const deathAge = useMemo(() => {
-        const celebrity = famousDeath.find(celebrity => celebrity.checked);
+        const celebrity = famousDeaths.find(celebrity => celebrity.checked);
         if (celebrity) {
             return celebrity.death * multiplier;
         }
-    }, [famousDeath, multiplier]);
+    }, [famousDeaths, multiplier]);
+
+    const eventAge = useMemo(() => {
+        const event = lifeEvents.find(event => event.checked);
+        if (event) {
+            return event.age * multiplier;
+        }
+    }, [lifeEvents, multiplier]);
 
     const age = useMemo(() => {
         if (!birthDate) {
@@ -155,6 +162,10 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeath, b
                         squares[i] && squares[i].map(index => {
                             if (showMe && age === index + 1) {
                                 return <Person key={`svg-age-${age}`} />;
+                            }
+
+                            if (deathAge === index + 1) {
+                                return <Death key={`svg-deathAge-${deathAge}`} />;
                             }
 
                             if (deathAge === index + 1) {

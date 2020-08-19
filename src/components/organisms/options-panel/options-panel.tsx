@@ -8,8 +8,8 @@ import RadioGroup from '../../atoms/radio-group';
 
 import OptionCard from '../../molecules/option-card';
 import { RootState } from '../../../store/reducers';
-import { OptionName } from '../../../models';
-import { changeFamousDeath } from '../../../store/actions';
+import { RadioOption, OptionName, FamousDeath, LifeEvent } from '../../../models';
+import { changeFamousDeath, changeEvents } from '../../../store/actions';
 
 
 const styles = StyleSheet.create({
@@ -20,32 +20,33 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({ options, famousDeath }: RootState) => ({ options, famousDeath });
+const mapStateToProps = ({ options, famousDeaths, lifeEvents }: RootState) => ({ options, lifeEvents, famousDeaths });
 
 const connector = connect(
     mapStateToProps,
-    { changeFamousDeath }
+    { changeFamousDeath, changeEvents }
 );
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface Props extends PropsFromRedux { }
 
-function OptionsPanel({ options, famousDeath, changeFamousDeath }: Props) {
+function OptionsPanel({ options, famousDeaths, lifeEvents, changeFamousDeath, changeEvents }: Props) {
 
-    const [person, stageOfLife, famousDeaths] = [
+    const [person, stageOfLife, famousDeath, lifeEvent] = [
         options.find(option => option.name === OptionName.Person),
         options.find(option => option.name === OptionName.StageOfLife),
-        options.find(option => option.name === OptionName.FamousDeaths)
+        options.find(option => option.name === OptionName.FamousDeaths),
+        options.find(option => option.name === OptionName.LifeEvents)
     ];
 
-    const updateFamousDeath = (index: number) => {
-        const its = [...famousDeath];
-
+    const updateRadio = (
+        index: number,
+        its: RadioOption[]
+    ) => {
         if (its[index].checked) {
             its[index].checked = false;
-            changeFamousDeath(its);
-            return;
+            return its;
         }
 
         const checkedIndex = its.findIndex(celebrity => celebrity.checked);
@@ -54,7 +55,15 @@ function OptionsPanel({ options, famousDeath, changeFamousDeath }: Props) {
         }
 
         its[index].checked = true;
-        changeFamousDeath(its);
+        return its;
+    };
+
+    const updateEvents = (index: number) => {
+        changeEvents(updateRadio(index, [...lifeEvents]) as LifeEvent[]);
+    };
+
+    const updateFamous = (index: number) => {
+        changeFamousDeath(updateRadio(index, [...famousDeaths]) as FamousDeath[]);
     };
 
     return (
@@ -66,11 +75,21 @@ function OptionsPanel({ options, famousDeath, changeFamousDeath }: Props) {
             }
 
             {
-                famousDeaths && famousDeaths.checked && <OptionCard>
+                lifeEvent && lifeEvent.checked && <OptionCard>
                     <RadioGroup
-                        title={'Смерти знаменитостей'}
-                        radioOption={famousDeath}
-                        changeRadioOption={updateFamousDeath}
+                        title={lifeEvent.name}
+                        radioOption={lifeEvents}
+                        changeRadioOption={updateEvents}
+                    />
+                </OptionCard>
+            }
+
+            {
+                famousDeath && famousDeath.checked && <OptionCard>
+                    <RadioGroup
+                        title={famousDeath.name}
+                        radioOption={famousDeaths}
+                        changeRadioOption={updateFamous}
                     />
                 </OptionCard>
             }
