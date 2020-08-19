@@ -28927,7 +28927,7 @@ const styles = aphrodite__WEBPACK_IMPORTED_MODULE_2__["StyleSheet"].create({
 const mapStateToProps = ({ lifeIternals, famousDeaths, lifeEvents, showMe, birthDate }) => ({
     lifeIternals, famousDeaths, showMe, birthDate, lifeEvents,
 });
-const connector = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, {});
+const connector = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps);
 function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, lifeEvents, birthDate, showMe }) {
     const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
     const [start, setStart] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
@@ -28951,7 +28951,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
             return celebrity.death * multiplier;
         }
     }, [famousDeaths, multiplier]);
-    const eventChecked = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => {
+    const eventOfLife = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => {
         const event = lifeEvents.find(event => event.checked);
         if (event) {
             return {
@@ -29011,7 +29011,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
     };
     Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => calculateSquares(), [numberOfSquares]);
     const getEventIcon = () => {
-        const { name, age } = eventChecked;
+        const { name, age } = eventOfLife;
         switch (name) {
             case _models__WEBPACK_IMPORTED_MODULE_5__["LEvents"].FirstMarriage:
                 return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_marriage__WEBPACK_IMPORTED_MODULE_9__["default"], { key: `svg-marriage-${age}` });
@@ -29027,7 +29027,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
         if (showMe && age === index) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_person__WEBPACK_IMPORTED_MODULE_7__["default"], { key: `svg-age-${age}` });
         }
-        if (eventChecked && eventChecked.age === index) {
+        if (eventOfLife && eventOfLife.age === index) {
             return getEventIcon();
         }
         if (deathAge === index) {
@@ -29415,7 +29415,7 @@ function OptionsPanel({ options, famousDeaths, lifeEvents, changeFamousDeath, ch
         person && person.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_personal_option__WEBPACK_IMPORTED_MODULE_4__["default"], null)),
         lifeEvent && lifeEvent.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_radio_group__WEBPACK_IMPORTED_MODULE_5__["default"], { title: lifeEvent.name, radioOption: lifeEvents, changeRadioOption: updateEvents })),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_radio_group__WEBPACK_IMPORTED_MODULE_5__["default"], { title: lifeEvent.name, radioOption: events, changeRadioOption: updateEvents })),
         famousDeath && famousDeath.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_radio_group__WEBPACK_IMPORTED_MODULE_5__["default"], { title: famousDeath.name, radioOption: deaths, changeRadioOption: updateFamous })),
         famousDeaths && stageOfLife.checked && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_molecules_option_card__WEBPACK_IMPORTED_MODULE_6__["default"], null,
