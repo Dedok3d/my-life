@@ -47,10 +47,7 @@ const mapStateToProps = ({ lifeIternals, famousDeaths, lifeEvents, showMe, birth
     lifeIternals, famousDeaths, showMe, birthDate, lifeEvents,
 });
 
-const connector = connect(
-    mapStateToProps,
-    {}
-);
+const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
@@ -85,7 +82,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
         }
     }, [famousDeaths, multiplier]);
 
-    const eventChecked = useMemo(() => {
+    const eventOfLife = useMemo(() => {
         const event = lifeEvents.find(event => event.checked);
         if (event) {
             return {
@@ -161,7 +158,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
     useEffect(() => calculateSquares(), [numberOfSquares]);
 
     const getEventIcon = () => {
-        const { name, age } = eventChecked;
+        const { name, age } = eventOfLife;
 
         switch (name) {
             case LEvents.FirstMarriage:
@@ -180,7 +177,7 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
             return <Person key={`svg-age-${age}`} />;
         }
 
-        if (eventChecked && eventChecked.age === index) {
+        if (eventOfLife && eventOfLife.age === index) {
             return getEventIcon();
         }
 

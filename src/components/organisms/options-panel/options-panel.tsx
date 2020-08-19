@@ -90,7 +90,7 @@ function OptionsPanel({ options, famousDeaths, lifeEvents, changeFamousDeath, ch
                 lifeEvent && lifeEvent.checked && <OptionCard>
                     <RadioGroup
                         title={lifeEvent.name}
-                        radioOption={lifeEvents}
+                        radioOption={events}
                         changeRadioOption={updateEvents}
                     />
                 </OptionCard>
