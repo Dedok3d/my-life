@@ -1,5 +1,5 @@
 import { ActionType, Action } from './actions';
-import { LifeIternal, RadioOption, OptionName, FamousDeath } from '../models';
+import { LifeIternal, RadioOption, OptionName, FamousDeath, LifeEvent } from '../models';
 import MStorage from '../actions/storage/storage';
 
 
@@ -10,6 +10,7 @@ export interface RootState {
     lifeIternals: LifeIternal[];
     options: RadioOption[];
     famousDeath: FamousDeath[];
+    lifeEvents: LifeEvent[];
 }
 
 const initialState: RootState = {
@@ -125,6 +126,28 @@ const initialState: RootState = {
             death: 82,
             checked: false,
         }
+    ],
+    lifeEvents: [
+        {
+            name: 'Первый брак',
+            age: 23,
+            checked: false,
+        },
+        {
+            name: 'Первый ребёнок',
+            age: 26,
+            checked: false,
+        },
+        {
+            name: 'Свой бизнес',
+            age: 28,
+            checked: false,
+        },
+        {
+            name: 'Покупка квартиры',
+            age: 33,
+            checked: false,
+        },
     ]
 };
 
