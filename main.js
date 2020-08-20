@@ -29024,16 +29024,17 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
         }
     };
     const getIcon = (index) => {
-        if (showMe && age === index) {
+        const id = index + 1;
+        if (showMe && age === id) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_person__WEBPACK_IMPORTED_MODULE_7__["default"], { key: `svg-age-${age}` });
         }
-        if (eventOfLife && eventOfLife.age === index) {
+        if (eventOfLife && eventOfLife.age === id) {
             return getEventIcon();
         }
-        if (deathAge === index) {
+        if (deathAge === id) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_svg_death__WEBPACK_IMPORTED_MODULE_6__["default"], { key: `svg-deathAge-${deathAge}` });
         }
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_square__WEBPACK_IMPORTED_MODULE_4__["default"], { key: `square-${index}`, fill: true, color: getSquareColor(index), num: index + 1 });
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_square__WEBPACK_IMPORTED_MODULE_4__["default"], { key: `square-${id}`, fill: true, color: getSquareColor(index), num: id });
     };
     const renderRows = (() => {
         let result = [];
@@ -29485,7 +29486,7 @@ var OptionName;
 (function (OptionName) {
     OptionName["Person"] = "\u041B\u0438\u0447\u043D\u043E\u0441\u0442\u044C";
     OptionName["StageOfLife"] = "\u042D\u0442\u0430\u043F\u044B \u0436\u0438\u0437\u043D\u0438";
-    OptionName["LifeEvents"] = "\u0421\u043E\u0431\u044B\u0442\u0438\u044F \u0432 \u0441\u0440\u0435\u0434\u043D\u0435\u043C";
+    OptionName["LifeEvents"] = "\u0421\u043E\u0431\u044B\u0442\u0438\u044F";
     OptionName["FamousDeaths"] = "\u0421\u043C\u0435\u0440\u0442\u0438 \u0437\u043D\u0430\u043C\u0435\u043D\u0438\u0442\u043E\u0441\u0442\u0435\u0439";
 })(OptionName || (OptionName = {}));
 var LEvents;
