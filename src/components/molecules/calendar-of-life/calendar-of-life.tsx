@@ -173,19 +173,21 @@ function CalendarOfLife({ numberOfSquares, lifeIternals, iternal, famousDeaths, 
     }
 
     const getIcon = (index: number) => {
-        if (showMe && age === index) {
+        const id = index + 1;
+
+        if (showMe && age === id) {
             return <Person key={`svg-age-${age}`} />;
         }
 
-        if (eventOfLife && eventOfLife.age === index) {
+        if (eventOfLife && eventOfLife.age === id) {
             return getEventIcon();
         }
 
-        if (deathAge === index) {
+        if (deathAge === id) {
             return <Death key={`svg-deathAge-${deathAge}`} />;
         }
 
-        return <Square key={`square-${index}`} fill={true} color={getSquareColor(index)} num={index + 1} />;
+        return <Square key={`square-${id}`} fill={true} color={getSquareColor(index)} num={id} />;
     }
 
     const renderRows = (() => {
