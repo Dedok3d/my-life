@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         marginLeft: '100px',
     },
 });
-///sdsfd 
+
 function StartPage() {
     return (
         <div className={css(styles.main)}>
