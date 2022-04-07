@@ -11,7 +11,11 @@
     "test": "jest",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major"
   },
   "config": {
     "commitizen": {
@@ -49,6 +53,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^7.0.4",
     "jest": "^25.1.0",
+    "standard-version": "^9.3.2",
     "ts-jest": "^25.2.1",
     "ts-loader": "^6.2.1",
     "tslint": "^6.1.0",
