@@ -10,19 +10,15 @@
     "lint": "tslint 'src/**/*.{ts,tsx}'",
     "test": "jest",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS -g './commitlint.js'"
-    }
+    "deploy": "gh-pages -d build",
+    "prepare": "husky install"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-customizable"
     },
     "cz-customizable": {
-      "config": "commitizen.js"
+      "config": "config/git/commitizen.js"
     }
   },
   "dependencies": {
@@ -38,6 +34,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@hot-loader/react-dom": "^16.9.23",
     "@types/jest": "^25.1.0",
     "@types/moment": "^2.13.0",
