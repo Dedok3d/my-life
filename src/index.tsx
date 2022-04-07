@@ -7,7 +7,7 @@ import StartPage from './pages/start-page';
 import { rootReducer } from './store/reducers';
 
 const store = createStore(rootReducer);
-
+// LOL
 function render(Component: ComponentType<{}>) {
   ReactDOM.render(
     <Provider store={store}>
