@@ -14,9 +14,7 @@ const styles = StyleSheet.create({
     },
 });
 
-interface Props { }
-
-function StartPage({ }: Props) {
+function StartPage() {
     return (
         <div className={css(styles.main)}>
             <HeaderPanel />
