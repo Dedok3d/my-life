@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/dedok3d/my-life/compare/v1.1.0...v2.0.0) (2022-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* lol
+
+### Features
+
+* lol ([d52d5e0](https://github.com/dedok3d/my-life/commits/d52d5e0425245ee99a835ec2608e501246406286))
+
 ## [1.1.0](https://github.com/dedok3d/my-life/compare/v1.0.1...v1.1.0) (2022-04-07)
 
 
