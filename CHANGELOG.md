@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/dedok3d/my-life/compare/v0.3.0...v0.4.0) (2022-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* use JavaScript features not available in Node 6.
+
+### Features
+
+* drop support for Node 6 ([38a4e88](https://github.com/dedok3d/my-life/commits/38a4e88ce5ae7ddbdfc54c2bfa13beedd8af8e43))
+
 ## [0.3.0](https://github.com/dedok3d/my-life/compare/v0.2.0...v0.3.0) (2022-04-07)
 
 
