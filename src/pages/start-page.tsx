@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     },
 });
 
+// lol
 function StartPage() {
     return (
         <div className={css(styles.main)}>
