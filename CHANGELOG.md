@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/dedok3d/my-life/compare/v2.0.0...v3.0.0) (2022-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* `extends` key in config file is now used for extending other config files
+
+### Features
+
+* allow provided config object to extend other configs ([b5b4bd7](https://github.com/dedok3d/my-life/commits/b5b4bd72c01923df2a616dd2e9f95fb2797da4df))
+
 ## [2.0.0](https://github.com/dedok3d/my-life/compare/v1.1.0...v2.0.0) (2022-04-07)
 
 
