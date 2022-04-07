@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/dedok3d/my-life/compare/v0.2.0...v0.3.0) (2022-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* send an email to the customer when a product is shipped
+
+### Features
+
+* send an email to the customer when a product is shipped ([e5f1e2a](https://github.com/dedok3d/my-life/commits/e5f1e2ad28c25a69f87267818af7798c506bc4cb))
+
 ## [0.2.0](https://github.com/dedok3d/my-life/compare/v0.1.2...v0.2.0) (2022-04-07)
 
 
